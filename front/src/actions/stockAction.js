@@ -17,8 +17,10 @@ export const getAllStock = () => {
                     payload: { error: res.data.error }
                 })
             }
-        } catch {
-
+        } catch(err) {
+            console.log("Err at stockAction");
+            console.log(err)
+            
         }
     }
 }

@@ -17,13 +17,15 @@ export default (state = initState, action) => {
         case "GET_ALL_STOCKS_SUCCESS" :
             state = {
                 ...state,
-                stocks: action.payload.stocks
+                stocks: action.payload.stocks,
+                loading: false
             }
             break;
         case "GET_ALL_STOCKS_FAILED" :
             state = {
                 ...state,
-                err: action.payload.error
+                err: action.payload.error,
+                loading: false
             }
             break;
     }
