@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllStock } from "../../actions/stockAction";
 import Table from "react-bootstrap/Table";
 
+import "./Home.css";
+
 const Home = (props) => {
     const dispatch = useDispatch();
     const stock = useSelector(state => state.stock);
@@ -12,12 +14,11 @@ const Home = (props) => {
     if (!stock.loading) {
         return (
             // <div>{stock.stocks}</div>
-            <div>
-                <Table responsive="sm">
-                    <thread>
+            <div class="container">
+                <Table responsive="xl">
+                    <thead>
                         <tr>
                             <th>Ticker</th>
-                            <th>*</th>
                             <th>Company</th>
                             <th>Price</th>
                             <th>Insider Name</th>
@@ -33,15 +34,13 @@ const Home = (props) => {
                             <th>Dividend Yield %</th>
                             <th>PE Ratio</th>
                             <th>Market Cap ($M)</th>
-                            <th>*</th>
                         </tr>
-                    </thread>
+                    </thead>
                     <tbody>
                         {stock.stocks.map((trs) => {
                             return (
                                 <tr key={trs[0] + trs[11] + trs[12] + Math.random()}>
                                     <th>{trs[0]}</th>
-                                    <th>{trs[1]}</th>
                                     <th>{trs[2]}</th>
                                     <th>{trs[3]}</th>
                                     <th>{trs[4]}</th>
@@ -57,7 +56,6 @@ const Home = (props) => {
                                     <th>{trs[14]}</th>
                                     <th>{trs[15]}</th>
                                     <th>{trs[16]}</th>
-                                    <th>{trs[17]}</th>
                                 </tr>
                             )
                         })}
