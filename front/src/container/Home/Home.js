@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStock } from "../../actions/stockAction";
 import Table from "react-bootstrap/Table";
+import Layout from "../../components/Layouts/Layout/Layout.js";
 
 import "./Home.css";
 
@@ -13,9 +14,10 @@ const Home = (props) => {
     }, [])
     if (!stock.loading) {
         return (
-            // <div>{stock.stocks}</div>
-            <div class="container">
-                <Table responsive="xl">
+            <>
+                <div class="container">
+                <Layout />
+                <Table responsive>
                     <thead>
                         <tr>
                             <th>Ticker</th>
@@ -57,11 +59,12 @@ const Home = (props) => {
                                     <th>{trs[15]}</th>
                                     <th>{trs[16]}</th>
                                 </tr>
-                            )
-                        })}
-                    </tbody>
-                </Table>
-            </div>
+                                )
+                            })}
+                        </tbody>
+                    </Table>
+                </div>
+            </>
         )
     } else {
         return (
