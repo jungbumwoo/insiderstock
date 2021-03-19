@@ -24,3 +24,14 @@ export const getAllStock = () => {
         }
     }
 }
+
+export const savestock = (__) => {
+    return async dispatch => {
+        dispatch({ type: "SAVE_STOCK_REQUEST"});
+        try {
+            const res = await axiosInstance.post("/savestock", {__})
+        } catch(err) {
+            console.log(err);
+        }
+    }
+}
