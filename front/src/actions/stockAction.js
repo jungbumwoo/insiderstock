@@ -4,12 +4,12 @@ export const getAllStock = () => {
     return async dispatch => {
         dispatch({ type: "GET_ALL_STOCKS_REQUEST"});
         try {
-            const res = await axiosInstance.get("/stock")
+            const res = await axiosInstance.get("/stock");
             if(res.status === 200) {
-                const { finalresult } = res.data;
+                const { buyresult } = res.data;
                 dispatch({
                     type: "GET_ALL_STOCKS_SUCCESS",
-                    payload: { stocks: finalresult }
+                    payload: { stocks: buyresult }
                 });
             } else {
                 dispatch({
