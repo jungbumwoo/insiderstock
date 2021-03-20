@@ -7,6 +7,19 @@ import Button from 'react-bootstrap/Button';
 
 import "./Home.css";
 
+
+const useInput = (defaultValue) => {
+    const [value, setValue] = useState(defaultValue);
+    let onChange = (e) => {
+        setValue(e.target.value);
+    }
+
+    return { 
+        value,
+        onChange
+    }
+}
+
 const Home = (props) => {
     const dispatch = useDispatch();
     const stock = useSelector(state => state.stock);
@@ -17,6 +30,8 @@ const Home = (props) => {
     const handleSaveBtn = () => {
         console.log("what the what")
     }
+    let inputProps = useInput("muyaho");
+        console.log(inputProps);
 
     if (!stock.loading) {
         return (
@@ -75,6 +90,12 @@ const Home = (props) => {
                         <Button onClick={handleSaveBtn} variant="success" size="sm">
                             Success
                         </Button>
+                    </div>
+                    <div>
+                        <input
+                            value= inputProps.value
+                            onChange= inputProps.onChange
+                            placeholder="Type in here"/>
                     </div>
                 </div>
             </>
