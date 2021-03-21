@@ -7,12 +7,11 @@ import Button from 'react-bootstrap/Button';
 
 import "./Home.css";
 
-
 const useInput = (defaultValue) => {
     const [value, setValue] = useState(defaultValue);
     let onChange = (e) => {
         setValue(e.target.value);
-    }
+    };
 
     return { 
         value,
@@ -20,18 +19,50 @@ const useInput = (defaultValue) => {
     }
 }
 
+
 const Home = (props) => {
     const dispatch = useDispatch();
+    const [checked, setChecked] = useState(false);
     const stock = useSelector(state => state.stock);
+    const [ newArray, setNewArray] = useState([]);
+    let checkboxArray = [];
+    let maplist = () => {
+        console.log("maplist Func executed. to get the list");
+        stock.stocks.map((trs) => {
+            checkboxArray.push({
+                id: trs[0],
+                checked         
+            })
+        })
+        return checkboxArray;
+    } 
+    const [checkArray, setCheckArray] = useState(maplist());
+
     useEffect(()=> {
         dispatch(getAllStock());
     }, [])
 
-    const handleSaveBtn = () => {
-        console.log("what the what")
+    const checkBoxChange = (e) => {
+        console.log(e.target.id);
+        const itemToFind = newArray.find((item) => { return item.id == e.target.id })
+        // let isexist = newArray.filter((cat) => {
+        //     cat.id = e.target.id
+        // });
+        const idx = newArray.indexOf(itemToFind)
+        if (idx > -1) {
+            newArray.splice(idx, 1)
+        } else {
+            newArray.push({ id: e.target.id })
+        }
+        setNewArray(newArray);
     }
+
+    const handleSaveBtn = () => {
+        console.log("Save btn clicked.");
+        console.log(newArray);
+    }
+
     let inputProps = useInput("muyaho");
-        console.log(inputProps);
 
     if (!stock.loading) {
         return (
@@ -64,7 +95,7 @@ const Home = (props) => {
                         {stock.stocks.map((trs) => {
                             return (
                                 <tr key={trs[0] + trs[11] + trs[12] + Math.random()}>
-                                    <th><input type="checkbox" id={trs[0]} name={trs[0]} /></th>
+                                    <th><input type="checkbox" id={trs[0]} name={trs[0]} onChange={checkBoxChange}/></th>
                                     <th>{trs[0]}</th>
                                     <th>{trs[2]}</th>
                                     <th>{trs[3]}</th>
@@ -87,15 +118,19 @@ const Home = (props) => {
                         </tbody>
                     </Table>
                     <div>
+                        <Button onClick={handleSelectAll} variant="primary" size="sm">
+                            Select All
+                        </Button>{' '}
                         <Button onClick={handleSaveBtn} variant="success" size="sm">
                             Success
                         </Button>
                     </div>
                     <div>
                         <input
-                            value= inputProps.value
-                            onChange= inputProps.onChange
+                            value= {inputProps.value}
+                            onChange= {inputProps.onChange}
                             placeholder="Type in here"/>
+                        <span>Value: {inputProps.value}</span>
                     </div>
                 </div>
             </>
@@ -105,6 +140,10 @@ const Home = (props) => {
             <div>Loading..</div>
         )
     }
+}
+
+const handleSelectAll = () => {
+    console.log("select All");
 }
 
 export default Home;
