@@ -30,7 +30,8 @@ export const savestock = (stockArray) => {
         dispatch({ type: "SAVE_STOCK_REQUEST"});
         try {
             console.log("saveStock Action");
-            const res = await axiosInstance.post("/savestock", {stockArray});
+            console.log(stockArray);
+            const res = await axiosInstance.post("/savestock", {data : stockArray});
             if(res.status === 200) {
                 const { savedList } = res.data;
                 console.log(savedList);
@@ -39,7 +40,7 @@ export const savestock = (stockArray) => {
                     payload: savedList
                 })
             } else {
-
+                
             }
         } catch(err) {
             console.log(err);
