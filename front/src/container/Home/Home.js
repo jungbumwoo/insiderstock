@@ -60,14 +60,16 @@ const Home = (props) => {
     const handleSaveBtn = () => {
         console.log("Save btn clicked.");
         console.log(newArray);
-        let stocksToSave = newArray.map((item) => {
+        let mapedArray = newArray.map((item) => {
             let puppy = stock.stocks.filter((cat) => {
                 return cat[0] == item.id 
             })
-            return puppy
+            return puppy[0]
         })
-        console.log(stocksToSave);
-        dispatch(savestock(stocksToSave));
+        console.log(mapedArray);
+
+        // if it's empty
+        dispatch(savestock(mapedArray));
         setNewArray([]);
     }
 
