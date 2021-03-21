@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllStock } from "../../actions/stockAction";
+import { getAllStock, savestock } from "../../actions/stockAction";
 import Table from "react-bootstrap/Table";
 import Layout from "../../components/Layouts/Layout/Layout.js";
 import Button from 'react-bootstrap/Button';
@@ -60,6 +60,15 @@ const Home = (props) => {
     const handleSaveBtn = () => {
         console.log("Save btn clicked.");
         console.log(newArray);
+        let stocksToSave = newArray.map((item) => {
+            let puppy = stock.stocks.filter((cat) => {
+                return cat[0] == item.id 
+            })
+            return puppy
+        })
+        console.log(stocksToSave);
+        dispatch(savestock(stocksToSave));
+        setNewArray([]);
     }
 
     let inputProps = useInput("muyaho");
@@ -67,7 +76,7 @@ const Home = (props) => {
     if (!stock.loading) {
         return (
             <>
-                <div class="container">
+                <div className="container">
                 <Layout />
                     <Table responsive>
                         <thead>
@@ -122,7 +131,7 @@ const Home = (props) => {
                             Select All
                         </Button>{' '}
                         <Button onClick={handleSaveBtn} variant="success" size="sm">
-                            Success
+                            Save
                         </Button>
                     </div>
                     <div>

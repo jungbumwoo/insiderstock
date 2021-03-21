@@ -25,11 +25,22 @@ export const getAllStock = () => {
     }
 }
 
-export const savestock = (__) => {
+export const savestock = (stockArray) => {
     return async dispatch => {
         dispatch({ type: "SAVE_STOCK_REQUEST"});
         try {
-            const res = await axiosInstance.post("/savestock", {__})
+            console.log("saveStock Action");
+            const res = await axiosInstance.post("/savestock", {stockArray});
+            if(res.status === 200) {
+                const { savedList } = res.data;
+                console.log(savedList);
+                dispatch({
+                    type: "SAVE_STOCK_SUCCESS",
+                    payload: savedList
+                })
+            } else {
+
+            }
         } catch(err) {
             console.log(err);
         }
