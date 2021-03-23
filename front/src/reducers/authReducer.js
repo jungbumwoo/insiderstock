@@ -11,7 +11,7 @@ const initState = {
     loading: false,
     error: null,
     message: ''
-}
+};
 
 export default (state = initState, action) => {
     switch(action.type) {
@@ -25,6 +25,19 @@ export default (state = initState, action) => {
             state = {
                 ...state,
                 user: action.payload.user,
+                token: action.payload.token,
+                authenticate: true,
+                authenticating: false
             }
+            break;
+        case "AUTH_LOGIN_FIALURE":
+            state = {
+                ...state,
+                error: action.payload.err,
+                authenticate: false,
+                authenticating: false
+            }
+            break;
     }
+    return state;
 }
