@@ -15,13 +15,13 @@ const initState = {
 
 export default (state = initState, action) => {
     switch(action.type) {
-        case "AUTH_LOGIN_REQUEST":
+        case "FACEBOOK_LOGIN_REQUEST":
             state = {
                 ...state,
                 authenticating: true
             }
             break;
-        case "AUTH_LOGIN_SUCCESS":
+        case "FACEBOOK_LOGIN_SUCCESS":
             state = {
                 ...state,
                 user: action.payload.user,
@@ -30,7 +30,7 @@ export default (state = initState, action) => {
                 authenticating: false
             }
             break;
-        case "AUTH_LOGIN_FIALURE":
+        case "FACEBOOK_LOGIN_FAILURE":
             state = {
                 ...state,
                 error: action.payload.err,
