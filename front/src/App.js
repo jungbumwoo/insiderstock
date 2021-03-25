@@ -12,7 +12,7 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route path="/signin" component={Signin} />
       <Route path="/signup" component={Signup} />
-      <Route path="/user/:token" component={GetToken} />
+      <Route path="/:token" component={GetToken} />
     </Switch>
   );
 }
