@@ -15,6 +15,14 @@ const initState = {
 
 export default (state = initState, action) => {
     switch(action.type) {
+        case "SEND_TOKEN_REQEUST": 
+            state = {
+                ...state,
+                token: action.payload.token,
+                authenticate: true,
+                authenticating: false
+            }
+            break;
         case "FACEBOOK_LOGIN_REQUEST":
             state = {
                 ...state,

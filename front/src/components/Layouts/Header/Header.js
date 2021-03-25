@@ -6,6 +6,8 @@ import { Nav, Form, FormControl, Button } from 'react-bootstrap';
 
 const Header = () => {
     const auth = useSelector(state => state.auth);
+    console.log("auth state when Header");
+    console.log(auth);
 
     const renderLoggedinbar = () => {
         return (
