@@ -1,5 +1,5 @@
 const initState = {
-    token: null,
+    token: undefined,
     user: {
         firstName: '',
         lastName: '',
@@ -15,12 +15,13 @@ const initState = {
 
 export default (state = initState, action) => {
     switch(action.type) {
-        case "SEND_TOKEN_REQEUST": 
+        case "SEND_TOKEN_REQUEST": 
             state = {
                 ...state,
                 token: action.payload.token,
                 authenticate: true,
-                authenticating: false
+                authenticating: false,
+                main: "muyaho"
             }
             break;
         case "FACEBOOK_LOGIN_REQUEST":

@@ -1,7 +1,7 @@
 import axiosInstance from "../helpers/axios";
 
 export const sendToken = (token) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         try {
             dispatch({
                 type: "SEND_TOKEN_REQUEST",
