@@ -7,6 +7,7 @@ const GetToken = (props) => {
     const { token } = props.match.params;
 
     useEffect(() => {
+        localStorage.setItem('token', token);
         dispatch(sendToken(token));
         props.history.push("/");
     })

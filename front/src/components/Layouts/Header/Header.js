@@ -13,7 +13,7 @@ const Header = () => {
         return (
             <Nav>
                 <li className="nav-item">
-                    <span></span>
+                    <span>MyPage</span>
                 </li>
             </Nav>
         )

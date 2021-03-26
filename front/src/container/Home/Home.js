@@ -7,19 +7,6 @@ import Button from 'react-bootstrap/Button';
 
 import "./Home.css";
 
-const useInput = (defaultValue) => {
-    const [value, setValue] = useState(defaultValue);
-    let onChange = (e) => {
-        setValue(e.target.value);
-    };
-
-    return { 
-        value,
-        onChange
-    }
-}
-
-
 const Home = (props) => {
     const dispatch = useDispatch();
     const [checked, setChecked] = useState(false);
@@ -72,8 +59,6 @@ const Home = (props) => {
         dispatch(savestock(mapedArray));
         setNewArray([]);
     }
-
-    let inputProps = useInput("muyaho");
 
     if (!stock.loading) {
         return (
@@ -136,13 +121,12 @@ const Home = (props) => {
                             Save
                         </Button>
                     </div>
-                    <div>
-                        <input
-                            value= {inputProps.value}
-                            onChange= {inputProps.onChange}
-                            placeholder="Type in here"/>
-                        <span>Value: {inputProps.value}</span>
-                    </div>
+                </div>
+                <div>
+                    Eggs
+                </div>
+                <div>
+                    interest
                 </div>
             </>
         )
