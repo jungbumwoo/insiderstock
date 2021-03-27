@@ -30,3 +30,16 @@ export const fblogin = () => {
         }
     }
 }
+
+export const getUserData = () => {
+    return async (dispatch) => {
+        dispatch({ type: "USER_DATA_REQUEST"});
+        try {
+            const res = await axiosInstance.get('/auth/getuser');
+            const { data } = res;
+            console.log(data); 
+        } catch {
+
+        }
+    }
+}
