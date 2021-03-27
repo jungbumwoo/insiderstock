@@ -13,7 +13,7 @@ const Header = () => {
         return (
             <Nav>
                 <li className="nav-item">
-                    <span>MyPage</span>
+                    <span>{auth.cookieusername}</span>
                 </li>
             </Nav>
         )

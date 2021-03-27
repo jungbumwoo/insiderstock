@@ -33,11 +33,21 @@ export const fblogin = () => {
 
 export const getUserData = () => {
     return async (dispatch) => {
-        dispatch({ type: "USER_DATA_REQUEST"});
+        dispatch({ type: "COOKIE_DATA_REQUEST"});
         try {
-            const res = await axiosInstance.get('/auth/getuser');
-            const { data } = res;
-            console.log(data); 
+            // const res = await axiosInstance.get('/auth/getuser');
+            // const { data } = res;
+            // console.log(data); 
+            let getCookie = () => {
+                let tokenName = "userName"
+                let matches = document.cookie.match(new RegExp(
+                  "(?:^|; )" + tokenName.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+                ));
+                return matches ? decodeURIComponent(matches[1]) : undefined;
+              }
+            let cookieUsername = getCookie();
+            dispatch({ type: "COOKIE_DATA_SUCCESS",
+                        payload: { name : cookieUsername }});
         } catch {
 
         }

@@ -1,8 +1,7 @@
 const initState = {
     token: undefined,
     user: {
-        firstName: '',
-        lastName: '',
+        username: '',
         email: '',
         picture: ''
     },
@@ -45,6 +44,14 @@ export default (state = initState, action) => {
                 error: action.payload.err,
                 authenticate: false,
                 authenticating: false
+            }
+            break;
+        case "COOKIE_DATA_SUCCESS":
+            state = {
+                ...state,
+                cookieusername: action.payload.name,
+                authenticating: true,
+                authenticate: false
             }
             break;
     }
