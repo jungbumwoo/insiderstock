@@ -8,12 +8,19 @@ const Header = () => {
     const auth = useSelector(state => state.auth);
     console.log("auth state when Header");
     console.log(auth);
+    
+    const signout = () => {
+        console.log('signout');
+    }
 
     const renderLoggedinbar = () => {
         return (
             <Nav>
                 <li className="nav-item">
                     <span>{auth.cookieusername}</span>
+                </li>
+                <li>
+                    <a href="javascript:void(0) onclick={signout}">signout</a>
                 </li>
             </Nav>
         )

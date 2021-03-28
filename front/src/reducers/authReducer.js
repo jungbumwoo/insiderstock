@@ -1,5 +1,6 @@
 const initState = {
     token: undefined,
+    // What is the difference between localStorage and Reducer store token ?
     user: {
         username: '',
         email: '',
