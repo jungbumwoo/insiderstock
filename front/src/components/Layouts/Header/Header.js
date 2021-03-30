@@ -9,8 +9,9 @@ const Header = () => {
     console.log("auth state when Header");
     console.log(auth);
     
-    const signout = () => {
-        console.log('signout');
+    const signout = (e) => {
+        e.preventDefault();
+        console.log('signout Fnc');
     }
 
     const renderLoggedinbar = () => {
@@ -20,7 +21,9 @@ const Header = () => {
                     <span>{auth.cookieusername}</span>
                 </li>
                 <li>
-                    <a href="javascript:void(0) onclick={signout}">signout</a>
+                    <a href="#" onClick={signout} >
+                        signout
+                    </a>
                 </li>
             </Nav>
         )
