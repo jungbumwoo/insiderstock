@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllStock, savestock } from "../../actions/stockAction";
-import Table from "react-bootstrap/Table";
 import Layout from "../../components/Layouts/Layout/Layout.js";
-import Button from 'react-bootstrap/Button';
 import News from "../News/News.js";
 import Saved from "../Saved/Saved.js";
 

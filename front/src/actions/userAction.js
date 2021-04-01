@@ -53,3 +53,20 @@ export const getUserData = () => {
         }
     }
 }
+
+export const signout = () => {
+    return async (dispatch) => {
+        dispatch({ type: "SIGNOUT_REQUEST"});
+        try {
+            const res = await axiosInstance.get('auth/signout');
+            if (res.status === 200) {
+                const { data } = res;
+                window.localStorage.removeItem("token"); 
+                dispatch({ type: "SIGNOUT_SUCCESS"});
+            }
+        } catch(err) {
+            console.log(err);
+            dispatch({ type: "SIGNOUT_FAILURE"})
+        }
+    }
+}

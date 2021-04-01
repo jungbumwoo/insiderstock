@@ -1,18 +1,21 @@
 import React from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { signout } from "../../../actions";
 
 const Header = () => {
+    const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
     console.log("auth state when Header");
     console.log(auth);
     
     const signout = (e) => {
         e.preventDefault();
-        console.log('signout Fnc');
-    }
+        console.log('signout Fnc at Header');
+        // dispatch(signout());
+    };
 
     const renderLoggedinbar = () => {
         return (
@@ -21,7 +24,7 @@ const Header = () => {
                     <span>{auth.cookieusername}</span>
                 </li>
                 <li>
-                    <a href="#" onClick={signout} >
+                    <a href="#" onClick={signout}>
                         signout
                     </a>
                 </li>

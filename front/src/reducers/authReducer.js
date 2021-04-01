@@ -27,7 +27,8 @@ export default (state = initState, action) => {
         case "FACEBOOK_LOGIN_REQUEST":
             state = {
                 ...state,
-                authenticating: true
+                authenticating: true,
+                loading: true
             }
             break;
         case "FACEBOOK_LOGIN_SUCCESS":
@@ -36,7 +37,8 @@ export default (state = initState, action) => {
                 user: action.payload.user,
                 token: action.payload.token,
                 authenticate: true,
-                authenticating: false
+                authenticating: false,
+                loading: false
             }
             break;
         case "FACEBOOK_LOGIN_FAILURE":
@@ -44,7 +46,8 @@ export default (state = initState, action) => {
                 ...state,
                 error: action.payload.err,
                 authenticate: false,
-                authenticating: false
+                authenticating: false,
+                loading: false
             }
             break;
         case "COOKIE_DATA_SUCCESS":
@@ -55,6 +58,35 @@ export default (state = initState, action) => {
                 authenticate: false
             }
             break;
-    }
+        case "SIGNOUT_REQUEST":
+            state = {
+                ...state,
+                authenticating: true,
+                loading: true
+            }
+            break;
+        case "SIGNOUT_SUCCESS": 
+            state = {
+                token: undefined,
+                user: {
+                    username: '',
+                    email: '',
+                    picture: ''
+                },
+                authenticate: false,
+                authenticating: false,
+                loading: false,
+                error: null,
+                message: ''
+            }
+            break;
+        case "SIGNOUT_FAILURE":
+            state = {
+                ...state,
+                authenticating: false,
+                loading: false
+            }
+            break;
+        }
     return state;
 }

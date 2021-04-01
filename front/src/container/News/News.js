@@ -18,7 +18,7 @@ const News = (props) => {
         stock.stocks.map((trs) => {
             checkboxArray.push({
                 id: trs[0],
-                checked         
+                checked
             })
         })
         return checkboxArray;
@@ -50,7 +50,7 @@ const News = (props) => {
         let mapedArray = newArray.map((item) => {
             let puppy = stock.stocks.filter((cat) => {
                 return cat[0] == item.id 
-            })
+            });
             return puppy[0]
         })
         console.log(mapedArray);
