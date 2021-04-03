@@ -90,7 +90,7 @@ const News = (props) => {
                         {stock.stocks.map((trs) => {
                             return (
                                 <tr key={trs[0] + trs[11] + trs[12] + Math.random()}>
-                                    <th><input type="checkbox" id={trs[0]} name={trs[0]} onChange={checkBoxChange}/></th>
+                                    <th><input type="checkbox" id={stock.stocks.indexOf(trs)} name={trs[0]} onChange={checkBoxChange}/></th>
                                     <th>{trs[0]}</th>
                                     <th>{trs[2]}</th>
                                     <th>{trs[3]}</th>

@@ -30,7 +30,7 @@ const Header = () => {
                 </li>
             </Nav>
         )
-    }
+    }   
     const renderNonLoginbar = () => {
         return (
             <>
