@@ -87,6 +87,14 @@ export default (state = initState, action) => {
                 loading: false
             }
             break;
+        case "LOCALSTOREAGE_DATA":
+            state = {
+                ...state,
+                authenticating: false,
+                authenticate: true,
+                loading: false,
+                token: action.payload.token
+            }
         }
     return state;
 }

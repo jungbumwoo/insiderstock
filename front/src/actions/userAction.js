@@ -70,3 +70,14 @@ export const signout = () => {
         }
     }
 }
+
+export const localStorageData = (userInfo) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: "LOCALSTORAGE_DATA",
+                    payload: {token: userInfo.token}});    
+        } catch(err) {
+            console.log(err);
+        }
+    }
+}

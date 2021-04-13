@@ -15,7 +15,8 @@ const Signin = () => {
     const fbLoginBtn = () => {
         console.log("fbLoginBtn is clicked");
         dispatch(fblogin());
-    }
+    };
+    
     return(
         <>  
             <Layout />

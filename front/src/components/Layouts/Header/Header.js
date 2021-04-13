@@ -1,15 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Nav, Form, FormControl, Button } from 'react-bootstrap';
-import { signout } from "../../../actions";
+import { signout, localStorageData } from "../../../actions";
+import FormImpl from "react-bootstrap/esm/Form";
 
 const Header = () => {
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
+    const [userToken, setUserToken] = useState(null);
+    const isToken = localStorage.getItem('token');
+    console.log("isToken at Header");
+    console.log(isToken);
+    if (isToken) {
+        let userInfo = [];
+        userInfo.token = isToken;
+        dispatch(localStorageData(userInfo));
+    }
+
     console.log("auth state when Header");
     console.log(auth);
+
+    useEffect(() => {
+        if(auth.token) {
+            setUserToken(auth.token);
+        }
+    })
     
     const signout = (e) => {
         e.preventDefault();
@@ -21,7 +39,7 @@ const Header = () => {
         return (
             <Nav>
                 <li className="nav-item">
-                    <span>{auth.cookieusername}</span>
+                    <span>{auth.token}</span>
                 </li>
                 <li>
                     <a href="#" onClick={signout}>
@@ -60,7 +78,7 @@ const Header = () => {
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                     <Button variant="outline-light">Search</Button>
                 </Form> */}
-                { auth.authenticate ? renderLoggedinbar() : renderNonLoginbar()}
+                { auth.token ? renderLoggedinbar() : renderNonLoginbar()}
             </Navbar>
         </>
     )
