@@ -10,24 +10,26 @@ import FormImpl from "react-bootstrap/esm/Form";
 const Header = () => {
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
-    const [userToken, setUserToken] = useState(null);
+    const [ userToken, setUserToken ] = useState(null);
     const isToken = localStorage.getItem('token');
-    console.log("isToken at Header");
-    console.log(isToken);
+    let x = document.cookie;
+    // console.log("isToken at Header");
+    console.log("auth / Header at front");
+    console.log(auth);
+
     if (isToken) {
         let userInfo = [];
         userInfo.token = isToken;
         dispatch(localStorageData(userInfo));
+        // setUserToken(userInfo.token);
     }
 
-    console.log("auth state when Header");
-    console.log(auth);
-
     useEffect(() => {
-        if(auth.token) {
+        if(isToken) {
+            console.log("useEffect executed");
             setUserToken(auth.token);
         }
-    })
+    }, [])
     
     const signout = (e) => {
         e.preventDefault();
@@ -39,7 +41,7 @@ const Header = () => {
         return (
             <Nav>
                 <li className="nav-item">
-                    <span>{auth.token}</span>
+                    <span>{auth.cookieusername}</span>
                 </li>
                 <li>
                     <a href="#" onClick={signout}>
@@ -78,7 +80,7 @@ const Header = () => {
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                     <Button variant="outline-light">Search</Button>
                 </Form> */}
-                { auth.token ? renderLoggedinbar() : renderNonLoginbar()}
+                { isToken ? renderLoggedinbar() : renderNonLoginbar()}
             </Navbar>
         </>
     )

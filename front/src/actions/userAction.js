@@ -48,8 +48,8 @@ export const getUserData = () => {
             let cookieUsername = getCookie();
             dispatch({ type: "COOKIE_DATA_SUCCESS",
                         payload: { name : cookieUsername }});
-        } catch {
-
+        } catch(err) {
+            console.log(err);
         }
     }
 }
