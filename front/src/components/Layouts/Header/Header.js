@@ -36,12 +36,20 @@ const Header = () => {
         console.log('signout Fnc at Header');
         // dispatch(signout());
     };
+    let getCookie = () => {
+        let tokenName = "userName"
+        let matches = document.cookie.match(new RegExp(
+          "(?:^|; )" + tokenName.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+      }
+    let cookieUsername = getCookie();
 
     const renderLoggedinbar = () => {
         return (
             <Nav>
                 <li className="nav-item">
-                    <span>{auth.cookieusername}</span>
+                    <span>{cookieUsername ? cookieUsername : undefined }</span>
                 </li>
                 <li>
                     <a href="#" onClick={signout}>
