@@ -13,43 +13,6 @@ export const sendToken = (token) => {
     }
 };
 
-export const fblogin = () => {
-    return async (dispatch) => {
-        dispatch({ type: "FACEBOOK_LOGIN_REQUEST"});
-        try {
-            const res = await axiosInstance.get('auth/facebook');
-            if(res.status === 200) {
-                const { data } = res;
-                console.log(data);
-                dispatch({
-                    type: "FACEBOOK_LOGIN_SUCCESS",
-                });
-            }
-        } catch(err) {
-            console.log(err);
-        }
-    }
-}
-
-export const kakaoLogin = () => {
-    return async (dispatch) => {
-        dispatch({ type: "KAKAO_LOGIN_REQUEST"});
-        try {
-            const res = axiosInstance.get('auth/kakao');
-            if(res.status === 200){
-                const { data } = res;
-                console.log("kakaoLogin at userAction.js");
-                console.log(data);
-                dispatch({
-                    type: "KAKAO_LOGIN_SUCCESS"
-                })
-            }
-        } catch(err) {
-            console.log(err);
-        }
-    }
-};
-
 export const getUserData = () => {
     return async (dispatch) => {
         dispatch({ type: "COOKIE_DATA_REQUEST"});
