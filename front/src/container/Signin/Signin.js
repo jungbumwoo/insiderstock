@@ -14,6 +14,14 @@ const Signin = () => {
     if(auth.authenticate){
         return <Redirect to={'/'} />
     }
+
+    const responseKakao = (res) => {
+        console.log(res);
+    }
+
+    const responseFailure = (res) => {
+        console.log(res);
+    }
     
     return(
         <>  
@@ -21,11 +29,17 @@ const Signin = () => {
             <a href="http://localhost:2000/api/auth/facebook">
                 <button>facebook Login</button>
             </a>
+
             <a href="http://localhost:2000/api/oauth">
                 <button>kakao Login</button>
             </a>
-            <KakaoLogin 
+            
+            <KakaoLogin
                 jsKey={process.env.REACT_APP_KAKAO_JS_KEY}
+                buttonText="Kakao Login!"
+                onSuccess={responseKakao}
+                onFailure={responseFailure}
+                getProfile={true}
             />
         </>
     )    

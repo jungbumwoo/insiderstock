@@ -34,6 +34,7 @@ const Header = () => {
     const signout = (e) => {
         e.preventDefault();
         console.log('signout Fnc at Header');
+        localStorage.removeItem('token');
         // dispatch(signout());
     };
     let getCookie = () => {
