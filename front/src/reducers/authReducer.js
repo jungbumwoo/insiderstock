@@ -95,6 +95,28 @@ export default (state = initState, action) => {
                 loading: false,
                 token: action.payload.token
             }
+            break;
+        case "POST_KAKAO_USER_REQUEST":
+            state = {
+                ...state,
+                authenticating: true,
+                authenticate: false,
+                loading: true,
+            }
+            break;
+        case "POST_KAKAOUSER_SUCCESS":
+            state = {
+                ...state,
+                authenticate: true,
+                authenticating: false,
+                loading: false,
+                token: action.payload.access_token,
+                user: {
+                    username: action.payload.nickname,
+                    picture: action.payload.profileImg110
+                }
+            }
+            break;
         }
     return state;
 }

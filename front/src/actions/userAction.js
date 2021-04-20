@@ -63,3 +63,20 @@ export const localStorageData = (userInfo) => {
         }
     }
 }
+
+export const postKakaoUser = (id, access_token, nickname, profileImg110, provider) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: "POST_KAKAO_USER_REQUEST"});
+            const res = await axiosInstance.post('auth/kakao/jslogin', {
+                id, access_token, nickname, profileImg110, provider
+            })
+            if (res.status == 200) {
+                dispatch({ type: "POST_KAKAOUSER_SUCCESS",
+                        payload: {id, access_token, nickname, profileImg110, provider} });
+            }
+        } catch(err) {
+            console.log(err);
+        }
+    }
+}

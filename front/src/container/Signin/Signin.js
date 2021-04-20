@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layouts/Layout/Layout.js"
 import { Redirect } from "react-router-dom";
+import { postKakaoUser } from "../../actions"; 
 
 require('dotenv').config();
 
@@ -10,7 +11,7 @@ const Signin = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // Kakao sdk import 
+        // Kakao sdk import
         const kakaoScript = document.createElement('script');
         kakaoScript.async = true;
         kakaoScript.src = "https://developers.kakao.com/sdk/js/kakao.js";
@@ -24,15 +25,22 @@ const Signin = () => {
             // SDK 초기화 여부를 판단합니다.
             console.log(window.Kakao.isInitialized());
 
+            // Login and Get access_token
             window.Kakao.Auth.createLoginButton({
                 container: '#kakao-login-btn',
                 success: (auth) => {
                     console.log("Kakao Login Success", auth);
+                    let { access_token } = auth; 
                     // requset Api User Info
                     window.Kakao.API.request({
-                        url: '/v2/user/me',
+                        url: '/v2/user/me', // kakao docs url
                         success: (res) => {
                             console.log(res);
+                            let id = res.properties.id;
+                            let nickname = res.properties.nickname;
+                            let profileImg110 = res.properties.thumbnail_image;
+                            let provider = 'kakao';
+                            dispatch(postKakaoUser(id, access_token, nickname, profileImg110, provider));
                         },
                         fail: (err) => {
                             console.log(err)
