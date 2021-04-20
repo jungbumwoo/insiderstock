@@ -1,15 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/Layouts/Layout/Layout.js"
 import { Redirect } from "react-router-dom";
-import KakaoLogin from "react-kakao-login";
 
 require('dotenv').config();
 
 const Signin = () => {
     const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
-    console.log(process.env.REACT_APP_KAKAO_JS_KEY);
+
+    useEffect(() => {
+        // Kakao sdk import 
+        const kakaoScript = document.createElement('script');
+        kakaoScript.async = true;
+        kakaoScript.src = "https://developers.kakao.com/sdk/js/kakao.js";
+        document.head.appendChild(kakaoScript);
+
+        // Kakao sdk load
+        kakaoScript.onload = () => {
+             // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+            window.Kakao.init(process.env.REACT_APP_KAKAO_JS_KEY);
+
+            // SDK 초기화 여부를 판단합니다.
+            console.log(window.Kakao.isInitialized());
+
+            window.Kakao.Auth.createLoginButton({
+                container: '#kakao-login-btn',
+                success: (auth) => {
+                    console.log("Kakao Login Success", auth);
+                    // requset Api User Info
+                    window.Kakao.API.request({
+                        url: '/v2/user/me',
+                        success: (res) => {
+                            console.log(res);
+                        },
+                        fail: (err) => {
+                            console.log(err)
+                        }
+                    });
+                },
+                fail: (err) => {
+                    console.log(err);
+                }
+            })
+        };
+    });
 
     if(auth.authenticate){
         return <Redirect to={'/'} />
@@ -34,13 +69,7 @@ const Signin = () => {
                 <button>kakao Login</button>
             </a>
             
-            <KakaoLogin
-                jsKey={process.env.REACT_APP_KAKAO_JS_KEY}
-                buttonText="Kakao Login!"
-                onSuccess={responseKakao}
-                onFailure={responseFailure}
-                getProfile={true}
-            />
+            <button type="button" id="kakao-login-btn"></button>
         </>
     )    
 }
