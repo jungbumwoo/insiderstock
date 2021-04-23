@@ -14,6 +14,7 @@ const Saved = (props) => {
     } else {
         return (
             <>
+                <div>You have to LogIn for this content.</div>
             </>
         )
     }

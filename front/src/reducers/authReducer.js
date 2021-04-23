@@ -2,7 +2,7 @@ const initState = {
     token: undefined,
     // What is the difference between localStorage and Reducer store token ?
     user: {
-        username: '',
+        username: null,
         email: '',
         picture: ''
     },
@@ -105,6 +105,26 @@ export default (state = initState, action) => {
             }
             break;
         case "POST_KAKAOUSER_SUCCESS":
+            state = {
+                ...state,
+                authenticate: true,
+                authenticating: false,
+                loading: false,
+                user: {
+                    username: action.payload.nickname,
+                    picture: action.payload.profileImg110
+                }
+            }
+            break;
+        case "POST_KAKAO_SIGNUP_REQUEST":
+            state = {
+                ...state,
+                authenticate: false,
+                authenticating: true,
+                loading: true,
+            }
+            break;
+        case "POST_KAKAO_SIGNUP_SUCCESS":
             state = {
                 ...state,
                 authenticate: true,

@@ -53,26 +53,35 @@ export const signout = () => {
     }
 }
 
-export const localStorageData = (userInfo) => {
-    return async (dispatch) => {
-        try {
-            dispatch({ type: "LOCALSTORAGE_DATA",
-                    payload: {token: userInfo.token}});    
-        } catch(err) {
-            console.log(err);
-        }
-    }
-}
 
 export const postKakaoUser = (id, access_token, nickname, profileImg110, provider) => {
     return async (dispatch) => {
         try {
             dispatch({ type: "POST_KAKAO_USER_REQUEST"});
             const res = await axiosInstance.post('auth/kakao/jslogin', {
-                id, access_token, nickname, profileImg110, provider
+                userid : id, access_token, nickname, profileImg110, provider
             })
-            if (res.status == 200) {
+            if (res.status === 200) {
+                const { token } = res.data;
+                localStorage.setItem('token', token);
                 dispatch({ type: "POST_KAKAOUSER_SUCCESS",
+                        payload: {id, nickname, profileImg110, provider} });
+            }
+        } catch(err) {
+            console.log(err);
+        }
+    }
+}
+
+export const postKakaoSignup = (id, access_token, nickname, profileImg110, provider) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: "POST_KAKAO_SIGNUP_REQUEST"});
+            const res = await axiosInstance.post('auth/kakao/signup', {
+                userid : id, access_token, nickname, profileImg110, provider
+            })
+            if (res.status === 201) {
+                dispatch({ type: "POST_KAKAO_SIGNUP_SUCCESS",
                         payload: {id, access_token, nickname, profileImg110, provider} });
             }
         } catch(err) {

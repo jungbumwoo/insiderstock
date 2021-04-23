@@ -9,6 +9,7 @@ require('dotenv').config();
 const Signin = () => {
     const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
+    const isToken = localStorage.getItem('token');
 
     useEffect(() => {
         // Kakao sdk import
@@ -16,7 +17,7 @@ const Signin = () => {
         kakaoScript.async = true;
         kakaoScript.src = "https://developers.kakao.com/sdk/js/kakao.js";
         document.head.appendChild(kakaoScript);
-
+        
         // Kakao sdk load
         kakaoScript.onload = () => {
              // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
@@ -36,7 +37,7 @@ const Signin = () => {
                         url: '/v2/user/me', // kakao docs url
                         success: (res) => {
                             console.log(res);
-                            let id = res.properties.id;
+                            let id = res.id;
                             let nickname = res.properties.nickname;
                             let profileImg110 = res.properties.thumbnail_image;
                             let provider = 'kakao';
@@ -54,7 +55,7 @@ const Signin = () => {
         };
     });
 
-    if(auth.authenticate){
+    if(auth.authenticate && isToken){
         return <Redirect to={'/'} />
     }
 

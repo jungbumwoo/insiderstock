@@ -4,7 +4,7 @@ import Home from "./container/Home/Home";
 import Signin from "../src/container/Signin/Signin.js";
 import Signup from "../src/container/Signup/Signup.js";
 import GetToken from "../src/container/GetToken/GetToken.js";
-
+import Signout from "../src/container/Signout/Signout.js";
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route path="/signin" component={Signin} />
       <Route path="/signup" component={Signup} />
+      <Route path="/signout" component={Signout} />
       <Route path="/:token" component={GetToken} />
     </Switch>
   );

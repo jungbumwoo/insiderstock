@@ -20,22 +20,20 @@ const Header = () => {
     if (isToken) {
         let userInfo = [];
         userInfo.token = isToken;
-        dispatch(localStorageData(userInfo));
-        // setUserToken(userInfo.token);
     }
 
-    useEffect(() => {
-        if(isToken) {
-            console.log("useEffect executed");
-            setUserToken(auth.token);
-        }
-    }, [])
+    // useEffect(() => {
+    //     if(isToken) {
+    //         console.log("useEffect executed");
+    //         setUserToken(auth.token);
+    //     }
+    // }, [])
     
     const signout = (e) => {
         e.preventDefault();
         console.log('signout Fnc at Header');
         localStorage.removeItem('token');
-        // dispatch(signout());
+        dispatch(signout());
     };
     let getCookie = () => {
         let tokenName = "userName"
@@ -50,12 +48,10 @@ const Header = () => {
         return (
             <Nav>
                 <li className="nav-item">
-                    <span>{cookieUsername ? cookieUsername : undefined }</span>
+                    <span>{auth.user.username ? auth.user.username : undefined }</span>
                 </li>
                 <li>
-                    <a href="#" onClick={signout}>
-                        signout
-                    </a>
+                    <Link to="/signout">signout</Link>
                 </li>
             </Nav>
         )
@@ -89,7 +85,7 @@ const Header = () => {
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                     <Button variant="outline-light">Search</Button>
                 </Form> */}
-                { isToken ? renderLoggedinbar() : renderNonLoginbar()}
+                { isToken && auth.authenticate ? renderLoggedinbar() : renderNonLoginbar()}
             </Navbar>
         </>
     )
