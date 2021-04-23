@@ -25,6 +25,8 @@ const News = (props) => {
     } 
     const [checkArray, setCheckArray] = useState(maplist());
 
+    console.log(newArray);
+
     useEffect(()=> {
         dispatch(getAllStock());
     }, [])
@@ -32,6 +34,7 @@ const News = (props) => {
     const checkBoxChange = (e) => {
         console.log(e.target.id);
         const itemToFind = newArray.find((item) => { return item.id == e.target.id })
+        console.log(itemToFind);
         // let isexist = newArray.filter((cat) => {
         //     cat.id = e.target.id
         // });
@@ -58,6 +61,31 @@ const News = (props) => {
         // if it's empty
         dispatch(savestock(mapedArray));
         setNewArray([]);
+    }
+
+    const handleSelectAll = () => {
+        console.log("handelSelectAll");
+        let ele = document.getElementsByName("chk");
+        console.log(ele);
+        for (let i = 0; i <ele.length; i++){
+            if(ele[i].checked == false){
+                ele[i].checked = true;
+            } else {
+                ele[i].checked = false;
+            }
+        }
+    }
+    
+    const handleInterestBtn = () => {
+        console.log("handleInterest btn");
+    };
+
+    const handleNotInterestBtn = () => {
+        console.log("handlenotinterestbtn");
+    }
+
+    const handleOnboardBtn = () => {
+        console.log("handleOnboard");
     }
 
     if (!stock.loading) {
@@ -90,7 +118,7 @@ const News = (props) => {
                         {stock.stocks.map((trs) => {
                             return (
                                 <tr key={trs[0] + trs[11] + trs[12] + Math.random()}>
-                                    <th><input type="checkbox" id={stock.stocks.indexOf(trs)} name={trs[0]} onChange={checkBoxChange}/></th>
+                                    <th><input type="checkbox" id={stock.stocks.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
                                     <th>{trs[0]}</th>
                                     <th>{trs[2]}</th>
                                     <th>{trs[3]}</th>
@@ -119,7 +147,16 @@ const News = (props) => {
                         <Button onClick={handleSaveBtn} variant="success" size="sm">
                             Save
                         </Button>
-                    </div>
+                        <Button onClick={handleInterestBtn} variant="primary" size="sm">
+                            Interest
+                        </Button>
+                        <Button onClick={handleNotInterestBtn} variant="warning" size="sm">
+                            Not Interest
+                        </Button>
+                        <Button onClick={handleOnboardBtn} variant="success" size="sm">
+                            Onboard
+                        </Button>
+                        </div>
                 </div>
                 <div>
                     Eggs
