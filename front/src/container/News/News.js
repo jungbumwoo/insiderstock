@@ -54,16 +54,14 @@ const News = (props) => {
         console.log("Save btn clicked.");
         console.log(newArray);
         let mapedArray = newArray.map((item) => {
-            let puppy = stock.stocks.filter((cat) => {
-                return cat[0] == item.id 
-            });
-            return puppy[0]
+            return stock.stocks[item];
         })
         console.log(mapedArray);
 
         // if it's empty
-        dispatch(savestock(mapedArray));
-        setNewArray([]);
+        // dispatch(savestock(mapedArray));
+        handleBtnSubmit();
+        // setNewArray([]);
     }
 
     const handleSelectAll = () => {
@@ -115,6 +113,20 @@ const News = (props) => {
 
     const handleOnboardBtn = () => {
         console.log("handleOnboard");
+    }
+
+    const handleBtnSubmit = () => {
+        console.log(stock.stocks);
+        let revisedStocks = newArray.map((id) => {
+            let filterd = stock.stocks.filter(item => {
+                console.log(stock.stocks.indexOf(item));
+                return stock.stocks.indexOf(item) !== id
+            })
+            console.log(filterd);
+            return filterd;
+        });
+        console.log(revisedStocks);
+        setNewArray([]);
     }
 
     if (!stock.loading) {
