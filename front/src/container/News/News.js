@@ -12,6 +12,8 @@ const News = (props) => {
     const [checked, setChecked] = useState(false);
     const stock = useSelector(state => state.stock);
     const [ newArray, setNewArray] = useState([]);
+    console.log(newArray);
+    const [ checkedArray, setCheckedArray ] = useState([]);
     let checkboxArray = [];
     let maplist = () => {
         console.log("maplist Func executed. to get the list");
@@ -25,25 +27,26 @@ const News = (props) => {
     } 
     const [checkArray, setCheckArray] = useState(maplist());
 
-    console.log(newArray);
-
     useEffect(()=> {
         dispatch(getAllStock());
     }, [])
 
     const checkBoxChange = (e) => {
-        console.log(e.target.id);
-        const itemToFind = newArray.find((item) => { return item.id == e.target.id })
+        console.log(e.target);
+        const itemToFind = newArray.find((item) => { return item == parseInt(e.target.id) })
         console.log(itemToFind);
         // let isexist = newArray.filter((cat) => {
         //     cat.id = e.target.id
         // });
         const idx = newArray.indexOf(itemToFind)
         if (idx > -1) {
+            // delete
             newArray.splice(idx, 1)
         } else {
-            newArray.push({ id: e.target.id })
+            // add
+            newArray.push(parseInt(e.target.id));
         }
+        console.log(newArray);
         setNewArray(newArray);
     }
 
@@ -64,16 +67,42 @@ const News = (props) => {
     }
 
     const handleSelectAll = () => {
-        console.log("handelSelectAll");
         let ele = document.getElementsByName("chk");
         console.log(ele);
         for (let i = 0; i <ele.length; i++){
+            console.log(`i : ${i}`)
             if(ele[i].checked == false){
+                console.log("if true");
                 ele[i].checked = true;
+                console.log("isit Included?")
+                console.log(newArray);
+                console.log(newArray.includes(i))
+                if(!newArray.includes(i)){
+                    console.log(`add ${i}`)
+                    newArray.push(i)
+                }
+                // console.log(checkedArray.includes(stock.stocks[i]));
+                // if(!checkedArray.includes(stock.stocks[i])){
+                //     checkedArray.push(stock.stocks[i]);
+                // }
+                // setCheckedArray(checkedArray);
             } else {
+                console.log("if false");
                 ele[i].checked = false;
+                console.log("isit Included?");
+                console.log(newArray);
+                console.log(newArray.includes(i))
+                if(newArray.includes( i)){
+                    console.log(`minus ${i}`)
+                    newArray.splice(newArray.indexOf(i), 1);
+                }
+                // if(checkedArray.includes(stock.stocks[i])){
+                //     checkedArray.splice(checkedArray.indexOf(stock.stocks[i]), 1);
+                // }
             }
         }
+        console.log(newArray);
+        setNewArray(newArray);
     }
     
     const handleInterestBtn = () => {
