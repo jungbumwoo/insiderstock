@@ -59,47 +59,27 @@ const News = (props) => {
         console.log(mapedArray);
 
         // if it's empty
-        // dispatch(savestock(mapedArray));
+        dispatch(savestock(mapedArray));
         handleBtnSubmit();
-        // setNewArray([]);
+        setNewArray([]);
     }
 
     const handleSelectAll = () => {
         let ele = document.getElementsByName("chk");
         console.log(ele);
         for (let i = 0; i <ele.length; i++){
-            console.log(`i : ${i}`)
             if(ele[i].checked == false){
-                console.log("if true");
                 ele[i].checked = true;
-                console.log("isit Included?")
-                console.log(newArray);
-                console.log(newArray.includes(i))
                 if(!newArray.includes(i)){
-                    console.log(`add ${i}`)
                     newArray.push(i)
                 }
-                // console.log(checkedArray.includes(stock.stocks[i]));
-                // if(!checkedArray.includes(stock.stocks[i])){
-                //     checkedArray.push(stock.stocks[i]);
-                // }
-                // setCheckedArray(checkedArray);
             } else {
-                console.log("if false");
                 ele[i].checked = false;
-                console.log("isit Included?");
-                console.log(newArray);
-                console.log(newArray.includes(i))
                 if(newArray.includes( i)){
-                    console.log(`minus ${i}`)
                     newArray.splice(newArray.indexOf(i), 1);
                 }
-                // if(checkedArray.includes(stock.stocks[i])){
-                //     checkedArray.splice(checkedArray.indexOf(stock.stocks[i]), 1);
-                // }
             }
         }
-        console.log(newArray);
         setNewArray(newArray);
     }
     
@@ -117,14 +97,29 @@ const News = (props) => {
 
     const handleBtnSubmit = () => {
         console.log(stock.stocks);
-        let revisedStocks = newArray.map((id) => {
-            let filterd = stock.stocks.filter(item => {
-                console.log(stock.stocks.indexOf(item));
-                return stock.stocks.indexOf(item) !== id
-            })
-            console.log(filterd);
-            return filterd;
+        let fullIndex = [];
+            for(let i = 0; i< stock.stocks.length; i++){
+                fullIndex.push(i);    
+            }
+        let toGetNewIndex = newArray.map((id) => {
+            console.log(id);
+            let isExist = fullIndex.indexOf(id);
+            console.log(isExist);
+            if (isExist > -1 ) {
+                fullIndex.splice(isExist, 1);
+            } 
+            // return stock.stocks[id];
+            // let filterd = stock.stocks.filter(item => {
+            //     console.log(stock.stocks.indexOf(item));
+            //     return stock.stocks.indexOf(item) !== id
+            // })
+            // console.log(filterd);
+            // return filterd;
         });
+        console.log(fullIndex);
+        let revisedStocks = fullIndex.map((index) => {
+            return stock.stocks[index];
+        })
         console.log(revisedStocks);
         setNewArray([]);
     }

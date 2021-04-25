@@ -28,6 +28,13 @@ export default (state = initState, action) => {
                 loading: false
             }
             break;
+        case "REVISED_STOCKS_SUCCESS" :
+            state = {
+                ...state,
+                err: action.payload.error,
+                stocks: action.payload.stocks
+            }
+            break;
     }
     return state;
 }
