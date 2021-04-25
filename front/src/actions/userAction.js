@@ -89,3 +89,14 @@ export const postKakaoSignup = (id, access_token, nickname, profileImg110, provi
         }
     }
 }
+
+export const getSaveStock = (req, res) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: "SAVESTOCK_REQUEST"});
+            const res = await axiosInstance.get('stock/saved');
+        } catch(err) {
+            console.log(err);
+        }
+    }
+}
