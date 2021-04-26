@@ -47,3 +47,21 @@ export const savestock = (stockArray) => {
         }
     }
 }
+
+export const postAddInterestAction = (addStock) => {
+    return async dispatch => {
+        dispatch({ type: "ADD_INTEREST_POST_REQUEST"});
+        try {
+            const res = await axiosInstance.post("/addinterest", { data: addStock});
+            if(res.status == 201){
+                const { interested } = res.data;
+                dispatch({ type: "ADD_INTEREST_POST_SUCCESS", 
+                            payload: interested });
+            } else {
+                console.log("Err: at postAddInterestAction");
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}

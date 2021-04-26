@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStock, savestock } from "../../actions/stockAction";
+import { postAddInterestAction } from "../../actions";
 import Table from "react-bootstrap/Table";
 import Layout from "../../components/Layouts/Layout/Layout.js";
 import Button from 'react-bootstrap/Button';
@@ -84,7 +85,10 @@ const News = (props) => {
     }
     
     const handleInterestBtn = () => {
-        console.log("handleInterest btn");
+        let getDataFromCheckedId = newArray.map((num) => {
+            return stock.stocks[num]
+        })
+        dispatch(postAddInterestAction(getDataFromCheckedId));
     };
 
     const handleNotInterestBtn = () => {

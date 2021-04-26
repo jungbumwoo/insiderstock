@@ -100,3 +100,7 @@ export const getSaveStock = (req, res) => {
         }
     }
 }
+
+export const getSavedStock = (req, res) => {
+    
+}
