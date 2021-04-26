@@ -85,7 +85,7 @@ const Header = () => {
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                     <Button variant="outline-light">Search</Button>
                 </Form> */}
-                { isToken && auth.authenticate ? renderLoggedinbar() : renderNonLoginbar()}
+                { isToken ? renderLoggedinbar() : renderNonLoginbar()}
             </Navbar>
         </>
     )
