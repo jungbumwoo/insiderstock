@@ -1,9 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-const Interest = (props) => {
-    return (
-        <div>sdf</div>
+const Interest = () => {
+    const dispatch = useDispatch();
+    
+    return(
+        <>
+            <div>Interest Stocks</div>
+        </>
     )
-};
+}
 
-export default Interest;
+export default Interest
