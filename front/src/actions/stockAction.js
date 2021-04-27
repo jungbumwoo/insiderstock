@@ -50,13 +50,14 @@ export const savestock = (stockArray) => {
 
 export const getAddInterestAction = () => {
     return async dispatch => {
-        dispatch({ type: "GET_INTERSET_REQUEST"});
+        dispatch({ type: "GET_INTEREST_REQUEST"});
         try {
             let res = await axiosInstance.get('/addinterest');
             if(res.status === 200) {
-                const { interestData } = res.data;
-                dispatch({ type: "GET_INTERSET_SUCCESS",
-                            payload: interestData });
+                const { interested } = res.data;
+                console.log(interested);
+                dispatch({ type: "GET_INTEREST_SUCCESS",
+                            payload: {interested} });
             }
         } catch(err) {
             console.log(err);
@@ -71,8 +72,9 @@ export const postAddInterestAction = (addStock) => {
             const res = await axiosInstance.post("/addinterest", { data: addStock});
             if(res.status == 201){
                 const { interested } = res.data;
+                console.log(interested);
                 dispatch({ type: "ADD_INTEREST_POST_SUCCESS", 
-                            payload: interested });
+                            payload: { interestData : interested } });
             } else {
                 console.log("Err: at postAddInterestAction");
             }

@@ -2,6 +2,7 @@ import { categoryConstants } from "../actions/constants.js";
 
 const initState = {
     stocks: [],
+    interests: [],
     loading: false,
     error: null
 };
@@ -33,6 +34,25 @@ export default (state = initState, action) => {
                 ...state,
                 err: action.payload.error,
                 stocks: action.payload.stocks
+            }
+            break;
+        case "GET_INTEREST_REQUEST" :
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case "GET_INTEREST_SUCCESS" :
+            state = {
+                ...state,
+                loading: false,
+                interests: action.payload.interested
+            }
+            break;
+        case "GET_INTERESET_FAILED" :
+            state = {
+                ...state,
+                loading: true
             }
             break;
     }

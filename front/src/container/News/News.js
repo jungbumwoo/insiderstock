@@ -138,14 +138,14 @@ const News = (props) => {
                                 <th></th>
                                 <th>Ticker</th>
                                 <th>Company</th>
-                                <th>Price</th>
+                                <th>CurrentPrice</th>
                                 <th>Insider Name</th>
                                 <th>Insider Position</th>
                                 <th>Date</th>
                                 <th>Buy/sell</th>
                                 <th>Insider Trading Shares</th>
                                 <th>Shares Change</th>
-                                <th>Price</th>
+                                <th>purchasePrice</th>
                                 <th>Cost</th>
                                 <th>Final Share</th>
                                 <th>Price Change Since Insider Trade (%)</th>

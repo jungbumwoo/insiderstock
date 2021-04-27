@@ -19,7 +19,7 @@ export const getUserData = () => {
         try {
             // const res = await axiosInstance.get('/auth/getuser');
             // const { data } = res;
-            // console.log(data); 
+            // console.log(data);
             let getCookie = () => {
                 let tokenName = "userName"
                 let matches = document.cookie.match(new RegExp(
@@ -43,7 +43,7 @@ export const signout = () => {
             const res = await axiosInstance.get('auth/signout');
             if (res.status === 200) {
                 const { data } = res;
-                window.localStorage.removeItem("token"); 
+                window.localStorage.removeItem("token");
                 dispatch({ type: "SIGNOUT_SUCCESS"});
             }
         } catch(err) {
