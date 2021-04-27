@@ -6,17 +6,17 @@ import { getAddInterestAction } from "../../actions/stockAction";
 const Interest = () => {
     const dispatch = useDispatch();
     const [ newArray, setNewArray ] = useState([]);
+    const [ noObj, setNoObj] = useState(null);
     const stockInterest = useSelector(state => state.stock);
     let { interests } = stockInterest;
-    console.log(interests);    
     let noObjInterests = interests.map((trs) => {
+        console.log(trs.priceChangeSIT.$numberDecimal);
         trs.priceChangeSIT = trs.priceChangeSIT.$numberDecimal;
         trs.DividendYield = trs.DividendYield.$numberDecimal;
         trs.PERatio = trs.PERatio.$numberDecimal;
         trs.MarketCap = trs.MarketCap.$numberDecimal;
         return trs;
     })
-    console.log(noObjInterests);
     
     const checkBoxChange = (e) => {
         console.log(e.target);
@@ -40,6 +40,7 @@ const Interest = () => {
     useEffect(() => {
         dispatch(getAddInterestAction());
     }, [])
+
     return(
         <>
             <div className="interestTable">
@@ -66,7 +67,7 @@ const Interest = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {noObjInterests ? noObjInterests.map((trs) => {
+                        {interests ? interests.map((trs) => {
                           console.log(trs);
                           return (
                               <tr>
