@@ -9,14 +9,6 @@ const Interest = () => {
     const [ noObj, setNoObj] = useState(null);
     const stockInterest = useSelector(state => state.stock);
     let { interests } = stockInterest;
-    let noObjInterests = interests.map((trs) => {
-        console.log(trs.priceChangeSIT.$numberDecimal);
-        trs.priceChangeSIT = trs.priceChangeSIT.$numberDecimal;
-        trs.DividendYield = trs.DividendYield.$numberDecimal;
-        trs.PERatio = trs.PERatio.$numberDecimal;
-        trs.MarketCap = trs.MarketCap.$numberDecimal;
-        return trs;
-    })
     
     const checkBoxChange = (e) => {
         console.log(e.target);
@@ -82,12 +74,12 @@ const Interest = () => {
                                 <th>{trs.insiderTradingShares}</th>
                                 <th>{trs.sharesChange}</th>
                                 <th>{trs.purchasePrice}</th>
-                                <th>{trs.cost}</th>
+                                <th>{trs.cost.$numberDecimal}</th>
                                 <th>{trs.finalShare}</th>
                                 <th>{trs.priceChangeSIT.$numberDecimal}</th>
-                                <th>{trs[14]}</th>
-                                <th>{trs[15]}</th>
-                                <th>{trs[16]}</th>
+                                <th>{trs.DividendYield.$numberDecimal}</th>
+                                <th>{trs.PERatio.$numberDecimal}</th>
+                                <th>{trs.MarketCap.$numberDecimal}</th>
                               </tr>
                           )  
                         }) : undefined}
