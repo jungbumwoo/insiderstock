@@ -96,29 +96,29 @@ const Interest = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {interests ? interests.map((trs) => {
-                                console.log(trs);
-                              return (
-                                  <tr key={interests.indexOf(trs)}>
+                        {interests ? interests.map((trs) => {
+                          console.log(trs);
+                          return (
+                                <tr>
                                     <th><input type="checkbox" id={interests.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
-                                    <th>{trs[0]}</th>
-                                    <th>{trs[2]}</th>
-                                    <th>{trs[3]}</th>
-                                    <th>{trs[4]}</th>
-                                    <th>{trs[5]}</th>
-                                    <th>{trs[6]}</th>
-                                    <th>{trs[7]}</th>
-                                    <th>{trs[8]}</th>
-                                    <th>{trs[9]}</th>
-                                    <th>{trs[10]}</th>
-                                    <th>{trs[11]}</th>
-                                    <th>{trs[12]}</th>
-                                    <th>{trs[13]}</th>
-                                    <th>{trs[14]}</th>
-                                    <th>{trs[15]}</th>
-                                    <th>{trs[16]}</th>
-                                  </tr>
-                              )  
+                                    <th>{trs.ticker}</th>
+                                    <th>{trs.company}</th>
+                                    <th>{trs.currentprice}</th>
+                                    <th>{trs.insiderName}</th>
+                                    <th>{trs.insiderPosition}</th>
+                                    <th>{trs.date.split('T')[0]}</th>
+                                    <th>{trs.buyOrSell}</th>
+                                    <th>{trs.insiderTradingShares}</th>
+                                    <th>{trs.sharesChange}</th>
+                                    <th>{trs.purchasePrice}</th>
+                                    <th>{trs.cost.$numberDecimal}</th>
+                                    <th>{trs.finalShare}</th>
+                                    <th>{trs.priceChangeSIT.$numberDecimal}</th>
+                                    <th>{trs.DividendYield.$numberDecimal}</th>
+                                    <th>{trs.PERatio.$numberDecimal}</th>
+                                    <th>{trs.MarketCap.$numberDecimal}</th>
+                                </tr>
+                                )  
                             }) : undefined}
                         </tbody>
                     </Table>
