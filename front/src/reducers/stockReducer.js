@@ -9,6 +9,22 @@ const initState = {
 
 export default (state = initState, action) => {
     switch (action.type) {
+        case "ADD_INTEREST_POST_REQUEST" :
+            state = {
+                ...state,
+                loading: true,
+            }
+            break;
+        case "ADD_INTEREST_POST_SUCCESS" :
+            state = {
+                ...state,
+                loading: false,
+                interests: [
+                    ...state.interests,
+                    action.payload.added
+                ]
+            }
+            break;
         case "GET_ALL_STOCKS_REQUEST" :
             state = {
                 ...state,
@@ -53,6 +69,25 @@ export default (state = initState, action) => {
             state = {
                 ...state,
                 loading: true
+            }
+            break;
+        case "DELETE_INTEREST_REQUEST" :
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case "DELETE_INTERST_SUCCESS" :
+            state = {
+                ...state,
+                loading: false,
+                interests: action.payload.interested
+            }
+            break;
+        case "REMAIN_ARRAY" :
+            state = {
+                ...state,
+                stocks: action.payload.remainData
             }
             break;
     }

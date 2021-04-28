@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStock, savestock } from "../../actions/stockAction";
-import { postAddInterestAction } from "../../actions";
+import { postAddInterestAction, remainAction } from "../../actions";
 import Table from "react-bootstrap/Table";
 import Layout from "../../components/Layouts/Layout/Layout.js";
 import Button from 'react-bootstrap/Button';
@@ -87,8 +87,9 @@ const News = (props) => {
     const handleInterestBtn = () => {
         let getDataFromCheckedId = newArray.map((num) => {
             return stock.stocks[num]
-        })
+        });
         dispatch(postAddInterestAction(getDataFromCheckedId));
+        handleBtnSubmit();
     };
 
     const handleNotInterestBtn = () => {
@@ -100,31 +101,21 @@ const News = (props) => {
     }
 
     const handleBtnSubmit = () => {
-        console.log(stock.stocks);
         let fullIndex = [];
             for(let i = 0; i< stock.stocks.length; i++){
                 fullIndex.push(i);    
             }
-        let toGetNewIndex = newArray.map((id) => {
-            console.log(id);
-            let isExist = fullIndex.indexOf(id);
-            console.log(isExist);
-            if (isExist > -1 ) {
-                fullIndex.splice(isExist, 1);
-            } 
-            // return stock.stocks[id];
-            // let filterd = stock.stocks.filter(item => {
-            //     console.log(stock.stocks.indexOf(item));
-            //     return stock.stocks.indexOf(item) !== id
-            // })
-            // console.log(filterd);
-            // return filterd;
+        newArray.forEach((num) => {
+            let deleteIndex = fullIndex.indexOf(num);
+            fullIndex.splice(deleteIndex, 1);
         });
         console.log(fullIndex);
-        let revisedStocks = fullIndex.map((index) => {
-            return stock.stocks[index];
-        })
-        console.log(revisedStocks);
+
+        let remainArray = fullIndex.map((num) => {
+            return stock.stocks[num];
+        });
+        
+        dispatch(remainAction(remainArray));
         setNewArray([]);
     }
 
@@ -186,17 +177,17 @@ const News = (props) => {
                         </Button>{' '}
                         <Button onClick={handleSaveBtn} variant="success" size="sm">
                             Save
-                        </Button>
+                        </Button>{' '}
                         <Button onClick={handleInterestBtn} variant="primary" size="sm">
                             Interest
                         </Button>
                         <Button onClick={handleNotInterestBtn} variant="warning" size="sm">
                             Not Interest
-                        </Button>
+                        </Button>{' '}
                         <Button onClick={handleOnboardBtn} variant="success" size="sm">
                             Onboard
-                        </Button>
-                        </div>
+                        </Button>{' '}
+                    </div>
                 </div>
                 <div>
                     Eggs
@@ -211,10 +202,6 @@ const News = (props) => {
             <div>Loading..</div>
         )
     }
-}
-
-const handleSelectAll = () => {
-    console.log("select All");
 }
 
 export default News;

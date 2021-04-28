@@ -72,14 +72,35 @@ export const postAddInterestAction = (addStock) => {
             const res = await axiosInstance.post("/addinterest", { data: addStock});
             if(res.status == 201){
                 const { interested } = res.data;
-                console.log(interested);
-                dispatch({ type: "ADD_INTEREST_POST_SUCCESS", 
-                            payload: { interestData : interested } });
+                dispatch({ type: "ADD_INTEREST_POST_SUCCESS", payload: {added: addStock}});
             } else {
                 console.log("Err: at postAddInterestAction");
-            }
+            };
         } catch (err) {
             console.log(err)
         }
+    }
+}
+
+export const interestDeleteAct = (deleteArray, remainArray) => {
+    return async dispatch => {
+        dispatch({ type: "DELETE_INTEREST_REQUEST"});
+        try {
+            const res = await axiosInstance.post("/delete/interest", deleteArray);
+            console.log(res.status);
+            if(res.status === 201){
+                dispatch({ type: "DELETE_INTERST_SUCCESS", payload: { interestData: remainArray}})
+            } else {
+                console.log("ERR at interestDeleteAct");
+            }
+        } catch(err){
+            console.log(err);
+        }
+    }
+}
+
+export const remainAction = (remainArray) => {
+    return async dispatch => {
+        dispatch({ type: "REMAIN_ARRAY", payload: { remainData : remainArray }})
     }
 }
