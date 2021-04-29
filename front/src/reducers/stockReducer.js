@@ -21,7 +21,7 @@ export default (state = initState, action) => {
                 loading: false,
                 interests: [
                     ...state.interests,
-                    action.payload.added
+                    ...action.payload.added
                 ]
             }
             break;
