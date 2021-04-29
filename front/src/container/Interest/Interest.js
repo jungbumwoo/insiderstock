@@ -97,7 +97,7 @@ const Interest = () => {
                         </thead>
                         <tbody>
                         {interests ? interests.map((trs) => {
-                          console.log(trs);
+                            console.log(trs);
                           return (
                                 <tr>
                                     <th><input type="checkbox" id={interests.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
@@ -106,17 +106,17 @@ const Interest = () => {
                                     <th>{trs.currentprice}</th>
                                     <th>{trs.insiderName}</th>
                                     <th>{trs.insiderPosition}</th>
-                                    <th>{trs.date.split('T')[0]}</th>
+                                    <th>{trs.date ? trs.date.split('T')[0] : trs.date}</th>
                                     <th>{trs.buyOrSell}</th>
                                     <th>{trs.insiderTradingShares}</th>
                                     <th>{trs.sharesChange}</th>
                                     <th>{trs.purchasePrice}</th>
-                                    <th>{trs.cost.$numberDecimal}</th>
+                                    <th>{trs.cost ? trs.cost.$numberDecimal : trs.cost}</th>
                                     <th>{trs.finalShare}</th>
-                                    <th>{trs.priceChangeSIT.$numberDecimal}</th>
-                                    <th>{trs.DividendYield.$numberDecimal}</th>
-                                    <th>{trs.PERatio.$numberDecimal}</th>
-                                    <th>{trs.MarketCap.$numberDecimal}</th>
+                                    <th>{trs.priceChangeSIT ? trs.priceChangeSIT.$numberDecimal : trs.priceChangeSIT}</th>
+                                    <th>{trs.DividendYield.$numberDecimal ? trs.DividendYield.$numberDecimal : trs.DividendYield }</th>
+                                    <th>{trs.PERatio.$numberDecimal ? trs.PERatio.$numberDecimal : trs.PERatio}</th>
+                                    <th>{trs.MarketCap.$numberDecimal ? trs.MarketCap.$numberDecimal : trs.MarketCap}</th>
                                 </tr>
                                 )  
                             }) : undefined}

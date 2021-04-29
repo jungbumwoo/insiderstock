@@ -66,6 +66,7 @@ export const getAddInterestAction = () => {
 }
 
 export const postAddInterestAction = (addStock) => {
+    console.log(addStock);
     return async dispatch => {
         dispatch({ type: "ADD_INTEREST_POST_REQUEST"});
         try {

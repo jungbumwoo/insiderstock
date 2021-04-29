@@ -16,20 +16,12 @@ const News = (props) => {
     console.log(newArray);
     const [ checkedArray, setCheckedArray ] = useState([]);
     let checkboxArray = [];
-    let maplist = () => {
-        console.log("maplist Func executed. to get the list");
-        stock.stocks.map((trs) => {
-            checkboxArray.push({
-                id: trs[0],
-                checked
-            })
-        })
-        return checkboxArray;
-    } 
-    const [checkArray, setCheckArray] = useState(maplist());
 
+    console.log(stock.stocks);
     useEffect(()=> {
-        dispatch(getAllStock());
+        if(!stock.stocks) {
+            dispatch(getAllStock());
+        }
     }, [])
 
     const checkBoxChange = (e) => {
@@ -88,7 +80,9 @@ const News = (props) => {
         let getDataFromCheckedId = newArray.map((num) => {
             return stock.stocks[num]
         });
-        dispatch(postAddInterestAction(getDataFromCheckedId));
+        let typeChangedArray = reduceArray(getDataFromCheckedId);
+
+        dispatch(postAddInterestAction(typeChangedArray));
         handleBtnSubmit();
     };
 
@@ -119,6 +113,31 @@ const News = (props) => {
         setNewArray([]);
     }
 
+    const reduceArray = (arrayData) => {
+        let reduceArrayType = arrayData.reduce((acc, item) => {
+            acc.push({
+                ticker: item[0],
+                company: item[2],
+                currentprice: parseFloat(item[3].replace(/\$/g, '')),
+                insiderName: item[4],
+                insiderPosition: item[5],
+                date: item[6],
+                buyOrSell: item[7],
+                insiderTradingShares: parseFloat(item[8].replace(/\,/, '')),
+                sharesChange: parseFloat(item[9].replace(/\%/g, '')),
+                purchasePrice: parseFloat(item[10].replace(/\$/g, '')),
+                cost: parseFloat(item[11].replace(/\$|\,/g, '')),
+                finalShare: parseInt(item[12].replace(/\,/g, '')),
+                priceChangeSIT: parseFloat(item[13].replace(/\%/, '')),
+                DividendYield: parseFloat(item[14]),
+                PERatio: parseFloat(item[15]),
+                MarketCap: parseFloat(item[16])
+            })
+            return acc
+        }, []);
+        return reduceArrayType;
+    }
+
     if (!stock.loading) {
         return (
             <>
@@ -146,7 +165,7 @@ const News = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                        {stock.stocks.map((trs) => {
+                        {stock.stocks ? stock.stocks.map((trs) => {
                             return (
                                 <tr key={trs[0] + trs[11] + trs[12] + Math.random()}>
                                     <th><input type="checkbox" id={stock.stocks.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
@@ -168,7 +187,7 @@ const News = (props) => {
                                     <th>{trs[16]}</th>
                                 </tr>
                                 )
-                            })}
+                            }): undefined }
                         </tbody>
                     </Table>
                     <div>

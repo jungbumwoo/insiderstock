@@ -1,7 +1,7 @@
 import { categoryConstants } from "../actions/constants.js";
 
 const initState = {
-    stocks: [],
+    stocks: null,
     interests: [],
     loading: false,
     error: null
