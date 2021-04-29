@@ -97,7 +97,7 @@ const Interest = () => {
                         </thead>
                         <tbody>
                         {interests ? interests.map((trs) => {
-                            console.log(trs);
+                            console.log(interests);
                           return (
                                 <tr key={interests.indexOf(trs)}>
                                     <th><input type="checkbox" id={interests.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
@@ -114,9 +114,9 @@ const Interest = () => {
                                     <th>{trs.cost ? trs.cost.$numberDecimal : trs.cost}</th>
                                     <th>{trs.finalShare}</th>
                                     <th>{trs.priceChangeSIT ? trs.priceChangeSIT.$numberDecimal : trs.priceChangeSIT}</th>
-                                    <th>{trs.DividendYield.$numberDecimal ? trs.DividendYield.$numberDecimal : trs.DividendYield }</th>
-                                    <th>{trs.PERatio.$numberDecimal ? trs.PERatio.$numberDecimal : trs.PERatio}</th>
-                                    <th>{trs.MarketCap.$numberDecimal ? trs.MarketCap.$numberDecimal : trs.MarketCap}</th>
+                                    <th>{trs.DividendYield ? trs.DividendYield.$numberDecimal : trs.DividendYield }</th>
+                                    <th>{trs.PERatio ? trs.PERatio.$numberDecimal : trs.PERatio}</th>
+                                    <th>{trs.MarketCap ? trs.MarketCap.$numberDecimal : trs.MarketCap}</th>
                                 </tr>
                                 )  
                             }) : undefined}
