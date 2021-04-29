@@ -90,6 +90,12 @@ export default (state = initState, action) => {
                 stocks: action.payload.remainData
             }
             break;
+        case "GET_INTEREST_FAILED":
+            state = {
+                ...state,
+                error: action.payload.error
+            }
+            break;
     }
     return state;
 }

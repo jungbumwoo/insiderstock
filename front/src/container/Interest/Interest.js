@@ -99,7 +99,7 @@ const Interest = () => {
                         {interests ? interests.map((trs) => {
                             console.log(trs);
                           return (
-                                <tr>
+                                <tr key={interests.indexOf(trs)}>
                                     <th><input type="checkbox" id={interests.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
                                     <th>{trs.ticker}</th>
                                     <th>{trs.company}</th>

@@ -58,6 +58,9 @@ export const getAddInterestAction = () => {
                 console.log(interested);
                 dispatch({ type: "GET_INTEREST_SUCCESS",
                             payload: {interested} });
+            } else {
+                dispatch({ type: "GET_INTEREST_FAILED",
+                            payload: {error: res.data.error}});
             }
         } catch(err) {
             console.log(err);
