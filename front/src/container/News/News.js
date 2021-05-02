@@ -17,7 +17,6 @@ const News = (props) => {
     const [ checkedArray, setCheckedArray ] = useState([]);
     let checkboxArray = [];
 
-    console.log(stock.stocks);
     useEffect(()=> {
         if(!stock.stocks) {
             dispatch(getAllStock());

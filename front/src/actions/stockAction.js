@@ -93,6 +93,7 @@ export const interestDeleteAct = (deleteArray, remainArray) => {
             const res = await axiosInstance.post("/delete/interest", deleteArray);
             console.log(res.status);
             if(res.status === 201){
+                console.log(remainArray);
                 dispatch({ type: "DELETE_INTERST_SUCCESS", payload: { interestData: remainArray}})
             } else {
                 console.log("ERR at interestDeleteAct");

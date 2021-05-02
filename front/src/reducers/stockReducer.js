@@ -81,7 +81,7 @@ export default (state = initState, action) => {
             state = {
                 ...state,
                 loading: false,
-                interests: action.payload.interested
+                interests: action.payload.interestData
             }
             break;
         case "REMAIN_ARRAY" :

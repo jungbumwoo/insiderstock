@@ -46,18 +46,27 @@ const Interest = () => {
         for( let i = 0; i < interests.length; i++ ){
             wholearray.push(i);
         };
-        let remainId = newArray.map((num) => {
-            let deleteIndex = wholearray.indexOf(num);
-            return wholearray.splice(deleteIndex, 1);
+        let remainArrayNum = wholearray.filter((num) => {
+            console.log(num);
+            let deleteIndex = newArray.indexOf(num);
+            // 여기 값이 달라지네;;;
+            //newArray. 항상그대로.
+            if (deleteIndex > -1 ) {
+                console.log(`num: ${num}, deleteIndx: ${deleteIndex}`)
+            }
+            return deleteIndex <= -1
         });
+        console.log(remainArrayNum);
 
-        let remainArray = remainId.map((num) => {
+        let remainArray = remainArrayNum.map((num) => {
             return interests[num];
         });
 
         let deleteArray = newArray.map((num) => {
             return interests[num];
-        })
+        });
+        console.log(deleteArray);
+        console.log(remainArray);
         dispatch(interestDeleteAct(deleteArray, remainArray));
     }
     
@@ -68,7 +77,6 @@ const Interest = () => {
     const reloadComponent = () => {
         setReload({});
     }
-    console.log(interests);
     if(!stockInterest.loading) {
         return(
             <>
@@ -97,7 +105,6 @@ const Interest = () => {
                         </thead>
                         <tbody>
                         {interests ? interests.map((trs) => {
-                            console.log(interests);
                           return (
                                 <tr key={interests.indexOf(trs)}>
                                     <th><input type="checkbox" id={interests.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
