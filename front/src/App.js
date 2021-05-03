@@ -6,7 +6,7 @@ import Signup from "../src/container/Signup/Signup.js";
 import GetToken from "../src/container/GetToken/GetToken.js";
 import Signout from "../src/container/Signout/Signout.js";
 import Onboard from "../src/container/Onboard/Onboard.js";
-import Interest from "./container/Interest/Interest";
+import AllInterest from "./container/AllInterest/AllInterest.js"
 
 function App() {
   return (
@@ -15,9 +15,9 @@ function App() {
       <Route path="/signin" component={Signin} />
       <Route path="/signup" component={Signup} />
       <Route path="/signout" component={Signout} />
+      <Route path="/interest" component={AllInterest} />
       <Route path="/onboard" component={Onboard} />
-      <Route path="/interest" component={Interest} />
-      <Route path="/:token" component={GetToken} />
+      <Route path="/token/:token" component={GetToken} />
     </Switch>
   );
 }

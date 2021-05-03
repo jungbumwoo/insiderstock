@@ -4,6 +4,7 @@ import { sendToken, getUserData } from "../../actions";
 
 const GetToken = (props) => {
     const dispatch = useDispatch();
+    console.log(props.match.params);
     const { token } = props.match.params;
     
     useEffect(() => {

@@ -36,6 +36,7 @@ const Signin = () => {
                     window.Kakao.API.request({
                         url: '/v2/user/me', // kakao docs url
                         success: (res) => {
+                            console.log("kakao SDK Login at Signin");
                             console.log(res);
                             let id = res.id;
                             let nickname = res.properties.nickname;

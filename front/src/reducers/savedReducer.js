@@ -1,5 +1,3 @@
-import { categoryConstants } from "../actions/constants.js";
-
 const initState = {
     saved: [],
     interest: [],
