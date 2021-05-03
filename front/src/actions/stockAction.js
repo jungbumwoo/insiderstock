@@ -25,29 +25,6 @@ export const getAllStock = () => {
     }
 }
 
-export const savestock = (stockArray) => {
-    return async dispatch => {
-        dispatch({ type: "SAVE_STOCK_REQUEST"});
-        try {
-            console.log("saveStock Action");
-            console.log(stockArray);
-            const res = await axiosInstance.post("/savestock", {data : stockArray});
-            if(res.status === 200) {
-                const { savedList } = res.data;
-                console.log(savedList);
-                dispatch({
-                    type: "SAVE_STOCK_SUCCESS",
-                    payload: savedList
-                })
-            } else {
-                
-            }
-        } catch(err) {
-            console.log(err);
-        }
-    }
-}
-
 export const getAddInterestAction = () => {
     return async dispatch => {
         dispatch({ type: "GET_INTEREST_REQUEST"});
@@ -85,6 +62,23 @@ export const postAddInterestAction = (addStock) => {
         }
     }
 }
+
+export const postNotInterestAction = (notinterestStock) => {
+    return async dispatch => {
+        dispatch({ type: "ADD_NOTINTEREST_POST_REQUEST"});
+        try {
+            const res = await axiosInstance.post("/addnotinterest", { data: notinterestStock});
+            if(res.status == 201) {
+                dispatch({ type: "ADD_NOTINTEREST_POST_SUCCESS"});
+            } else {
+                dispatch({ type: "ADD_NOTINTEREST_POST_FAILED", payload: { error: "Err at postNotInterestAction"}});
+                console.log("Err at postNotInterestAction");
+            }
+        } catch(err) {
+            console.log(err);
+        };
+    }
+};
 
 export const interestDeleteAct = (deleteArray, remainArray) => {
     return async dispatch => {

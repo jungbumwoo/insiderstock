@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStock, savestock } from "../../actions/stockAction";
-import { postAddInterestAction, remainAction } from "../../actions";
+import { postAddInterestAction, remainAction, postNotInterestAction } from "../../actions";
 import Table from "react-bootstrap/Table";
 import Layout from "../../components/Layouts/Layout/Layout.js";
 import Button from 'react-bootstrap/Button';
@@ -42,20 +42,6 @@ const News = (props) => {
         setNewArray(newArray);
     }
 
-    const handleSaveBtn = () => {
-        console.log("Save btn clicked.");
-        console.log(newArray);
-        let mapedArray = newArray.map((item) => {
-            return stock.stocks[item];
-        })
-        console.log(mapedArray);
-
-        // if it's empty
-        dispatch(savestock(mapedArray));
-        handleBtnSubmit();
-        setNewArray([]);
-    }
-
     const handleSelectAll = () => {
         let ele = document.getElementsByName("chk");
         console.log(ele);
@@ -86,7 +72,13 @@ const News = (props) => {
     };
 
     const handleNotInterestBtn = () => {
-        console.log("handlenotinterestbtn");
+        let getDataFromCheckedId = newArray.map((num) => {
+            return stock.stocks[num]
+        });
+        let typeChangedArray = reduceArray(getDataFromCheckedId);
+
+        dispatch(postNotInterestAction(typeChangedArray));
+        handleBtnSubmit();
     }
 
     const handleOnboardBtn = () => {
@@ -155,7 +147,7 @@ const News = (props) => {
                                 <th>Insider Trading Shares</th>
                                 <th>Shares Change</th>
                                 <th>purchasePrice</th>
-                                <th>Cost</th>
+                                <th>Cost, k</th>
                                 <th>Final Share</th>
                                 <th>Price Change Since Insider Trade (%)</th>
                                 <th>Dividend Yield %</th>
@@ -193,12 +185,9 @@ const News = (props) => {
                         <Button onClick={handleSelectAll} variant="primary" size="sm">
                             Select All
                         </Button>{' '}
-                        <Button onClick={handleSaveBtn} variant="success" size="sm">
-                            Save
-                        </Button>{' '}
                         <Button onClick={handleInterestBtn} variant="primary" size="sm">
                             Interest
-                        </Button>
+                        </Button>{' '}
                         <Button onClick={handleNotInterestBtn} variant="warning" size="sm">
                             Not Interest
                         </Button>{' '}

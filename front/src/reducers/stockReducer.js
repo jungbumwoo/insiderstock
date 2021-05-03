@@ -96,6 +96,25 @@ export default (state = initState, action) => {
                 error: action.payload.error
             }
             break;
+        case "ADD_NOTINTEREST_POST_REQUEST":
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case "ADD_NOTINTEREST_POST_SUCCESS":
+            state = {
+                ...state,
+                loading: false
+            }
+            break;
+        case "ADD_NOTINTEREST_POST_FAILED":
+            state = {
+                ...state,
+                loading: false,
+                error: action.payload.error
+            }
+            break;
     }
     return state;
 }
