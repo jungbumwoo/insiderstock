@@ -10,7 +10,6 @@ import FormImpl from "react-bootstrap/esm/Form";
 const Header = () => {
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
-    const [ userToken, setUserToken ] = useState(null);
     const isToken = localStorage.getItem('token');
     let x = document.cookie;
     // console.log("isToken at Header");
@@ -21,13 +20,6 @@ const Header = () => {
         let userInfo = [];
         userInfo.token = isToken;
     }
-
-    // useEffect(() => {
-    //     if(isToken) {
-    //         console.log("useEffect executed");
-    //         setUserToken(auth.token);
-    //     }
-    // }, [])
     
     const signout = (e) => {
         e.preventDefault();
@@ -42,7 +34,6 @@ const Header = () => {
         ));
         return matches ? decodeURIComponent(matches[1]) : undefined;
       }
-    let cookieUsername = getCookie();
 
     const renderLoggedinbar = () => {
         return (
@@ -75,11 +66,10 @@ const Header = () => {
     return (
         <>
             <Navbar bg="primary" variant="dark">
-                <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                <Navbar.Brand href="/">Insider</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#features">Features</Nav.Link>
-                    <Nav.Link href="#pricing">Pricing</Nav.Link>
+                    <Nav.Link href="/onboard">Onboard</Nav.Link>
+                    <Nav.Link href="/interest">Interest</Nav.Link>
                 </Nav>
                 {/* <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
