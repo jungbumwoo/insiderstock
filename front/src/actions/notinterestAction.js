@@ -7,6 +7,7 @@ export const getNotInterestAction = (req, res) => {
             let res = await axiosInstance.get("/getnotinterest");
             if(res.status === 200) {
                 const { notInterests } = res.data;
+                console.log(notInterests);
                 dispatch({ type: "GET_NOTINTEREST_SUCCESS",
                             payload: { notInterests }});
             } else {

@@ -16,7 +16,7 @@ export default (state = initState, action) => {
             state = {
                 ...state,
                 loading: false.valueOf,
-                notinterests: action.payload.notinterests
+                notinterests: action.payload.notInterests
             }
             break;
         case "GET_NOTINTEREST_FAILED":

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllStock, savestock } from "../../actions/stockAction";
 import { postAddInterestAction, remainAction, postNotInterestAction } from "../../actions";
 import Table from "react-bootstrap/Table";
+import Spinner from "react-bootstrap/Spinner";
 import Layout from "../../components/Layouts/Layout/Layout.js";
 import Button from 'react-bootstrap/Button';
 
@@ -178,7 +179,11 @@ const News = (props) => {
                                     <th>{trs[16]}</th>
                                 </tr>
                                 )
-                            }): undefined }
+                            }): 
+                                <>
+                                    <Spinner animation="border" variant="primary" />
+                                </>
+                            }
                         </tbody>
                     </Table>
                     <div>
@@ -206,7 +211,9 @@ const News = (props) => {
         )
     } else {
         return (
-            <div>Loading..</div>
+            <>
+                <Spinner animation="border" variant="primary" />
+            </>
         )
     }
 }
