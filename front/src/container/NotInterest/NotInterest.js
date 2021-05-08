@@ -77,6 +77,7 @@ const NotInterest = (props) => {
                             <th>Company</th>
                             <th>insiderName</th>
                             <th>Date</th>
+                            <th>MarketCap</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -88,6 +89,7 @@ const NotInterest = (props) => {
                                 <th>{item.company}</th>
                                 <th>{item.insiderName}</th>
                                 <th>{item.date}</th>
+                                <th>{item.MarketCap}</th>
                             </tr>
                         )
                     })}

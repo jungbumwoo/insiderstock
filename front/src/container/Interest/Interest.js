@@ -109,7 +109,7 @@ const Interest = () => {
                                 <tr key={interests.indexOf(trs)}>
                                     <th><input type="checkbox" id={interests.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
                                     <th>{trs.ticker}</th>
-                                    <th>{trs.company}</th>
+                                    <th><a href=``>{trs.company}</a></th>
                                     <th>{trs.currentprice}</th>
                                     <th>{trs.insiderName}</th>
                                     <th>{trs.insiderPosition}</th>
