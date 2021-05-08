@@ -19,3 +19,22 @@ export const getNotInterestAction = (req, res) => {
         }
     }
 }
+
+export const notInterestDeleteAct = (deleteArray, remainArray) => {
+    return async dispatch => {
+        dispatch({ type: "DELETE_NOT_INTEREST_REQUEST"});
+        try {
+            const res = await axiosInstance.post("/delete/notinterest", {deleteArray});
+            console.log(res.status);
+            if(res.status === 201){
+                console.log(remainArray);
+                dispatch({ type: "DELETE_NOT_INTERST_SUCCESS", payload: { interestData: remainArray}})
+            } else {
+                console.log("ERR at interestDeleteAct");
+                dispatch({ type: "DELETE_NOT_INTERST_FAILED", payload: { error: "ERR : DELETE_NOT_INTERST_FAILED"}})
+            }
+        } catch(err){
+            console.log(err);
+        }
+    }
+}

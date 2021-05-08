@@ -103,3 +103,4 @@ export const remainAction = (remainArray) => {
         dispatch({ type: "REMAIN_ARRAY", payload: { remainData : remainArray }})
     }
 }
+
