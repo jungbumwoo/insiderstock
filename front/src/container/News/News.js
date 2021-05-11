@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStock, savestock } from "../../actions/stockAction";
 import { postAddInterestAction, remainAction, postNotInterestAction } from "../../actions";
+import Modal from "../../components/Modals/Modal/Modal.js";
 import Table from "react-bootstrap/Table";
 import Spinner from "react-bootstrap/Spinner";
 import Layout from "../../components/Layouts/Layout/Layout.js";
@@ -11,18 +12,24 @@ import "./News.css";
 
 const News = (props) => {
     const dispatch = useDispatch();
-    const [checked, setChecked] = useState(false);
     const stock = useSelector(state => state.stock);
+    const [checked, setChecked] = useState(false);
     const [ newArray, setNewArray] = useState([]);
-    console.log(newArray);
     const [ checkedArray, setCheckedArray ] = useState([]);
+    const [ isModalOpen, setIsModalOpen ] = useState(false);
+
     let checkboxArray = [];
 
     useEffect(()=> {
         if(!stock.stocks) {
             dispatch(getAllStock());
         }
-    }, [])
+    }, []);
+
+    const onModalCloseRequest = () => {
+        console.log("onModalCloseRequest");
+        setIsModalOpen(false);
+    };
 
     const checkBoxChange = (e) => {
         console.log(e.target);
@@ -67,7 +74,6 @@ const News = (props) => {
             return stock.stocks[num]
         });
         let typeChangedArray = reduceArray(getDataFromCheckedId);
-
         dispatch(postAddInterestAction(typeChangedArray));
         handleBtnSubmit();
     };
@@ -80,10 +86,6 @@ const News = (props) => {
 
         dispatch(postNotInterestAction(typeChangedArray));
         handleBtnSubmit();
-    }
-
-    const handleOnboardBtn = () => {
-        console.log("handleOnboard");
     }
 
     const handleBtnSubmit = () => {
@@ -133,76 +135,78 @@ const News = (props) => {
     if (!stock.loading) {
         return (
             <>
-                <div className="container">
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Ticker</th>
-                                <th>Company</th>
-                                <th>CurrentPrice</th>
-                                <th>Insider Name</th>
-                                <th>Insider Position</th>
-                                <th>Date</th>
-                                <th>Buy/sell</th>
-                                <th>Insider Trading Shares</th>
-                                <th>Shares Change</th>
-                                <th>purchasePrice</th>
-                                <th>Cost, k</th>
-                                <th>Final Share</th>
-                                <th>Price Change Since Insider Trade (%)</th>
-                                <th>Dividend Yield %</th>
-                                <th>PE Ratio</th>
-                                <th>Market Cap ($M)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {stock.stocks ? stock.stocks.map((trs) => {
-                            return (
-                                <tr key={trs[0] + trs[11] + trs[12] + Math.random()}>
-                                    <th><input type="checkbox" id={stock.stocks.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
-                                    <th>{trs[0]}</th>
-                                    <th>{trs[2]}</th>
-                                    <th>{trs[3]}</th>
-                                    <th>{trs[4]}</th>
-                                    <th>{trs[5]}</th>
-                                    <th>{trs[6]}</th>
-                                    <th>{trs[7]}</th>
-                                    <th>{trs[8]}</th>
-                                    <th>{trs[9]}</th>
-                                    <th>{trs[10]}</th>
-                                    <th>{trs[11]}</th>
-                                    <th>{trs[12]}</th>
-                                    <th>{trs[13]}</th>
-                                    <th>{trs[14]}</th>
-                                    <th>{trs[15]}</th>
-                                    <th>{trs[16]}</th>
+                <div className="newsContainer">
+                    <div className="newsTable">
+                        <Table responsive>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Ticker</th>
+                                    <th>Company</th>
+                                    <th>CurrentPrice</th>
+                                    <th>Insider Name</th>
+                                    <th>Insider Position</th>
+                                    <th>Date</th>
+                                    <th>Buy/sell</th>
+                                    <th>Insider Trading Shares</th>
+                                    <th>Shares Change</th>
+                                    <th>purchasePrice</th>
+                                    <th>Cost, k</th>
+                                    <th>Final Share</th>
+                                    <th>Price Change Since Insider Trade (%)</th>
+                                    <th>Dividend Yield %</th>
+                                    <th>PE Ratio</th>
+                                    <th>Market Cap ($M)</th>
                                 </tr>
-                                )
-                            }): 
-                                <>
-                                    <Spinner animation="border" variant="primary" />
-                                </>
-                            }
-                        </tbody>
-                    </Table>
-                    <div>
+                            </thead>
+                            <tbody>
+                            {stock.stocks ? stock.stocks.map((trs) => {
+                                return (
+                                    <tr key={trs[0] + trs[11] + trs[12] + Math.random()}>
+                                        <th><input type="checkbox" id={stock.stocks.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
+                                        <th><a href={`https://www.gurufocus.com/stock/${trs[0]}/insider`} target='_blank'>{trs[0]}</a></th>
+                                        <th><a href={`https://www.google.com/search?q=${trs[2]}`} target='_blank'>{trs[2]}</a></th>
+                                        <th>{trs[3]}</th>
+                                        <th>{trs[4]}</th>
+                                        <th>{trs[5]}</th>
+                                        <th>{trs[6]}</th>
+                                        <th>{trs[7]}</th>
+                                        <th>{trs[8]}</th>
+                                        <th>{trs[9]}</th>
+                                        <th>{trs[10]}</th>
+                                        <th>{trs[11]}</th>
+                                        <th>{trs[12]}</th>
+                                        <th>{trs[13]}</th>
+                                        <th>{trs[14]}</th>
+                                        <th>{trs[15]}</th>
+                                        <th>{trs[16]}</th>
+                                    </tr>
+                                    )
+                                }): 
+                                    <>
+                                        <div className="spinner">
+                                            <Spinner animation="border" variant="primary" />
+                                        </div>
+                                    </>
+                                }
+                            </tbody>
+                        </Table>
+                    </div>
+                    <div className="buttons">
                         <Button onClick={handleSelectAll} variant="primary" size="sm">
                             Select All
-                        </Button>{' '}
+                        </Button>
                         <Button onClick={handleInterestBtn} variant="primary" size="sm">
                             Interest
-                        </Button>{' '}
+                        </Button>
                         <Button onClick={handleNotInterestBtn} variant="warning" size="sm">
                             Not Interest
-                        </Button>{' '}
-                        <Button onClick={handleOnboardBtn} variant="success" size="sm">
+                        </Button>
+                        <Button onClick={setIsModalOpen} variant="success" size="sm">
                             Onboard
-                        </Button>{' '}
+                        </Button>
+                        <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} />
                     </div>
-                </div>
-                <div>
-                    Eggs
                 </div>
                 <div>
                     interest

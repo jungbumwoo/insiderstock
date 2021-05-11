@@ -42,6 +42,9 @@ const Header = () => {
                     <span>{auth.user.username ? auth.user.username : undefined }</span>
                 </li>
                 <li>
+                    <Link to="/profile">profile</Link>
+                </li>
+                <li>
                     <Link to="/signout">signout</Link>
                 </li>
             </Nav>

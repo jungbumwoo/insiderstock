@@ -29,6 +29,7 @@ export const getAddInterestAction = () => {
     return async dispatch => {
         dispatch({ type: "GET_INTEREST_REQUEST"});
         try {
+            console.log("ADD Interest");
             let res = await axiosInstance.get('/addinterest');
             if(res.status === 200) {
                 const { interested } = res.data;
@@ -40,13 +41,12 @@ export const getAddInterestAction = () => {
                             payload: {error: res.data.error}});
             }
         } catch(err) {
-            console.log(err);
+            console.log(err.response);
         }
     }
 }
 
 export const postAddInterestAction = (addStock) => {
-    console.log(addStock);
     return async dispatch => {
         dispatch({ type: "ADD_INTEREST_POST_REQUEST"});
         try {

@@ -12,9 +12,11 @@ const Home = (props) => {
         // Interest
     return (
         <>
-            <Layout />
-            <News />
-            <Interest />
+            <div className="background">
+                <Layout />
+                <News />
+                <Interest />
+            </div>
         </>
     )
 }
