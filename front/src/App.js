@@ -7,6 +7,7 @@ import GetToken from "../src/container/GetToken/GetToken.js";
 import Signout from "../src/container/Signout/Signout.js";
 import Onboard from "../src/container/Onboard/Onboard.js";
 import AllInterest from "./container/AllInterest/AllInterest.js"
+import Profile from "./container/Profile/Profile";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/signout" component={Signout} />
       <Route path="/interest" component={AllInterest} />
       <Route path="/onboard" component={Onboard} />
+      <Route path="/profile" component={Profile} />
       <Route path="/token/:token" component={GetToken} />
     </Switch>
   );
