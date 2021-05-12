@@ -1,5 +1,6 @@
 import React, { useState} from "react";
 import Modal from "../../components/Modals/Modal/Modal";
+import Layout from "../../components/Layouts/Layout/Layout.js";
 import "./Profile.css";
 
 
@@ -12,7 +13,8 @@ const Profile = (props) => {
     }
 
     return (
-        <>
+        <>  
+            <Layout />
             <div className="profile">
                 <h4>Profile</h4>
                 <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} />

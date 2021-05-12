@@ -15,10 +15,8 @@ const News = (props) => {
     const stock = useSelector(state => state.stock);
     const [checked, setChecked] = useState(false);
     const [ newArray, setNewArray] = useState([]);
-    const [ checkedArray, setCheckedArray ] = useState([]);
     const [ isModalOpen, setIsModalOpen ] = useState(false);
-
-    let checkboxArray = [];
+    const [ toggleModal, setToggleModal ] = useState(false)
 
     useEffect(()=> {
         if(!stock.stocks) {
@@ -28,7 +26,7 @@ const News = (props) => {
 
     const onModalCloseRequest = () => {
         console.log("onModalCloseRequest");
-        setIsModalOpen(false);
+        setToggleModal(false);
     };
 
     const checkBoxChange = (e) => {
@@ -105,6 +103,11 @@ const News = (props) => {
         
         dispatch(remainAction(remainArray));
         setNewArray([]);
+    }
+
+    const handleOnboardBtn = () => {
+        console.log("handleOnboardBtn");
+        setToggleModal(!toggleModal);
     }
 
     const reduceArray = (arrayData) => {
@@ -202,14 +205,11 @@ const News = (props) => {
                         <Button onClick={handleNotInterestBtn} variant="warning" size="sm">
                             Not Interest
                         </Button>
-                        <Button onClick={setIsModalOpen} variant="success" size="sm">
+                        <Button onClick={handleOnboardBtn} variant="success" size="sm">
                             Onboard
                         </Button>
-                        <Modal isOpen={isModalOpen} onCloseRequest={onModalCloseRequest} />
+                        <Modal shown={toggleModal} onCloseRequest={onModalCloseRequest} />
                     </div>
-                </div>
-                <div>
-                    interest
                 </div>
             </>
         )
