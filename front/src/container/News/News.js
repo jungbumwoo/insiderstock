@@ -13,21 +13,21 @@ import "./News.css";
 const News = (props) => {
     const dispatch = useDispatch();
     const stock = useSelector(state => state.stock);
-    const [checked, setChecked] = useState(false);
     const [ newArray, setNewArray] = useState([]);
     const [ isModalOpen, setIsModalOpen ] = useState(false);
-    const [ toggleModal, setToggleModal ] = useState(false)
+    const [ toggleModal, setToggleModal ] = useState(false);
+    const [ multipleInput, setMultipleInput] = useState([]);
+    const [ modalInputs, setModalInputs] = useState({
+        ticker: '',
+        company: ''
+    });
 
     useEffect(()=> {
         if(!stock.stocks) {
             dispatch(getAllStock());
-        }
+        };
+        setNewArray([]);
     }, []);
-
-    const onModalCloseRequest = () => {
-        console.log("onModalCloseRequest");
-        setToggleModal(false);
-    };
 
     const checkBoxChange = (e) => {
         console.log(e.target);
@@ -135,6 +135,29 @@ const News = (props) => {
         return reduceArrayType;
     }
 
+    const checkedList = () => {
+        let checkedContent = newArray.map((num) => {
+            return stock.stocks[num];
+        });
+        console.log(checkedContent);
+        return checkedContent;
+    };
+
+    const onModalInputChange = (e) => {
+        console.log(e.target);
+        let { name, value } = e.target;
+        setModalInputs({
+            ...modalInputs,
+            [name] : value
+        })
+    }
+    
+    const onModalCloseRequest = () => {
+        console.log("onModalCloseRequest");
+        setToggleModal(false);
+        setNewArray([]);
+    };
+
     if (!stock.loading) {
         return (
             <>
@@ -208,7 +231,7 @@ const News = (props) => {
                         <Button onClick={handleOnboardBtn} variant="success" size="sm">
                             Onboard
                         </Button>
-                        <Modal shown={toggleModal} onCloseRequest={onModalCloseRequest} />
+                        <Modal shown={toggleModal} onCloseRequest={onModalCloseRequest} checked={checkedList()} onChangeInput={onModalInputChange} />
                     </div>
                 </div>
             </>
