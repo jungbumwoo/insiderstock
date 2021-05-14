@@ -17,10 +17,7 @@ const News = (props) => {
     const [ isModalOpen, setIsModalOpen ] = useState(false);
     const [ toggleModal, setToggleModal ] = useState(false);
     const [ multipleInput, setMultipleInput] = useState([]);
-    const [ modalInputs, setModalInputs] = useState({
-        ticker: '',
-        company: ''
-    });
+    const [ modalInputs, setModalInputs] = useState({});
 
     useEffect(()=> {
         if(!stock.stocks) {
@@ -30,12 +27,7 @@ const News = (props) => {
     }, []);
 
     const checkBoxChange = (e) => {
-        console.log(e.target);
         const itemToFind = newArray.find((item) => { return item == parseInt(e.target.id) })
-        console.log(itemToFind);
-        // let isexist = newArray.filter((cat) => {
-        //     cat.id = e.target.id
-        // });
         const idx = newArray.indexOf(itemToFind)
         if (idx > -1) {
             // delete
@@ -44,7 +36,6 @@ const News = (props) => {
             // add
             newArray.push(parseInt(e.target.id));
         }
-        console.log(newArray);
         setNewArray(newArray);
     }
 
@@ -105,11 +96,6 @@ const News = (props) => {
         setNewArray([]);
     }
 
-    const handleOnboardBtn = () => {
-        console.log("handleOnboardBtn");
-        setToggleModal(!toggleModal);
-    }
-
     const reduceArray = (arrayData) => {
         let reduceArrayType = arrayData.reduce((acc, item) => {
             acc.push({
@@ -139,24 +125,58 @@ const News = (props) => {
         let checkedContent = newArray.map((num) => {
             return stock.stocks[num];
         });
-        console.log(checkedContent);
         return checkedContent;
     };
 
+    const handleOnboardBtn = () => {
+        console.log("handleOnboardBtn");
+        let checkedContent = newArray.map((num) => {
+            return stock.stocks[num];
+        });
+        let handleModalData = checkedContent.map((item) => {
+            let dataArray = {};
+            let ticker = `${checkedContent.indexOf(item)}_ticker`;
+            let company = `${checkedContent.indexOf(item)}_company`;
+            let price = `${checkedContent.indexOf(item)}_price`;
+            let shares = `${checkedContent.indexOf(item)}_shares`;
+            let cost = `${checkedContent.indexOf(item)}_cost`;
+            let marketCap = `${checkedContent.indexOf(item)}_marketCap`;
+            dataArray[ticker] = item[0];
+            dataArray[company] = item[2];
+            dataArray[price] = item[3].replace(/\$/g,'');
+            dataArray[shares] = item[8];
+            dataArray[cost] = item[11].replace(/\$/g,'');
+            dataArray[marketCap] = item[16];
+            return dataArray
+        });
+        const conModalData = Object.assign({}, ...handleModalData);
+
+        setModalInputs({
+            ...modalInputs,
+            ...conModalData
+        }); 
+        setToggleModal(!toggleModal);
+    }
+
     const onModalInputChange = (e) => {
-        console.log(e.target);
         let { name, value } = e.target;
         setModalInputs({
             ...modalInputs,
             [name] : value
         })
     }
-    
+
     const onModalCloseRequest = () => {
         console.log("onModalCloseRequest");
         setToggleModal(false);
+        setModalInputs({});
         setNewArray([]);
     };
+
+    const modalSubmitInputValue = () => {
+        console.log("modalSubmitInputValue");
+        console.log(modalInputs);
+    }
 
     if (!stock.loading) {
         return (
@@ -231,7 +251,12 @@ const News = (props) => {
                         <Button onClick={handleOnboardBtn} variant="success" size="sm">
                             Onboard
                         </Button>
-                        <Modal shown={toggleModal} onCloseRequest={onModalCloseRequest} checked={checkedList()} onChangeInput={onModalInputChange} />
+                        <Modal shown={toggleModal} 
+                            onCloseRequest={onModalCloseRequest} 
+                            checked={checkedList()} 
+                            onChangeInput={onModalInputChange} 
+                            modalSubmit={modalSubmitInputValue}
+                            modalInputs={modalInputs} />
                     </div>
                 </div>
             </>

@@ -7,11 +7,12 @@ const Modal = (props) => {
     let onCloseRequest = props.onCloseRequest;
     let checked = props.checked;
     let onModalInputChange = props.onChangeInput;
-    console.log(checked);
+    let modalSubmitInputValue = props.modalSubmit;
+    let modalInputs = props.modalInputs;
+    console.log(modalInputs);
     
     const filledModal = () => {
         let checkedList = checked.map((item) => {
-            console.log(item);
             return (
                 <div className="modal_container">
                     <label>Ticker :</label>
@@ -19,13 +20,13 @@ const Modal = (props) => {
                     <label>Company :</label>
                     <input type="text" defaultValue={item[2]} name={`${checked.indexOf(item)}_company`} onChange={onModalInputChange} />
                     <label>Price :</label>
-                    <input type="text"/>
+                    <input type="text" defaultValue={item[3].replace(/\$/g,'')} name={`${checked.indexOf(item)}_price`} onChange={onModalInputChange} />
                     <label>Shares:</label>
-                    <input type="text"/>
+                    <input type="text" defaultValue={item[8]} name={`${checked.indexOf(item)}_shares`} onChange={onModalInputChange} />
                     <label>Cost: </label>
-                    <input type="text"/>
+                    <input type="text" name={`${checked.indexOf(item)}_cost`} onChange={onModalInputChange} />
                     <label>MarketCap:</label>
-                    <input type="text"/>
+                    <input type="text" defaultValue={item[16]} name={`${checked.indexOf(item)}_marketCap`} onChange={onModalInputChange} />
                 </div>    
             )
         })
@@ -63,6 +64,11 @@ const Modal = (props) => {
         return null;
     }
     
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        console.log(e.target);
+    }
+    
     return (
         <div className="profile_modal" onClick={() => {
             onCloseRequest();
@@ -70,7 +76,11 @@ const Modal = (props) => {
             <div className="modal-main" onClick={(e) => {
                 e.stopPropagation();
             }}>
-                {checked.length > 0 ? filledModal() : defaultInput()}
+                <form onSubmit={handleFormSubmit}>
+                    {checked.length > 0 ? filledModal() : defaultInput()}
+                    <button type="button" onClick={modalSubmitInputValue}>Submit</button>
+                    <input type="submit" value="Submit" />
+                </form>
             </div>
         </div>
     )
