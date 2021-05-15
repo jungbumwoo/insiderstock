@@ -10,6 +10,11 @@ const Modal = (props) => {
     let modalSubmitInputValue = props.modalSubmit;
     let modalInputs = props.modalInputs;
     console.log(modalInputs);
+
+    const costCalculate = (item) => {
+        let multiple = modalInputs[`${checked.indexOf(item)}_price`] * modalInputs[`${checked.indexOf(item)}_shares`];
+        return multiple;
+    }
     
     const filledModal = () => {
         let checkedList = checked.map((item) => {
@@ -19,14 +24,17 @@ const Modal = (props) => {
                     <input type="text" defaultValue={item[0]} name={`${checked.indexOf(item)}_ticker`} onChange={onModalInputChange} />
                     <label>Company :</label>
                     <input type="text" defaultValue={item[2]} name={`${checked.indexOf(item)}_company`} onChange={onModalInputChange} />
-                    <label>Price :</label>
-                    <input type="text" defaultValue={item[3].replace(/\$/g,'')} name={`${checked.indexOf(item)}_price`} onChange={onModalInputChange} />
-                    <label>Shares:</label>
-                    <input type="text" defaultValue={item[8]} name={`${checked.indexOf(item)}_shares`} onChange={onModalInputChange} />
-                    <label>Cost: </label>
-                    <input type="text" name={`${checked.indexOf(item)}_cost`} onChange={onModalInputChange} />
                     <label>MarketCap:</label>
                     <input type="text" defaultValue={item[16]} name={`${checked.indexOf(item)}_marketCap`} onChange={onModalInputChange} />
+                    <label>Price :</label>
+                    <input type="text" defaultValue={item[3]} name={`${checked.indexOf(item)}_price`} onChange={onModalInputChange} />
+                    <label>Shares:</label>
+                    <input type="text" defaultValue={0} name={`${checked.indexOf(item)}_shares`} onChange={onModalInputChange} />
+                    <label>Cost: </label>
+                    <span defaultValue={0} name={`${checked.indexOf(item)}_cost`} onChange={onModalInputChange}>{costCalculate(item)}</span>
+                    {/* <input type="text" value={costCalculate(item)}
+                            name={`${checked.indexOf(item)}_cost`} 
+                            onChange={onModalInputChange} /> */}
                 </div>    
             )
         })
@@ -79,7 +87,6 @@ const Modal = (props) => {
                 <form onSubmit={handleFormSubmit}>
                     {checked.length > 0 ? filledModal() : defaultInput()}
                     <button type="button" onClick={modalSubmitInputValue}>Submit</button>
-                    <input type="submit" value="Submit" />
                 </form>
             </div>
         </div>

@@ -129,10 +129,13 @@ const News = (props) => {
     };
 
     const handleOnboardBtn = () => {
-        console.log("handleOnboardBtn");
         let checkedContent = newArray.map((num) => {
+            stock.stocks[num][3] = stock.stocks[num][3].toString().replace(/\$/g,'');
+            stock.stocks[num][3] = parseFloat(stock.stocks[num][3]);
+            stock.stocks[num][8] = parseFloat(stock.stocks[num][8]);
             return stock.stocks[num];
         });
+        console.log(checkedContent);
         let handleModalData = checkedContent.map((item) => {
             let dataArray = {};
             let ticker = `${checkedContent.indexOf(item)}_ticker`;
@@ -143,9 +146,9 @@ const News = (props) => {
             let marketCap = `${checkedContent.indexOf(item)}_marketCap`;
             dataArray[ticker] = item[0];
             dataArray[company] = item[2];
-            dataArray[price] = item[3].replace(/\$/g,'');
-            dataArray[shares] = item[8];
-            dataArray[cost] = item[11].replace(/\$/g,'');
+            dataArray[price] = item[3];
+            dataArray[shares] = 0;
+            dataArray[cost] = 0;
             dataArray[marketCap] = item[16];
             return dataArray
         });
