@@ -6,7 +6,17 @@ const initState = {
 
 export default (state = initState, action) => {
     switch (action.type){
-        case "":
+        case "REQUEST_ADD_ONBOARD":
+            state = {
+                ...state
+            }
+            break;
+        case "SUCCESS_ADD_ONBOARD":
+            state = {
+                ...state
+            }
+            break;
+        case "FAILED_ADD_ONBOARD":
             state = {
                 ...state
             }

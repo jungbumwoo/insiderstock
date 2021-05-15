@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllStock, savestock } from "../../actions/stockAction";
-import { postAddInterestAction, remainAction, postNotInterestAction } from "../../actions";
+import { getAllStock } from "../../actions/stockAction";
+import { postAddInterestAction, remainAction, postNotInterestAction, addOnboard } from "../../actions";
 import Modal from "../../components/Modals/Modal/Modal.js";
 import Table from "react-bootstrap/Table";
 import Spinner from "react-bootstrap/Spinner";
@@ -179,6 +179,10 @@ const News = (props) => {
     const modalSubmitInputValue = () => {
         console.log("modalSubmitInputValue");
         console.log(modalInputs);
+        dispatch(addOnboard(modalInputs));
+        setToggleModal(false);
+        setModalInputs({});
+        setNewArray([]);
     }
 
     if (!stock.loading) {
