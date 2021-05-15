@@ -5,7 +5,6 @@ import { postAddInterestAction, remainAction, postNotInterestAction, addOnboard 
 import Modal from "../../components/Modals/Modal/Modal.js";
 import Table from "react-bootstrap/Table";
 import Spinner from "react-bootstrap/Spinner";
-import Layout from "../../components/Layouts/Layout/Layout.js";
 import Button from 'react-bootstrap/Button';
 
 import "./News.css";
@@ -14,9 +13,7 @@ const News = (props) => {
     const dispatch = useDispatch();
     const stock = useSelector(state => state.stock);
     const [ newArray, setNewArray] = useState([]);
-    const [ isModalOpen, setIsModalOpen ] = useState(false);
     const [ toggleModal, setToggleModal ] = useState(false);
-    const [ multipleInput, setMultipleInput] = useState([]);
     const [ modalInputs, setModalInputs] = useState({});
 
     useEffect(()=> {
