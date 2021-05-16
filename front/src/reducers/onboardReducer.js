@@ -1,22 +1,25 @@
 const initState = {
     onboards: [],
-    loading: false,
+loading: false,
     error: null
 };
 
 export default (state = initState, action) => {
     switch (action.type){
-        case "REQUEST_ADD_ONBOARD":
+        case "REQUEST_GET_ONBOARD":
             state = {
-                ...state
+                ...state,
+                loading: true,
             }
             break;
-        case "SUCCESS_ADD_ONBOARD":
+        case "SUCCESS_GET_ONBOARD":
             state = {
-                ...state
+                ...state,
+                loading: false,
+                onboards : action.payload.onboards
             }
             break;
-        case "FAILED_ADD_ONBOARD":
+        case "FAILED_GET_ONBOARD":
             state = {
                 ...state
             }

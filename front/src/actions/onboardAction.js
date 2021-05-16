@@ -1,5 +1,23 @@
 import axiosInstance from "../helpers/axios";
 
+export const getOnboard = () => {
+    return async (dispatch) => {
+        dispatch({ type: "REQUEST_GET_ONBOARD"});
+        try {
+            const res = await axiosInstance.get("/onboard");
+            if(res.status ===200) {
+                const { onboards } = res.data;
+                console.log(onboards);
+                dispatch({ type: "SUCCESS_GET_ONBOARD",
+                            payload: { onboards }});
+            };
+        } catch(err) {
+            console.log(err);
+            dispatch({ type: "FAILED_GET_ONBOARD"});
+        };
+    };
+};
+
 export const addOnboard = (onboardList) => {
     return async (dispatch) => {
         dispatch({ type: "REQUEST_ADD_ONBOARD"});
