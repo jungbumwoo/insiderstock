@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStock } from "../../actions/stockAction";
-import { postAddInterestAction, remainAction, postNotInterestAction, addOnboard } from "../../actions";
+import { postAddInterestAction, remainAction, postNotInterestAction, addOnboard, postBanAction } from "../../actions";
 import Modal from "../../components/Modals/Modal/Modal.js";
 import Table from "react-bootstrap/Table";
 import Spinner from "react-bootstrap/Spinner";
@@ -38,7 +38,6 @@ const News = (props) => {
 
     const handleSelectAll = () => {
         let ele = document.getElementsByName("chk");
-        console.log(ele);
         for (let i = 0; i <ele.length; i++){
             if(ele[i].checked == false){
                 ele[i].checked = true;
@@ -72,6 +71,15 @@ const News = (props) => {
 
         dispatch(postNotInterestAction(typeChangedArray));
         handleBtnSubmit();
+    }
+
+    const handleBanBtn = () => {
+        let getDataFromCheckedId = newArray.map((num) => {
+            return stock.stocks[num]
+        });
+        dispatch(postBanAction(getDataFromCheckedId));
+        handleBtnSubmit();
+        console.log(getDataFromCheckedId);
     }
 
     const handleBtnSubmit = () => {
@@ -182,6 +190,8 @@ const News = (props) => {
         setNewArray([]);
     }
 
+    
+
     if (!stock.loading) {
         return (
             <>
@@ -249,11 +259,14 @@ const News = (props) => {
                         <Button onClick={handleInterestBtn} variant="primary" size="sm">
                             Interest
                         </Button>
-                        <Button onClick={handleNotInterestBtn} variant="warning" size="sm">
-                            Not Interest
-                        </Button>
                         <Button onClick={handleOnboardBtn} variant="success" size="sm">
                             Onboard
+                        </Button>
+                        <Button onClick={handleBanBtn} variant="warning" size="sm">
+                            Ban for 5days
+                        </Button>
+                        <Button onClick={handleNotInterestBtn} variant="danger" size="sm">
+                            Not Interest
                         </Button>
                         <Modal shown={toggleModal} 
                             onCloseRequest={onModalCloseRequest} 
