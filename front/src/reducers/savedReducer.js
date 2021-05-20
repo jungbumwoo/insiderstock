@@ -5,7 +5,7 @@ const initState = {
     error: null
 };
 
-export default (state = initState, action) => {
+const savedReducer = (state = initState, action) => {
     switch (action.type) {
         case "SAVE_STOCK_REQUEST" :
             state = {
@@ -27,6 +27,9 @@ export default (state = initState, action) => {
                 loading: false
             }
             break;
+        default:
     }
     return state;
 }
+
+export default savedReducer;

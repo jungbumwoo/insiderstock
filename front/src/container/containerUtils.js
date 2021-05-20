@@ -4,29 +4,29 @@ export const returnUtil = (state, cb) => {
     console.log(state);
     if (state.loading) {
         return(
-            <div>
-                <span>Loading...</span>
-            </div>
+            <tr>
+                <th>Loading...</th>
+            </tr>
         )
     } else if(!isToken){
         return(
-            <div>
-                <span>You need to Sign In</span>
-            </div>
+            <tr>
+                You need to Sign In
+            </tr>
         )
     } else if(state.error === "jwt expired"){
         console.log("jwt error");
         localStorage.removeItem('token');
         return(
-            <div>
-                <span>LogIn Token is expired..</span>
-            </div>
+            <tr>
+                LogIn Token is expired..
+            </tr>
         )
     } else if (state.error) {
         return (
-            <div>
+            <tr>
                 <span>${state.error}</span>
-            </div>
+            </tr>
         )
     } else {
         return cb();

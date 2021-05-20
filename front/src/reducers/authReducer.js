@@ -13,7 +13,7 @@ const initState = {
     message: ''
 };
 
-export default (state = initState, action) => {
+const authReducer = (state = initState, action) => {
     switch(action.type) {
         case "SEND_TOKEN_REQUEST": 
             state = {
@@ -137,6 +137,9 @@ export default (state = initState, action) => {
                 }
             }
             break;
+        default:
         }
     return state;
 }
+
+export default authReducer;

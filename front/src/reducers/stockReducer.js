@@ -1,5 +1,3 @@
-import { categoryConstants } from "../actions/constants.js";
-
 const initState = {
     stocks: null,
     interests: [],
@@ -7,7 +5,7 @@ const initState = {
     error: null
 };
 
-export default (state = initState, action) => {
+const stockReducer = (state = initState, action) => {
     switch (action.type) {
         case "ADD_INTEREST_POST_REQUEST" :
             state = {
@@ -120,5 +118,4 @@ export default (state = initState, action) => {
     return state;
 }
 
-
-
+export default stockReducer;

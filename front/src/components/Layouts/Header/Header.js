@@ -1,17 +1,13 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { Nav, Form, FormControl, Button } from 'react-bootstrap';
-import { signout, localStorageData } from "../../../actions";
-import FormImpl from "react-bootstrap/esm/Form";
+import { useSelector } from "react-redux";
+import { Nav} from 'react-bootstrap';
+
 
 const Header = () => {
-    const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
     const isToken = localStorage.getItem('token');
-    let x = document.cookie;
     // console.log("isToken at Header");
     console.log("auth / Header at front");
     console.log(auth);
@@ -21,19 +17,19 @@ const Header = () => {
         userInfo.token = isToken;
     }
     
-    const signout = (e) => {
-        e.preventDefault();
-        console.log('signout Fnc at Header');
-        localStorage.removeItem('token');
-        dispatch(signout());
-    };
-    let getCookie = () => {
-        let tokenName = "userName"
-        let matches = document.cookie.match(new RegExp(
-          "(?:^|; )" + tokenName.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-      }
+    // const signout = (e) => {
+    //     e.preventDefault();
+    //     console.log('signout Fnc at Header');
+    //     localStorage.removeItem('token');
+    //     dispatch(signout());
+    // };
+    // let getCookie = () => {
+    //     let tokenName = "userName"
+    //     let matches = document.cookie.match(new RegExp(
+    //       "(?:^|; )" + tokenName.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    //     ));
+    //     return matches ? decodeURIComponent(matches[1]) : undefined;
+    //   }
 
     const renderLoggedinbar = () => {
         return (

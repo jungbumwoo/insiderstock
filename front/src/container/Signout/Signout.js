@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { localStorageData, signout } from "../../actions";
+import { signout } from "../../actions";
 
 const Signout = () => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const isToken = localStorage.getItem('token');
 
     useEffect(() => {
         localStorage.removeItem('token');

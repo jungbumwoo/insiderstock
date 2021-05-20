@@ -50,8 +50,7 @@ export const postAddInterestAction = (addStock) => {
         dispatch({ type: "ADD_INTEREST_POST_REQUEST"});
         try {
             const res = await axiosInstance.post("/addinterest", { data: addStock});
-            if(res.status == 201){
-                const { interested } = res.data;
+            if(res.status === 201){
                 dispatch({ type: "ADD_INTEREST_POST_SUCCESS", payload: {added: addStock}});
             } else {
                 console.log("Err: at postAddInterestAction");
@@ -67,7 +66,7 @@ export const postNotInterestAction = (notinterestStock) => {
         dispatch({ type: "ADD_NOTINTEREST_POST_REQUEST"});
         try {
             const res = await axiosInstance.post("/addnotinterest", { data: notinterestStock});
-            if(res.status == 201) {
+            if(res.status === 201) {
                 dispatch({ type: "ADD_NOTINTEREST_POST_SUCCESS"});
             } else {
                 dispatch({ type: "ADD_NOTINTEREST_POST_FAILED", payload: { error: "Err at postNotInterestAction"}});

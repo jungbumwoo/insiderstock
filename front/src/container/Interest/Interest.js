@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Tab, Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAddInterestAction } from "../../actions/stockAction";
 import { interestDeleteAct } from "../../actions";
@@ -10,14 +10,13 @@ import { returnUtil } from "../containerUtils";
 const Interest = () => {
     const dispatch = useDispatch();
     const [ newArray, setNewArray ] = useState([]);
-    const [ noObj, setNoObj] = useState(null);
     const [ reload, setReload] = useState(null);
     const stockInterest = useSelector(state => state.stock);
     let { interests } = stockInterest;
     
     const checkBoxChange = (e) => {
         console.log(e.target);
-        const itemToFind = newArray.find((item) => { return item == parseInt(e.target.id) })
+        const itemToFind = newArray.find((item) => { return item === parseInt(e.target.id) })
         console.log(itemToFind);
         // let isexist = newArray.filter((cat) => {
         //     cat.id = e.target.id
@@ -85,8 +84,8 @@ const Interest = () => {
             return (
                     <tr key={interests.indexOf(trs)}>
                         <th><input type="checkbox" id={interests.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
-                        <th><a href={`https://www.gurufocus.com/stock/${trs.ticker}/insider`} target='_blank'>{trs.ticker}</a></th>
-                        <th><a href={`https://www.google.com/search?q=${trs.company}`} target='_blank'>{trs.company}</a></th>
+                        <th><a href={`https://www.gurufocus.com/stock/${trs.ticker}/insider`} target='_blank' rel="noreferrer">{trs.ticker}</a></th>
+                        <th><a href={`https://www.google.com/search?q=${trs.company}`} target='_blank' rel="noreferrer">{trs.company}</a></th>
                         <th>{trs.currentprice}</th>
                         <th>{trs.insiderName}</th>
                         <th>{trs.insiderPosition}</th>
@@ -104,7 +103,7 @@ const Interest = () => {
                     </tr>
                     )
                 })
-        return result
+        return result;
     }
 
     return(

@@ -7,7 +7,6 @@ import { returnUtil } from '../containerUtils';
 const Ban = (props) => {
     const dispatch = useDispatch();
     const ban = useSelector(state => state.ban);
-    console.log(ban);
 
     useEffect(() => {
         dispatch(getBanAction());
@@ -28,17 +27,6 @@ const Ban = (props) => {
         })
         return returnBan;
     };
-    
-    
-
-    // if(ban.loading) {
-    //     return (
-    //         <>
-    //             <Layout />
-    //             <div>Loading...</div>
-    //         </>
-    //     )
-    // };
 
     return(
         <>  

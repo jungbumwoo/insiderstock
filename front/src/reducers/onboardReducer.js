@@ -4,7 +4,7 @@ loading: false,
     error: null
 };
 
-export default (state = initState, action) => {
+const onboardReducer = (state = initState, action) => {
     switch (action.type){
         case "REQUEST_GET_ONBOARD":
             state = {
@@ -26,6 +26,9 @@ export default (state = initState, action) => {
                 error: action.payload.error
             }
             break;
+        default:
     }
     return state;
 }
+
+export default onboardReducer;

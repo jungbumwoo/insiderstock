@@ -17,7 +17,7 @@ const NotInterest = (props) => {
     
     const checkBoxChange = (e) => {
         console.log(e.target);
-        const itemToFind = newArray.find((item) => { return item == parseInt(e.target.id) })
+        const itemToFind = newArray.find((item) => { return item === parseInt(e.target.id) })
         console.log(itemToFind);
         // let isexist = newArray.filter((cat) => {
         //     cat.id = e.target.id

@@ -59,14 +59,6 @@ const Signup = () => {
         return <Redirect to={'/'} />
     }
 
-    const responseKakao = (res) => {
-        console.log(res);
-    }
-
-    const responseFailure = (res) => {
-        console.log(res);
-    }
-    
     return(
         <>  
             <Layout />            

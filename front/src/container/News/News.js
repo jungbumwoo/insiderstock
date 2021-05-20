@@ -24,7 +24,7 @@ const News = (props) => {
     }, []);
 
     const checkBoxChange = (e) => {
-        const itemToFind = newArray.find((item) => { return item == parseInt(e.target.id) })
+        const itemToFind = newArray.find((item) => { return item === parseInt(e.target.id) })
         const idx = newArray.indexOf(itemToFind)
         if (idx > -1) {
             // delete
@@ -39,7 +39,7 @@ const News = (props) => {
     const handleSelectAll = () => {
         let ele = document.getElementsByName("chk");
         for (let i = 0; i <ele.length; i++){
-            if(ele[i].checked == false){
+            if(ele[i].checked === false){
                 ele[i].checked = true;
                 if(!newArray.includes(i)){
                     newArray.push(i)
@@ -224,8 +224,8 @@ const News = (props) => {
                                 return (
                                     <tr key={trs[0] + trs[11] + trs[12] + Math.random()}>
                                         <th><input type="checkbox" id={stock.stocks.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
-                                        <th><a href={`https://www.gurufocus.com/stock/${trs[0]}/insider`} target='_blank'>{trs[0]}</a></th>
-                                        <th><a href={`https://www.google.com/search?q=${trs[2]}`} target='_blank'>{trs[2]}</a></th>
+                                        <th><a href={`https://www.gurufocus.com/stock/${trs[0]}/insider`} target='_blank' rel="noreferrer">{trs[0]}</a></th>
+                                        <th><a href={`https://www.google.com/search?q=${trs[2]}`} target='_blank' rel="noreferrer">{trs[2]}</a></th>
                                         <th>{trs[3]}</th>
                                         <th>{trs[4]}</th>
                                         <th>{trs[5]}</th>
@@ -243,11 +243,11 @@ const News = (props) => {
                                     </tr>
                                     )
                                 }): 
-                                    <>
+                                    <tr>
                                         <div className="spinner">
                                             <Spinner animation="border" variant="primary" />
                                         </div>
-                                    </>
+                                    </tr>
                                 }
                             </tbody>
                         </Table>
@@ -280,9 +280,9 @@ const News = (props) => {
         )
     } else {
         return (
-            <>
+            <tr>
                 <Spinner animation="border" variant="primary" />
-            </>
+            </tr>
         )
     }
 }

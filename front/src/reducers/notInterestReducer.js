@@ -4,7 +4,7 @@ const initState = {
     error: null
 };
 
-export default (state = initState, action) => {
+const notInterestReducer = (state = initState, action) => {
     switch (action.type) {
         case "GET_NOTINTEREST_REQUEST":
             state = {
@@ -46,6 +46,9 @@ export default (state = initState, action) => {
                 error: action.payload.error
             }
             break;
+        default:
     }
     return state;
 }
+
+export default notInterestReducer;
