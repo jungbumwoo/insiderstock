@@ -13,7 +13,8 @@ export const getBanAction = () => {
             }
         } catch(err) { 
             console.log(err);
-            dispatch({ type: "GET_BAN_FAILED"});
+            dispatch({ type: "GET_BAN_FAILED",
+                        payload: {error: err}});
         }
     } 
 };

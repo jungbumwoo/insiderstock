@@ -13,7 +13,10 @@ export const getOnboard = () => {
             };
         } catch(err) {
             console.log(err);
-            dispatch({ type: "FAILED_GET_ONBOARD"});
+            console.log(err.response.data.message.message);
+            let errMessage = err.response.data.message.message;
+            dispatch({ type: "FAILED_GET_ONBOARD",
+                        payload: { error: errMessage}});
         };
     };
 };

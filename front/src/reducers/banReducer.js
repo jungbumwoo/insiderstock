@@ -22,6 +22,8 @@ export default (state = initState, action) => {
         case "GET_BAN_FAILED" :
             state = {
                 ...state,
+                loading: false,
+                error: action.payload.error
             }
             break;
         case "ADD_BAN_REQUEST" :

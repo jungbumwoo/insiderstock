@@ -2,11 +2,17 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBanAction } from '../../actions/banAction';
 import Layout from "../../components/Layouts/Layout/Layout.js";
+import { returnUtil } from '../containerUtils';
 
 const Ban = (props) => {
     const dispatch = useDispatch();
     const ban = useSelector(state => state.ban);
     console.log(ban);
+
+    useEffect(() => {
+        dispatch(getBanAction());
+    }, []);
+    
     const returnBans = () => {
         let returnBan = ban.bans.map((item) => {
             return (
@@ -23,18 +29,16 @@ const Ban = (props) => {
         return returnBan;
     };
     
-    useEffect(() => {
-        dispatch(getBanAction());
-    }, []);
+    
 
-    if(ban.loading) {
-        return (
-            <>
-                <Layout />
-                <div>Loading...</div>
-            </>
-        )
-    };
+    // if(ban.loading) {
+    //     return (
+    //         <>
+    //             <Layout />
+    //             <div>Loading...</div>
+    //         </>
+    //     )
+    // };
 
     return(
         <>  
@@ -53,7 +57,7 @@ const Ban = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {returnBans()}
+                            {returnUtil(ban, returnBans)}
                         </tbody>
                     </table>
                 </div>

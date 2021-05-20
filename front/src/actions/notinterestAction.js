@@ -15,7 +15,9 @@ export const getNotInterestAction = (req, res) => {
                             payload: { error: res.data.error}});
             }
         } catch(err) {
-            console.log(err);
+            console.log(err.response);
+            dispatch({ type: "GET_NOTINTEREST_FAILED",
+                            payload: { error: err.response.data.message}});
         }
     }
 }

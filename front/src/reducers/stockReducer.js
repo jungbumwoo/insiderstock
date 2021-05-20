@@ -65,10 +65,11 @@ export default (state = initState, action) => {
                 interests: action.payload.interested
             }
             break;
-        case "GET_INTERESET_FAILED" :
+        case "GET_INTEREST_FAILED" :
             state = {
                 ...state,
-                loading: true
+                loading: false,
+                error: action.payload.error
             }
             break;
         case "DELETE_INTEREST_REQUEST" :

@@ -21,7 +21,9 @@ export default (state = initState, action) => {
             break;
         case "FAILED_GET_ONBOARD":
             state = {
-                ...state
+                ...state,
+                loading: false,
+                error: action.payload.error
             }
             break;
     }

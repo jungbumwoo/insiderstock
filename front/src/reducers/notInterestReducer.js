@@ -15,7 +15,7 @@ export default (state = initState, action) => {
         case "GET_NOTINTEREST_SUCCESS":
             state = {
                 ...state,
-                loading: false.valueOf,
+                loading: false,
                 notinterests: action.payload.notInterests
             }
             break;

@@ -2,29 +2,39 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOnboard } from "../../actions/onboardAction.js";
 import Layout from "../../components/Layouts/Layout/Layout.js";
+import { returnUtil } from "../containerUtils.js";
+import { Redirect, useHistory } from "react-router-dom";
+
 import "./Onboard.css";
 
 const Onboard = (props) => {
     const onboard = useSelector(state => state.onboard);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(getOnboard());
     }, []);
     console.log(onboard);
 
-    if(onboard.loading) {
-        return (
-            <>
-                <div>
-                    <p>loading..</p>
-                </div>
-            </>
-        )
-    }
+    // isLoggedIn(onboard, props, history);
+
+    // if(onboard.error){
+    //     console.log("Redirect!!");
+    //    return <Redirect to='/' />
+    // }
+    // if(onboard.loading) {
+    //     return (
+    //         <>
+    //             <div>
+    //                 <p>loading..</p>
+    //             </div>
+    //         </>
+    //     )
+    // }
 
     const returnOnboards = () => {
-        console.log(onboard.onboards);
+        console.log("returnOnboards");
         let onboardList = onboard.onboards.map((item) => {
             console.log(item);
             return (
@@ -60,7 +70,7 @@ const Onboard = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {returnOnboards()}
+                            {returnUtil(onboard, returnOnboards)}
                         </tbody>
                     </table>
                 </div>

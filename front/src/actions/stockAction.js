@@ -33,15 +33,14 @@ export const getAddInterestAction = () => {
             let res = await axiosInstance.get('/addinterest');
             if(res.status === 200) {
                 const { interested } = res.data;
-                console.log(interested);
                 dispatch({ type: "GET_INTEREST_SUCCESS",
                             payload: {interested} });
-            } else {
-                dispatch({ type: "GET_INTEREST_FAILED",
-                            payload: {error: res.data.error}});
             }
         } catch(err) {
             console.log(err.response);
+            console.log(err.response.data.error);
+            dispatch({ type: "GET_INTEREST_FAILED",
+                        payload: {error: err.response.data.error}});
         }
     }
 }

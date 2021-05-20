@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNotInterestAction } from "../../actions";
-import Table from "react-bootstrap/Table";
 import { notInterestDeleteAct } from "../../actions";
+import { returnUtil } from "../containerUtils.js";
+import Table from "react-bootstrap/Table";
 import Button from 'react-bootstrap/Button';
 
 const NotInterest = (props) => {
@@ -65,6 +66,22 @@ const NotInterest = (props) => {
         dispatch(notInterestDeleteAct(deleteArray, remainArray));
     }
 
+    const returnNotInt = () => {
+        let result = notinterest.notinterests.map((item) => {
+            return (
+                <tr key={notinterest.notinterests.indexOf(item)}>
+                    <th><input type="checkbox" id={notinterest.notinterests.indexOf(item)} name="chk" onChange={checkBoxChange} /></th>
+                    <th>{item.ticker}</th>
+                    <th>{item.company}</th>
+                    <th>{item.insiderName}</th>
+                    <th>{item.date}</th>
+                    {/* <th>{item.MarketCap}</th> */}
+                </tr>
+            )
+        })
+        return result;
+    }
+
     return (
         <>
             <div>NotInterest</div>
@@ -81,18 +98,7 @@ const NotInterest = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                    {notinterest.notinterests.map((item) => {
-                        return (
-                            <tr key={notinterest.notinterests.indexOf(item)}>
-                                <th><input type="checkbox" id={notinterest.notinterests.indexOf(item)} name="chk" onChange={checkBoxChange} /></th>
-                                <th>{item.ticker}</th>
-                                <th>{item.company}</th>
-                                <th>{item.insiderName}</th>
-                                <th>{item.date}</th>
-                                {/* <th>{item.MarketCap}</th> */}
-                            </tr>
-                        )
-                    })}
+                        {returnUtil(notinterest, returnNotInt)}
                     </tbody>
                 </Table>
                 <Button onClick={handleDeleteBtn} variant="dark" size="sm">Delete</Button>{' '}
