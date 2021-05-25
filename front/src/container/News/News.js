@@ -14,7 +14,7 @@ const News = (props) => {
     const stock = useSelector(state => state.stock);
     const [ newArray, setNewArray] = useState([]);
     const [ toggleModal, setToggleModal ] = useState(false);
-    const [ modalInputs, setModalInputs] = useState({});
+    const [ modalInputs, setModalInputs ] = useState({});
 
     useEffect(()=> {
         if(!stock.stocks) {
@@ -221,25 +221,26 @@ const News = (props) => {
                             </thead>
                             <tbody>
                             {stock.stocks ? stock.stocks.map((trs) => {
+                                console.log(trs);
                                 return (
-                                    <tr key={trs[0] + trs[11] + trs[12] + Math.random()}>
+                                    <tr key={trs.ticker + Math.random()}>
                                         <th><input type="checkbox" id={stock.stocks.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
-                                        <th><a href={`https://www.gurufocus.com/stock/${trs[0]}/insider`} target='_blank' rel="noreferrer">{trs[0]}</a></th>
-                                        <th><a href={`https://www.google.com/search?q=${trs[2]}`} target='_blank' rel="noreferrer">{trs[2]}</a></th>
-                                        <th>{trs[3]}</th>
-                                        <th>{trs[4]}</th>
-                                        <th>{trs[5]}</th>
-                                        <th>{trs[6]}</th>
-                                        <th>{trs[7]}</th>
-                                        <th>{trs[8]}</th>
-                                        <th>{trs[9]}</th>
-                                        <th>{trs[10]}</th>
-                                        <th>{trs[11]}</th>
-                                        <th>{trs[12]}</th>
-                                        <th>{trs[13]}</th>
-                                        <th>{trs[14]}</th>
-                                        <th>{trs[15]}</th>
-                                        <th>{trs[16]}</th>
+                                        <th><a href={`https://www.gurufocus.com/stock/${trs.ticker}/insider`} target='_blank' rel="noreferrer">{trs.ticker}</a></th>
+                                        <th><a href={`https://www.google.com/search?q=${trs.company}`} target='_blank' rel="noreferrer">{trs.company}</a></th>
+                                        <th>{trs.currentprice}</th>
+                                        <th>{trs.insiderName}</th>
+                                        <th>{trs.insiderPosition}</th>
+                                        <th>{trs.date}</th>
+                                        <th>{trs.transcation}</th>
+                                        <th>{trs.insiderTradingShares}</th>
+                                        <th>{trs.sharesChange}</th>
+                                        <th>{trs.purchasePrice}</th>
+                                        <th>{trs.cost}</th>
+                                        <th>{trs.finalShare}</th>
+                                        <th>{trs.priceChangeSIT}</th>
+                                        <th>{trs.DividendYield}</th>
+                                        <th>{trs.PERatio}</th>
+                                        <th>{trs.MarketCap}</th>
                                     </tr>
                                     )
                                 }): 

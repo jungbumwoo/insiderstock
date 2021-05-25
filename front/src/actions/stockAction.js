@@ -6,10 +6,10 @@ export const getAllStock = () => {
         try {
             const res = await axiosInstance.get("/stock");
             if(res.status === 200) {
-                const { buyresult } = res.data;
+                const { result } = res.data;
                 dispatch({
                     type: "GET_ALL_STOCKS_SUCCESS",
-                    payload: { stocks: buyresult }
+                    payload: { stocks: result }
                 });
             } else {
                 dispatch({
@@ -20,7 +20,10 @@ export const getAllStock = () => {
         } catch(err) {
             console.log("Err at stockAction");
             console.log(err)
-            
+            dispatch({
+                type: "GET_ALL_STOCKS_FAILED",
+                payload: { error: err }
+            });
         }
     }
 }
@@ -37,10 +40,10 @@ export const getAddInterestAction = () => {
                             payload: {interested} });
             }
         } catch(err) {
-            console.log(err.response);
-            console.log(err.response.data.error);
+            console.log(err);
+            let stringErr = err.toString();
             dispatch({ type: "GET_INTEREST_FAILED",
-                        payload: {error: err.response.data.error}});
+                        payload: { error: stringErr }});
         }
     }
 }
