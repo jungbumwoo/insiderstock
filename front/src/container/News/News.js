@@ -106,7 +106,7 @@ const News = (props) => {
             acc.push({
                 ticker: item[0],
                 company: item[2],
-                currentprice: parseFloat(item[3].replace(/\$/g, '')),
+                // currentprice: parseFloat(item[3].replace(/\$/g, '')),
                 insiderName: item[4],
                 insiderPosition: item[5],
                 date: item[6],
@@ -117,7 +117,7 @@ const News = (props) => {
                 cost: parseFloat(item[11].replace(/\$|\,/g, '')),
                 finalShare: parseInt(item[12].replace(/\,/g, '')),
                 priceChangeSIT: parseFloat(item[13].replace(/\%/, '')),
-                DividendYield: parseFloat(item[14]),
+                // DividendYield: parseFloat(item[14]),
                 PERatio: parseFloat(item[15]),
                 MarketCap: parseFloat(item[16])
             })
@@ -203,7 +203,7 @@ const News = (props) => {
                                     <th></th>
                                     <th>Ticker</th>
                                     <th>Company</th>
-                                    <th>CurrentPrice</th>
+                                    {/* <th>CurrentPrice</th> */}
                                     <th>Insider Name</th>
                                     <th>Insider Position</th>
                                     <th>Date</th>
@@ -214,7 +214,7 @@ const News = (props) => {
                                     <th>Cost, k</th>
                                     <th>Final Share</th>
                                     <th>Price Change Since Insider Trade (%)</th>
-                                    <th>Dividend Yield %</th>
+                                    {/* <th>Dividend Yield %</th> */}
                                     <th>PE Ratio</th>
                                     <th>Market Cap ($M)</th>
                                 </tr>
@@ -227,7 +227,7 @@ const News = (props) => {
                                         <th><input type="checkbox" id={stock.stocks.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
                                         <th><a href={`https://www.gurufocus.com/stock/${trs.ticker}/insider`} target='_blank' rel="noreferrer">{trs.ticker}</a></th>
                                         <th><a href={`https://www.google.com/search?q=${trs.company}`} target='_blank' rel="noreferrer">{trs.company}</a></th>
-                                        <th>{trs.currentprice}</th>
+                                        {/* <th>{trs.currentprice}</th> */}
                                         <th>{trs.insiderName}</th>
                                         <th>{trs.insiderPosition}</th>
                                         <th>{trs.date}</th>
@@ -238,7 +238,7 @@ const News = (props) => {
                                         <th>{trs.cost}</th>
                                         <th>{trs.finalShare}</th>
                                         <th>{trs.priceChangeSIT}</th>
-                                        <th>{trs.DividendYield}</th>
+                                        {/* <th>{trs.DividendYield}</th> */}
                                         <th>{trs.PERatio}</th>
                                         <th>{trs.MarketCap}</th>
                                     </tr>

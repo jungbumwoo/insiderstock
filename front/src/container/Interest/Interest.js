@@ -86,7 +86,7 @@ const Interest = () => {
                         <th><input type="checkbox" id={interests.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
                         <th><a href={`https://www.gurufocus.com/stock/${trs.ticker}/insider`} target='_blank' rel="noreferrer">{trs.ticker}</a></th>
                         <th><a href={`https://www.google.com/search?q=${trs.company}`} target='_blank' rel="noreferrer">{trs.company}</a></th>
-                        <th>{trs.currentprice}</th>
+                        {/* <th>{trs.currentprice}</th> */}
                         <th>{trs.insiderName}</th>
                         <th>{trs.insiderPosition}</th>
                         <th>{trs.date ? trs.date.split('T')[0] : trs.date}</th>
@@ -97,7 +97,7 @@ const Interest = () => {
                         <th>{trs.cost ? trs.cost.$numberDecimal : trs.cost}</th>
                         <th>{trs.finalShare}</th>
                         <th>{trs.priceChangeSIT ? trs.priceChangeSIT.$numberDecimal : trs.priceChangeSIT}</th>
-                        <th>{trs.DividendYield ? trs.DividendYield.$numberDecimal : trs.DividendYield }</th>
+                        {/* <th>{trs.DividendYield ? trs.DividendYield.$numberDecimal : trs.DividendYield }</th> */}
                         <th>{trs.PERatio ? trs.PERatio.$numberDecimal : trs.PERatio}</th>
                         <th>{trs.MarketCap ? trs.MarketCap.$numberDecimal : trs.MarketCap}</th>
                     </tr>
@@ -116,7 +116,7 @@ const Interest = () => {
                                 <th></th>
                                 <th>Ticker</th>
                                 <th>Company</th>
-                                <th>Current Price</th>
+                                {/* <th>Current Price</th> */}
                                 <th>Insider Name</th>
                                 <th>Insider Position</th>
                                 <th>Date</th>
@@ -127,7 +127,7 @@ const Interest = () => {
                                 <th>Cost</th>
                                 <th>Final Share</th>
                                 <th>Price Change Since Insider Trade (%)</th>
-                                <th>Dividend Yield %</th>
+                                {/* <th>Dividend Yield %</th> */}
                                 <th>PE Ratio</th>
                                 <th>Market Cap ($M)</th>
                             </tr>

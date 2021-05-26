@@ -21,7 +21,7 @@ const Ban = (props) => {
                     <td>{item.company}</td>
                     <td>{item.MarketCap.$numberDecimal}</td>
                     <td>{item.PERatio.$numberDecimal}</td>
-                    <td>{item.DividendYield.$numberDecimal}</td>
+                    {/* <td>{item.DividendYield.$numberDecimal}</td> */}
                 </tr>
             )
         })
@@ -41,7 +41,7 @@ const Ban = (props) => {
                                 <th>Company</th>
                                 <th>MarketCap</th>
                                 <th>PERatio</th>
-                                <th>DividendYield</th>
+                                {/* <th>DividendYield</th> */}
                             </tr>
                         </thead>
                         <tbody>
