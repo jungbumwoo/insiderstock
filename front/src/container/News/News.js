@@ -188,9 +188,7 @@ const News = (props) => {
         setToggleModal(false);
         setModalInputs({});
         setNewArray([]);
-    }
-
-    
+    }    
 
     if (!stock.loading) {
         return (

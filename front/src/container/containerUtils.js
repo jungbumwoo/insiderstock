@@ -1,4 +1,3 @@
-
 export const returnUtil = (state, cb) => {
     let isToken = localStorage.getItem('token');
     console.log(state);
