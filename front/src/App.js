@@ -9,6 +9,7 @@ import Onboard from "../src/container/Onboard/Onboard.js";
 import AllInterest from "./container/AllInterest/AllInterest.js"
 import Profile from "./container/Profile/Profile";
 import Ban from "./container/Ban/Ban.js";
+import Pagination from "./container/Pagination.js";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/onboard" component={Onboard} />
       <Route path="/profile" component={Profile} />
       <Route path="/ban" component={Ban} />
+      <Route path="/pagination" component={Pagination} />
       <Route path="/token/:token" component={GetToken} />
     </Switch>
   );

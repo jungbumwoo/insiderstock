@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Pagination = (props) => {
     const [ pager, setPager] = useState({});
-    const [ pageOfItems, setPageOfItems] = useState({});
+    const [ pageOfItems, setPageOfItems] = useState([]);
+
+    useEffect(() => {
+        loadPage();
+    }, [pager]);
 
     const loadPage = () => {
+        console.log("loadPage");
         // get page of items from api
-        const params = new URLSearchParams(location.search);
+        const params = new URLSearchParams(props.location.search);
         const page = parseInt(params.get('page')) || 1;
         if (page !== pager.currentPage) {
-            fetch(`/api/items?page=${page}`, { method: Get})
-                .then(response => response.json())
-                .then(({pager, pageOfItems}) => {
+            fetch(`http://localhost:2000/api/stock`, { method: 'GET'})
+                .then(response =>response.json())
+                .then((data) => {
+                    console.log(data);
+                    let { pager, pageOfItems } = data.paginatedResult;
                     setPager(pager);
                     setPageOfItems(pageOfItems);
                 });
