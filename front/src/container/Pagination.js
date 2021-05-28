@@ -31,7 +31,7 @@ const Pagination = (props) => {
             <h3 className="card-header">React + Node Pagination</h3>
             <div className="card-body">
                 {pageOfItems.map(item => 
-                    <div key={item.id}>{item.name}</div>
+                    <div key={pageOfItems.indexOf(item)}>{item.name}</div>
                 )}
             </div>
             <div className="card-footer pd-0 pt-3">
