@@ -35,7 +35,7 @@ const Pagination = (props) => {
                 )}
             </div>
             <div className="card-footer pd-0 pt-3">
-                {pager.pages && pager.pages.length &&
+                {pager.pages && pager.pages.length && 
                     <ul className="pagination">
                         <li className={`page-item first-item ${pager.currentPage === 1 ? 'disabled' : ''}`}>
                             <Link to={{ search: `?page=1` }} className="page-link">First</Link>
