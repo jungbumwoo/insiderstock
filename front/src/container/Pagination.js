@@ -7,15 +7,15 @@ const Pagination = (props) => {
 
     useEffect(() => {
         loadPage();
-    }, [pager]);
+    });
 
     const loadPage = () => {
-        console.log("loadPage");
+        console.log(props);
         // get page of items from api
         const params = new URLSearchParams(props.location.search);
         const page = parseInt(params.get('page')) || 1;
         if (page !== pager.currentPage) {
-            fetch(`http://localhost:2000/api/stock`, { method: 'GET'})
+            fetch(`http://localhost:2000/api/stock?page=${page}`, { method: 'GET'})
                 .then(response =>response.json())
                 .then((data) => {
                     console.log(data);
