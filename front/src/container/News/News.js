@@ -16,6 +16,8 @@ const News = (props) => {
     const [ toggleModal, setToggleModal ] = useState(false);
     const [ modalInputs, setModalInputs ] = useState({});
 
+    console.log(stock.paginatedResult);
+
     useEffect(()=> {
         if(!stock.stocks) {
             dispatch(getAllStock());

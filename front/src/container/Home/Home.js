@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../../components/Layouts/Layout/Layout.js";
-import News from "../News/News.js";
+import News2_pagination from "../News/News2_pagination.js";
 import Interest from "../Interest/Interest.js";
 
 import "./Home.css";
@@ -10,8 +10,8 @@ const Home = (props) => {
         <>
             <div className="background">
                 <Layout />
-                <News />
-                <Interest />
+                <News2_pagination location={props.location} />
+                {/* <Interest /> */}
             </div>
         </>
     )

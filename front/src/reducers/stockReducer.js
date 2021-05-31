@@ -2,6 +2,7 @@ const initState = {
     stocks: null,
     interests: [],
     loading: false,
+    paginatedResult: { pager: {currentPage: 1}},
     error: null
 };
 
@@ -32,7 +33,8 @@ const stockReducer = (state = initState, action) => {
         case "GET_ALL_STOCKS_SUCCESS" :
             state = {
                 ...state,
-                stocks: action.payload.stocks,
+                // stocks: action.payload.stocks,
+                paginatedResult: action.payload.paginatedResult,
                 loading: false
             }
             break;

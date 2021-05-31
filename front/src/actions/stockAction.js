@@ -1,15 +1,17 @@
 import axiosInstance from "../helpers/axios.js";
 
-export const getAllStock = () => {
+export const getAllStock = (params) => {
     return async dispatch => {
         dispatch({ type: "GET_ALL_STOCKS_REQUEST"});
         try {
-            const res = await axiosInstance.get("/stock");
+            const res = await axiosInstance.get(`/stock?page=${params}`);
             if(res.status === 200) {
-                const { result } = res.data;
+                console.log(res.data);
+                const { paginatedResult } = res.data;
                 dispatch({
                     type: "GET_ALL_STOCKS_SUCCESS",
-                    payload: { stocks: result }
+                    // payload: { stocks: result }
+                    payload: { paginatedResult }
                 });
             } else {
                 dispatch({
