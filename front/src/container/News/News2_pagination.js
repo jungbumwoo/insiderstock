@@ -15,19 +15,22 @@ const News2_pagination = (props) => {
     const stock = useSelector(state => state.stock);
     // const { pager, pageOfItems } = stock.paginatedResult;
     const [ newArray, setNewArray] = useState([]);
+    const [ pageUrl, setPageUrl] = useState('');
+    const [ currentUrl, setCurrentUrl ] = useState('');
     const [ toggleModal, setToggleModal ] = useState(false);
     const [ modalInputs, setModalInputs ] = useState({});
     
     useEffect(()=> {
         let urlSearchParams = new URLSearchParams(props.location.search);
         let urlParams = parseInt(urlSearchParams.get('page')) || 1;
-
-        console.log(urlParams, stock.paginatedResult.pager.currentPage);
-        if(urlParams !== stock.paginatedResult.pager.currentPage){
-            console.log("useEffect!!");
-            dispatch(getAllStock(urlParams));
-        }
-    });
+            if(urlParams !== stock.paginatedResult.pager.currentPage){
+                console.log("useEffect!!");
+                console.log(urlParams, stock.paginatedResult.pager.currentPage);
+                dispatch(getAllStock(urlParams));
+                console.log(urlParams, stock.paginatedResult.pager.currentPage);
+            }
+            // setCurrentUrl(stock.paginatedResult.pager.currentPage);
+    }, [dispatch, currentUrl]);
 
     useEffect(()=> {
         let urlSearchParams = new URLSearchParams(props.location.search);
@@ -49,6 +52,12 @@ const News2_pagination = (props) => {
             newArray.push(parseInt(e.target.id));
         }
         setNewArray(newArray);
+    }
+
+    const pageChange = () => {
+        let urlSearchParams = new URLSearchParams(props.location.search);
+        let urlParams = parseInt(urlSearchParams.get('page')) || 1;
+        setCurrentUrl(urlParams);
     }
     
     if (!stock.loading) {
@@ -106,7 +115,7 @@ const News2_pagination = (props) => {
                         {stock.paginatedResult.pageOfItems ? stock.paginatedResult.pager.pages.map(num => {
                             return (
                                 <span>
-                                    <Link to={{search: `?page=${num}`}}>{num}</Link>
+                                    <Link to={{search: `?page=${num}`}} onClick={pageChange}>{num}</Link>
                                 </span>
                             )
                         }) : <span>Pager undefined at News2_pagination</span>}
