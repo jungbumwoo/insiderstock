@@ -11,10 +11,10 @@ const CheckBoxRef1 = (props) => {
     const [ isCheck, setIsCheck ] = useState([]);
     
     let initialfruits = [
-        { id: 1, name: "banana"},
-        { id: 2, name: "apple" },
-        { id: 3, name: "mango" },
-        { id: 4, name: "grap" }
+        { id: "1", name: "banana"},
+        { id: "2", name: "apple" },
+        { id: "3", name: "mango" },
+        { id: "4", name: "grap" }
     ];
     const [ fruits, setFruits ] = useState(initialfruits);
     
