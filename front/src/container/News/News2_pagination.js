@@ -12,25 +12,21 @@ const News2_pagination = (props) => {
     const stock = useSelector(state => state.stock);
     const { pager, pageOfItems } = stock.paginatedResult;
     const [ newArray, setNewArray] = useState([]);
-    const [ currentUrl, setCurrentUrl ] = useState(1);
+    const [ currentUrl, setCurrentUrl ] = useState('');
    
     useEffect(()=> {
         let urlSearchParams = new URLSearchParams(props.location.search);
         let urlParams = parseInt(urlSearchParams.get('page')) || 1;
+            // When Page Change
             if(urlParams !== stock.paginatedResult.pager.currentPage){
                 dispatch(getAllStock(urlParams));
+            } else if (urlParams === 1 && stock.paginatedResult.pager.currentPage === 1) {
+                // When first page was loaded.
+                dispatch(getAllStock(urlParams));    
             }
             // setCurrentUrl(stock.paginatedResult.pager.currentPage);
     }, [dispatch, currentUrl]);
 
-    useEffect(()=> {
-        let urlSearchParams = new URLSearchParams(props.location.search);
-        let urlParams = parseInt(urlSearchParams.get('page')) || 1;
-        console.log(urlParams, stock.paginatedResult.pager.currentPage);
-        if(urlParams === 1 && stock.paginatedResult.pager.currentPage === 1){
-            dispatch(getAllStock(urlParams));
-        }
-    }, []);
 
     const checkBoxChange = (e) => {
         const itemToFind = newArray.find((item) => { return item === parseInt(e.target.id) })

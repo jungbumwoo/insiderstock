@@ -14,7 +14,7 @@ const Home = (props) => {
                 <Layout />
                 <News2_pagination location={props.location} />
                 {/* <MyCheckBox /> */}
-                <CheckBoxRef1 />
+                {/* <CheckBoxRef1 /> */}
                 {/* <Interest /> */}
             </div>
         </>

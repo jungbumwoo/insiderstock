@@ -40,17 +40,12 @@ const MyCheckbox = (props) => {
     };
 
     const handleChkChange = (e) => {
-        console.log(e.target.value);
-        console.log(e.target.checked);
-
         let chkfruits = fruits.map((item) => {
             if(e.target.value == item.value){
                 item.isChecked = !item.isChecked
             }
             return item;
         })
-
-        console.log(chkfruits);
         setFruits(chkfruits);
     }
 
