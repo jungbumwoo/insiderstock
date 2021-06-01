@@ -12,11 +12,8 @@ const News2_pagination = (props) => {
     const stock = useSelector(state => state.stock);
     const { pager, pageOfItems } = stock.paginatedResult;
     const [ newArray, setNewArray] = useState([]);
-    const [ pageUrl, setPageUrl] = useState('');
     const [ currentUrl, setCurrentUrl ] = useState(1);
-    const [ toggleModal, setToggleModal ] = useState(false);
-    const [ modalInputs, setModalInputs ] = useState({});
-    
+   
     useEffect(()=> {
         let urlSearchParams = new URLSearchParams(props.location.search);
         let urlParams = parseInt(urlSearchParams.get('page')) || 1;
@@ -65,6 +62,7 @@ const News2_pagination = (props) => {
 
     console.log(currentUrl);
     console.log(pager, pageOfItems);
+
     return(
         <div className="newsContainer">
                     <table>
@@ -136,12 +134,13 @@ const News2_pagination = (props) => {
                         </li>
                     </div>
                     <div className="buttons">
+                        <button>Select All</button>
                         <button>Delete</button>
                         <button>Interest</button>
                         <button>Onboard</button>
                         <button>7일간 제외</button>
                     </div>
-                </div>
+    </div>
     )
 }
 
