@@ -64,7 +64,7 @@ const MyCheckbox = (props) => {
                 console.log(elements)
                 return(
                     <div>
-                        <input type="checkbox" onChange={handleChkChange} defaultCecked={elements.isChecked} checked={elements.isChecked} value={elements.value} />
+                        <input type="checkbox" onChange={handleChkChange} checked={elements.isChecked} value={elements.value} />
                         <span>{elements.value}</span>
                     </div>
                 )
