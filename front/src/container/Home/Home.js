@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../../components/Layouts/Layout/Layout.js";
-import News2_pagination from "../News/News2_pagination.js";
+import News2 from "../News/News.js";
 import MyCheckBox from "../CheckBox/MyCheckBox.js";
 import CheckBoxRef1 from "../CheckBox/CheckBoxRef1/CheckBoxRef1.js";
 import Interest from "../Interest/Interest.js";
@@ -12,7 +12,7 @@ const Home = (props) => {
         <>
             <div className="background">
                 <Layout />
-                <News2_pagination location={props.location} />
+                <News2 location={props.location} />
                 {/* <MyCheckBox /> */}
                 {/* <CheckBoxRef1 /> */}
                 {/* <Interest /> */}

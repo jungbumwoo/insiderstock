@@ -30,16 +30,12 @@
     background-color: #f5f5f5;
 }
 
-.newsContainer .buttons {
-    width: 100%;
-    text-align: center;
-    margin: 0 auto;
-    padding-bottom: 1rem;
+.pageNum {
+    font-size: 1.2rem;
 }
 
-.newsContainer .buttons button {
-    margin-left: 0.3rem;
-    box-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2);
+.pageNum li {
+    margin-right: 1rem;
 }
 
 .spinner {

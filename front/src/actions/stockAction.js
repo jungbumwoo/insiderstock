@@ -4,6 +4,7 @@ export const getAllStock = (params) => {
     return async dispatch => {
         dispatch({ type: "GET_ALL_STOCKS_REQUEST"});
         try {
+            console.log("getAllStock");
             const res = await axiosInstance.get(`/stock?page=${params}`);
             if(res.status === 200) {
                 console.log(res.data);
