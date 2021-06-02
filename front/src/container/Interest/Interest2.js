@@ -14,11 +14,10 @@ const Interest2 = (props) => {
     const [ pager, setPager ] = useState({});
     const [ pageOfItems, setPageOfItems ] = useState([]);
     const stockInterest = useSelector(state => state.stock);
-    let { interests } = stockInterest;
     
     useEffect(() => {
         loadData();
-    });
+    }, []);
 
     console.log(pager);
     console.log(pageOfItems);
@@ -42,9 +41,12 @@ const Interest2 = (props) => {
                 let newPager = res.data.pagedResult.pager;
                 let newPageOfItems = res.data.pagedResult.pager;
                 if (newPager != pager || newPageOfItems != pageOfItems ) {
-                    setPageOfItems(pageOfItems);
-                    setPager(pager);
-                }
+                    console.log("update pager, pageOfItems");
+                    console.log(pager);
+                    console.log(newPager);
+                    setPageOfItems(newPageOfItems);
+                    setPager(newPager);
+                }   
             }
         }
     }
