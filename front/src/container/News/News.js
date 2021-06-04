@@ -4,6 +4,7 @@ import { getAllStock } from "../../actions/stockAction";
 import { postAddInterestAction, remainAction, postNotInterestAction, addOnboard, postBanAction } from "../../actions";
 import { Link } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
+import Modal from "../../components/Modals/Modal/Modal";
 
 import "./News.css";
 
@@ -14,6 +15,7 @@ const News = (props) => {
     const [ currentUrl, setCurrentUrl ] = useState('');
     const [ checkedArray, setCheckedArray ] = useState([]);
     const [ selectAllTF, setSelectAllTF ] = useState(false);
+    const [ toggleModal, setToggleModal ] = useState(false);
    
     useEffect(()=> {
         let urlSearchParams = new URLSearchParams(props.location.search);
@@ -30,6 +32,12 @@ const News = (props) => {
             // setCurrentUrl(stock.paginatedResult.pager.currentPage);
     }, [currentUrl]);
 
+    const returnItemsByIndex = () => {
+        const returnItems = checkedArray.map(item => {
+            return pageOfItems[item]
+        })
+        return returnItems;
+    };
 
     const checkBoxChange = (e) => {
         let intId = parseInt(e.target.id);
@@ -83,14 +91,19 @@ const News = (props) => {
     };
 
     const addOnboardBtn = () => {
-        let checkedStock = pageOfItems.filter(item => checkedArray.includes(pageOfItems.indexOf(item)));
-        dispatch(addOnboard(checkedStock));
-        setCheckedArray([]);
-        // dispatch(getAllStock(pager.currentPage));
+        setToggleModal(true);
     };
 
-    const handleAfterSumbit = () => {
+    const onModalInputChange = () => {};
 
+    const handleModalClose = () => {
+        setCheckedArray([]);
+        setToggleModal(false);
+    };
+
+    const handleModalSubmit = () => {
+        setCheckedArray([]);
+        setToggleModal(false);
     };
 
     return(
@@ -170,6 +183,13 @@ const News = (props) => {
                 <button onClick={addOnboardBtn}>Onboard</button>
                 <button>7일간 제외</button>
             </div>
+            <Modal 
+                shown={toggleModal}
+                onCloseRequest={handleModalClose}
+                checked={returnItemsByIndex()}
+                onModalInputChange={onModalInputChange}
+                handleModalSubmit={handleModalSubmit}
+                />
     </div>
     )
 }
