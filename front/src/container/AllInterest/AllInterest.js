@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../../components/Layouts/Layout/Layout.js";
-import Interest2 from "../../container/Interest/Interest2.js";
+import Interest from "../../container/Interest/Interest.js";
 import NotInterest from "../../container/NotInterest/NotInterest.js";
 
 const AllInterest = (props) => {
@@ -8,7 +8,7 @@ const AllInterest = (props) => {
     return(
         <>
             <Layout />
-            <Interest2 location={props.location}/>
+            <Interest location={props.location}/>
             <NotInterest />
         </>
     )

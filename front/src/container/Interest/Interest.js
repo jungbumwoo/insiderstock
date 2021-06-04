@@ -1,122 +1,133 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAddInterestAction } from "../../actions/stockAction";
-import { interestDeleteAct } from "../../actions";
-import Button from 'react-bootstrap/Button';
+import { getInterestAction } from "../../actions/stockAction";
+import { getNotInterestAction, interestDeleteAct } from "../../actions";
 import "./Interest.css";
 import { returnUtil } from "../containerUtils";
+import axiosInstance from "../../helpers/axios";
 
-const Interest = () => {
+const Interest = (props) => {
     const dispatch = useDispatch();
-    const [ newArray, setNewArray ] = useState([]);
-    const [ reload, setReload] = useState(null);
-    const stockInterest = useSelector(state => state.stock);
-    let { interests } = stockInterest;
-    
-    const checkBoxChange = (e) => {
-        console.log(e.target);
-        const itemToFind = newArray.find((item) => { return item === parseInt(e.target.id) })
-        console.log(itemToFind);
-        // let isexist = newArray.filter((cat) => {
-        //     cat.id = e.target.id
-        // });
-        const idx = newArray.indexOf(itemToFind)
-        if (idx > -1) {
-            // delete
-            newArray.splice(idx, 1)
-        } else {
-            // add
-            newArray.push(parseInt(e.target.id));
-        }
-        console.log(newArray);
-        setNewArray(newArray);
-    }
-    console.log(newArray);
-
-    const handleDeleteBtn = () => {
-        console.log(newArray);
-        // reload Component if checkBox Empty
-        if(newArray === []){
-            console.log("reloadComponent cause newArray Empty!!")
-            reloadComponent();
-        }
-
-        // remain element
-        let wholearray = [];
-        for( let i = 0; i < interests.length; i++ ){
-            wholearray.push(i);
-        };
-        let remainArrayNum = wholearray.filter((num) => {
-            console.log(num);
-            let deleteIndex = newArray.indexOf(num);
-            // 여기 값이 달라지네;;;
-            //newArray. 항상그대로.
-            if (deleteIndex > -1 ) {
-                console.log(`num: ${num}, deleteIndx: ${deleteIndex}`)
-            }
-            return deleteIndex <= -1
-        });
-        console.log(remainArrayNum);
-
-        let remainArray = remainArrayNum.map((num) => {
-            return interests[num];
-        });
-
-        let deleteArray = newArray.map((num) => {
-            return interests[num];
-        });
-        console.log(deleteArray);
-        console.log(remainArray);
-        dispatch(interestDeleteAct(deleteArray, remainArray));
-    }
+    const stock = useSelector(state => state.stock);
+    const { pager, pageOfItems } = stock.pagedGetInt;
+    const [ curntUrl, setCurntUrl ] = useState(1);
+    const [ checkedArray, setCheckedArray ] = useState([]);
     
     useEffect(() => {
-        dispatch(getAddInterestAction());
-    }, [])
+        console.log(curntUrl);
+        dispatch(getInterestAction(curntUrl));
+    }, [curntUrl]);
 
-    const reloadComponent = () => {
-        setReload({});
-    }
+    // const loadData = async() => {
+    //     if(curntUrl !== pager.currentPage){
+    //         console.log("fetch!!");
+    //         let res = await axiosInstance.get(`/addinterest?page=${curntUrl}`);
+    //         // fetch(`http://localhost:2000/api/addinterest`, { method: 'GET', })
+    //         // // fetch(`http://localhost:2000/api/addinterest?page=${page}`, { method: 'GET'})
+    //         // .then(response => response.json())
+    //         // .then((data) => {
+    //         //     console.log(data);
+    //         //     let { pager, pageOfItem } = data.paginatedResult;
+    //         //     setPager(pager);
+    //         //     setPageOfItems(pageOfItem);
+    //         // })
+    //         if(res.status === 200){
+    //             let newPager = res.data.pagedResult.pager;
+    //             let newPageOfItems = res.data.pagedResult.pager;
+    //             if (newPager != pager || newPageOfItems != pageOfItems ) {
+    //                 console.log("update pager, pageOfItems");
+    //                 console.log(pager);
+    //                 console.log(newPager);
+    //                 setPageOfItems(newPageOfItems);
+    //                 setPager(newPager);
+    //             }   
+    //         }
+    //     }
+    // }
+    const handlePageClick = (e) => {
+        let targetNum = e.target.innerHTML;
+        setCurntUrl(parseInt(targetNum));
+        setCheckedArray([]);
+    }; 
 
-    const returnInterest = () => {
-        let result = interests.map((trs) => {
+    const returnPages = () => {
+        let pageReturn = pager.pages.map(el => {
             return (
-                    <tr key={interests.indexOf(trs)}>
-                        <th><input type="checkbox" id={interests.indexOf(trs)} name="chk" onChange={checkBoxChange} /></th>
+                <li onClick={handlePageClick}>
+                    <span>{el}</span>        
+                </li>
+            )
+        });
+        return pageReturn;
+    };
+
+    const checkBoxChange = (e) => {
+        let intId = parseInt(e.target.id);
+        if(!e.target.checked){
+            // uncheck, remove
+            let filtered = checkedArray.filter(el => (el !== intId))
+            setCheckedArray(filtered);
+        } else {
+            // check, insert 
+            setCheckedArray([...checkedArray, intId]);
+        }
+    };
+
+    const returnPageOfItems = () => {
+        let result = pageOfItems.map(trs => {
+            return (
+                <tr>
+                    <th><input type="checkbox" onChange={checkBoxChange} id={parseInt(pageOfItems.indexOf(trs))} checked={checkedArray.includes(pageOfItems.indexOf(trs))} name="chk" /></th>
                         <th><a href={`https://www.gurufocus.com/stock/${trs.ticker}/insider`} target='_blank' rel="noreferrer">{trs.ticker}</a></th>
                         <th><a href={`https://www.google.com/search?q=${trs.company}`} target='_blank' rel="noreferrer">{trs.company}</a></th>
                         {/* <th>{trs.currentprice}</th> */}
                         <th>{trs.insiderName}</th>
                         <th>{trs.insiderPosition}</th>
-                        <th>{trs.date ? trs.date.split('T')[0] : trs.date}</th>
-                        <th>{trs.buyOrSell}</th>
+                        <th>{trs.date}</th>
+                        <th>{trs.transcation}</th>
                         <th>{trs.insiderTradingShares}</th>
                         <th>{trs.sharesChange}</th>
                         <th>{trs.purchasePrice}</th>
-                        <th>{trs.cost ? trs.cost.$numberDecimal : trs.cost}</th>
                         <th>{trs.finalShare}</th>
-                        <th>{trs.priceChangeSIT ? trs.priceChangeSIT.$numberDecimal : trs.priceChangeSIT}</th>
-                        {/* <th>{trs.DividendYield ? trs.DividendYield.$numberDecimal : trs.DividendYield }</th> */}
-                        <th>{trs.PERatio ? trs.PERatio.$numberDecimal : trs.PERatio}</th>
-                        <th>{trs.MarketCap ? trs.MarketCap.$numberDecimal : trs.MarketCap}</th>
-                    </tr>
-                    )
-                })
+                        <th>{trs.priceChangeSIT}</th>
+                        {/* <th>{trs.DividendYield}</th> */}
+                        <th>{trs.PERatio}</th>
+                        <th>{trs.MarketCap}</th>
+                </tr>
+            )
+        })
         return result;
-    }
+    };
+
+    const hadnleDeleteBtn = () => {
+        let wholeArrayNum = [];
+        for(let i = 0; i < pageOfItems.length; i++){
+            wholeArrayNum.push(i);
+        }
+
+        let remainArrayNum = wholeArrayNum.filter(el => {
+            return !checkedArray.includes(el);
+        });
+
+        let remainItems = pageOfItems.filter(item => remainArrayNum.includes(pageOfItems.indexOf(item)));
+
+        let deleteItems = pageOfItems.filter(item => (checkedArray.includes(pageOfItems.indexOf(item))));
+        
+        dispatch(interestDeleteAct(deleteItems, remainItems));
+        setCheckedArray([]);
+    };
 
     return(
         <>
-            <div className="interestContainster">
-                <div className="interestTable">
-                    <Table responsive>
+            <div>
+                <span>Interest</span>
+                <div className="data_table">
+                    <table>
                         <thead>
                             <tr>
-                                <th></th>
                                 <th>Ticker</th>
                                 <th>Company</th>
-                                {/* <th>Current Price</th> */}
                                 <th>Insider Name</th>
                                 <th>Insider Position</th>
                                 <th>Date</th>
@@ -124,22 +135,41 @@ const Interest = () => {
                                 <th>Insider Trading Shares</th>
                                 <th>Shares Change</th>
                                 <th>purchasePrice</th>
-                                <th>Cost</th>
                                 <th>Final Share</th>
                                 <th>Price Change Since Insider Trade (%)</th>
-                                {/* <th>Dividend Yield %</th> */}
                                 <th>PE Ratio</th>
                                 <th>Market Cap ($M)</th>
-                            </tr>
+                            </tr>  
                         </thead>
                         <tbody>
-                            {returnUtil(stockInterest, returnInterest)}
+                            {/* {pageOfItems.length > 0 ? returnPageOfItems() : ''} */}
+                            {returnUtil(stock, returnPageOfItems)}
                         </tbody>
-                    </Table>
+                    </table>
                 </div>
-                <div className="interestBtns">
-                    <Button onClick={handleDeleteBtn} variant="dark" size="sm">Delete</Button>
+
+                <div className="page_buttons">
+                    <ul>{returnPages()}</ul>
                 </div>
+
+                <div className="buttons">
+                    <button onClick={hadnleDeleteBtn}>Delete</button>
+                </div>
+
+
+                {/* {pager.pages && pager.pages.length &&
+                    <ul className="pagination">
+                        <li className={`page-item fist-item ${pager.currentPage ===1 ? 'disabled' : ''}`}>
+                            <Link to={{search: `?page=1`}}></Link>
+                        </li>
+                        {pager.pages.map(page =>
+                            <li key={page} className={`page-item number-item ${pager.currentPage === page ? 'active' : ''}`}>
+                                <Link to={{ search: `?page=${page}`}} className="page-link">{page}</Link>
+                            </li>    
+                        )}
+                    </ul>
+                    
+                } */}
             </div>
         </>
     )

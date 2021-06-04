@@ -1,6 +1,6 @@
 const initState = {
     stocks: null,
-    interests: [],
+    pagedGetInt: { pager: {pages: [1]}, pageOfItems: []},
     loading: false,
     paginatedResult: { pager: {currentPage: 1}},
     error: null
@@ -8,22 +8,6 @@ const initState = {
 
 const stockReducer = (state = initState, action) => {
     switch (action.type) {
-        case "ADD_INTEREST_POST_REQUEST" :
-            state = {
-                ...state,
-                loading: true,
-            }
-            break;
-        case "ADD_INTEREST_POST_SUCCESS" :
-            state = {
-                ...state,
-                loading: false,
-                interests: [
-                    ...state.interests,
-                    ...action.payload.added
-                ]
-            }
-            break;
         case "GET_ALL_STOCKS_REQUEST" :
             state = {
                 ...state,
@@ -45,13 +29,7 @@ const stockReducer = (state = initState, action) => {
                 loading: false
             }
             break;
-        case "REVISED_STOCKS_SUCCESS" :
-            state = {
-                ...state,
-                err: action.payload.error,
-                stocks: action.payload.stocks
-            }
-            break;
+        
         case "GET_INTEREST_REQUEST" :
             state = {
                 ...state,
@@ -62,7 +40,8 @@ const stockReducer = (state = initState, action) => {
             state = {
                 ...state,
                 loading: false,
-                interests: action.payload.interested
+                pagedGetInt: action.payload.pagedGetInt
+
             }
             break;
         case "GET_INTEREST_FAILED" :
@@ -70,6 +49,22 @@ const stockReducer = (state = initState, action) => {
                 ...state,
                 loading: false,
                 error: action.payload.error
+            }
+            break;
+        case "ADD_INTEREST_POST_REQUEST" :
+            state = {
+                ...state,
+                loading: true,
+            }
+            break;
+        case "ADD_INTEREST_POST_SUCCESS" :
+            state = {
+                ...state,
+                loading: false,
+                interests: [
+                    ...state.interests,
+                    ...action.payload.added
+                ]
             }
             break;
         case "DELETE_INTEREST_REQUEST" :
@@ -82,13 +77,10 @@ const stockReducer = (state = initState, action) => {
             state = {
                 ...state,
                 loading: false,
-                interests: action.payload.interestData
-            }
-            break;
-        case "REMAIN_ARRAY" :
-            state = {
-                ...state,
-                stocks: action.payload.remainData
+                pagedGetInt: {
+                    ...state.pagedGetInt,
+                    pageOfItems: action.payload.remainInterest
+                }
             }
             break;
         case "GET_INTEREST_FAILED":
@@ -97,25 +89,7 @@ const stockReducer = (state = initState, action) => {
                 error: action.payload.error
             }
             break;
-        case "ADD_NOTINTEREST_POST_REQUEST":
-            state = {
-                ...state,
-                loading: true
-            }
-            break;
-        case "ADD_NOTINTEREST_POST_SUCCESS":
-            state = {
-                ...state,
-                loading: false
-            }
-            break;
-        case "ADD_NOTINTEREST_POST_FAILED":
-            state = {
-                ...state,
-                loading: false,
-                error: action.payload.error
-            }
-            break;
+        default:
     }
     return state;
 }

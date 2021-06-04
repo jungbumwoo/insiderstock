@@ -70,83 +70,106 @@ const News = (props) => {
         )
     };
 
+    const addInterestBtn = () => {
+        let checkedStock = pageOfItems.filter(item => checkedArray.includes(pageOfItems.indexOf(item)));
+        dispatch(postAddInterestAction(checkedStock));
+        setCheckedArray([]);
+    };
+
+    const handleNotIntBtn = () => {
+        let checkedStock = pageOfItems.filter(item => checkedArray.includes(pageOfItems.indexOf(item)));
+        dispatch(postNotInterestAction(checkedStock));
+        setCheckedArray([]);
+    };
+
+    const addOnboardBtn = () => {
+        let checkedStock = pageOfItems.filter(item => checkedArray.includes(pageOfItems.indexOf(item)));
+        dispatch(addOnboard(checkedStock));
+        setCheckedArray([]);
+        // dispatch(getAllStock(pager.currentPage));
+    };
+
+    const handleAfterSumbit = () => {
+
+    };
+
     return(
         <div className="newsContainer">
-                    <table>
-                        <thead>
-                            <tr>
-                            <th></th>
-                                    <th>Ticker</th>
-                                    <th>Company</th>
-                                    <th>Insider Name</th>
-                                    <th>Insider Position</th>
-                                    <th>Date</th>
-                                    <th>Buy/sell</th>
-                                    <th>Insider Trading Shares</th>
-                                    <th>Shares Change</th>
-                                    <th>purchasePrice</th>
-                                    <th>Cost, k</th>
-                                    <th>Final Share</th>
-                                    <th>Price Change Since Insider Trade (%)</th>
-                                    <th>PE Ratio</th>
-                                    <th>Market Cap ($M)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { stock.paginatedResult.pageOfItems ? stock.paginatedResult.pageOfItems.map(trs => {
-                                    return (
-                                        <tr key={stock.paginatedResult.pageOfItems.indexOf(trs)}>
-                                            <th><input type="checkbox" onChange={checkBoxChange} id={parseInt(pageOfItems.indexOf(trs))} checked={checkedArray.includes(pageOfItems.indexOf(trs))} name="chk" /></th>
-                                            <th><a href={`https://www.gurufocus.com/stock/${trs.ticker}/insider`} target='_blank' rel="noreferrer">{trs.ticker}</a></th>
-                                            <th><a href={`https://www.google.com/search?q=${trs.company}`} target='_blank' rel="noreferrer">{trs.company}</a></th>
-                                            {/* <th>{trs.currentprice}</th> */}
-                                            <th>{trs.insiderName}</th>
-                                            <th>{trs.insiderPosition}</th>
-                                            <th>{trs.date}</th>
-                                            <th>{trs.transcation}</th>
-                                            <th>{trs.insiderTradingShares}</th>
-                                            <th>{trs.sharesChange}</th>
-                                            <th>{trs.purchasePrice}</th>
-                                            <th>{trs.cost}</th>
-                                            <th>{trs.finalShare}</th>
-                                            <th>{trs.priceChangeSIT}</th>
-                                            {/* <th>{trs.DividendYield}</th> */}
-                                            <th>{trs.PERatio}</th>
-                                            <th>{trs.MarketCap}</th>                                        
-                                        </tr>
-                                    )
-                                }) : returnLoadingSpinner()
-                            }
-                        </tbody>
-                    </table>
-                    <div className="pageNum">
-                        <li className={ `${pager.currentPage === 1 ? 'disabled' : ''}`}>
-                            <Link to={{search: `?page=1`}} onClick={pageChange}>First</Link>
-                        </li>
-                        <li className={ `${pager.currentPage === 1 ? 'disabled' : ''}`}>
-                            <Link to={{search: `?page=${pager.currentPage - 1}`}} onClick={pageChange}>Previous</Link>
-                        </li>
-                        {stock.paginatedResult.pageOfItems ? stock.paginatedResult.pager.pages.map(num => {
+            <table>
+                <thead>
+                    <tr>
+                    <th></th>
+                            <th>Ticker</th>
+                            <th>Company</th>
+                            <th>Insider Name</th>
+                            <th>Insider Position</th>
+                            <th>Date</th>
+                            <th>Buy/sell</th>
+                            <th>Insider Trading Shares</th>
+                            <th>Shares Change</th>
+                            <th>purchasePrice</th>
+                            <th>Cost, k</th>
+                            <th>Final Share</th>
+                            <th>Price Change Since Insider Trade (%)</th>
+                            <th>PE Ratio</th>
+                            <th>Market Cap ($M)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { stock.paginatedResult.pageOfItems ? stock.paginatedResult.pageOfItems.map(trs => {
                             return (
-                                <span>
-                                    <Link to={{search: `?page=${num}`}} onClick={pageChange}>{num}</Link>
-                                </span>
+                                <tr key={stock.paginatedResult.pageOfItems.indexOf(trs)}>
+                                    <th><input type="checkbox" onChange={checkBoxChange} id={parseInt(pageOfItems.indexOf(trs))} checked={checkedArray.includes(pageOfItems.indexOf(trs))} name="chk" /></th>
+                                    <th><a href={`https://www.gurufocus.com/stock/${trs.ticker}/insider`} target='_blank' rel="noreferrer">{trs.ticker}</a></th>
+                                    <th><a href={`https://www.google.com/search?q=${trs.company}`} target='_blank' rel="noreferrer">{trs.company}</a></th>
+                                    {/* <th>{trs.currentprice}</th> */}
+                                    <th>{trs.insiderName}</th>
+                                    <th>{trs.insiderPosition}</th>
+                                    <th>{trs.date}</th>
+                                    <th>{trs.transcation}</th>
+                                    <th>{trs.insiderTradingShares}</th>
+                                    <th>{trs.sharesChange}</th>
+                                    <th>{trs.purchasePrice}</th>
+                                    <th>{trs.cost}</th>
+                                    <th>{trs.finalShare}</th>
+                                    <th>{trs.priceChangeSIT}</th>
+                                    {/* <th>{trs.DividendYield}</th> */}
+                                    <th>{trs.PERatio}</th>
+                                    <th>{trs.MarketCap}</th>                                        
+                                </tr>
                             )
-                        }) : <span>Pager undefined at News</span>}
-                        <li className={ `${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
-                            <Link to={{search: `?page=${pager.currentPage + 1}`}} onClick={pageChange}>Next</Link>
-                        </li>
-                        <li className={ `${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
-                            <Link to={{search: `?page=${pager.totalPages}`}} onClick={pageChange}>End</Link>
-                        </li>
-                    </div>
-                    <div className="buttons">
-                        <button onClick={handleAllClick}>Select All</button>
-                        <button>Delete</button>
-                        <button>Interest</button>
-                        <button>Onboard</button>
-                        <button>7일간 제외</button>
-                    </div>
+                        }) : returnLoadingSpinner()
+                    }
+                </tbody>
+            </table>
+            <div className="pageNum">
+                <li className={ `${pager.currentPage === 1 ? 'disabled' : ''}`}>
+                    <Link to={{search: `?page=1`}} onClick={pageChange}>First</Link>
+                </li>
+                <li className={ `${pager.currentPage === 1 ? 'disabled' : ''}`}>
+                    <Link to={{search: `?page=${pager.currentPage - 1}`}} onClick={pageChange}>Previous</Link>
+                </li>
+                {stock.paginatedResult.pageOfItems ? stock.paginatedResult.pager.pages.map(num => {
+                    return (
+                        <span key={num}>
+                            <Link to={{search: `?page=${num}`}} onClick={pageChange}>{num}</Link>
+                        </span>
+                    )
+                }) : <span>Pager undefined at News</span>}
+                <li className={ `${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
+                    <Link to={{search: `?page=${pager.currentPage + 1}`}} onClick={pageChange}>Next</Link>
+                </li>
+                <li className={ `${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
+                    <Link to={{search: `?page=${pager.totalPages}`}} onClick={pageChange}>End</Link>
+                </li>
+            </div>
+            <div className="buttons">
+                <button onClick={handleAllClick}>Select All</button>
+                <button onClick={addInterestBtn}>Interest</button>
+                <button onClick={handleNotIntBtn}>NotInterest</button>
+                <button onClick={addOnboardBtn}>Onboard</button>
+                <button>7일간 제외</button>
+            </div>
     </div>
     )
 }

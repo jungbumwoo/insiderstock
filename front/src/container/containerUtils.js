@@ -1,6 +1,5 @@
 export const returnUtil = (state, cb) => {
     let isToken = localStorage.getItem('token');
-    console.log(state);
     if (state.loading) {
         return(
             <tr>
@@ -13,7 +12,7 @@ export const returnUtil = (state, cb) => {
                 You need to Sign In
             </tr>
         )
-    } else if(state.error === "jwt expired"){
+    } else if(state.error === "Login Error at middlewares"){
         console.log("jwt error");
         localStorage.removeItem('token');
         return(
@@ -22,9 +21,11 @@ export const returnUtil = (state, cb) => {
             </tr>
         )
     } else if (state.error) {
+        console.log("state error!!");
+        console.log(state.error);
         return (
             <tr>
-                <span>${state.error}</span>
+                <span>${state.error.toString()}</span>
             </tr>
         )
     } else {

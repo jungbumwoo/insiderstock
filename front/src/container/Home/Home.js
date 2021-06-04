@@ -13,9 +13,9 @@ const Home = (props) => {
             <div className="background">
                 <Layout />
                 <News2 location={props.location} />
+                <Interest />
                 {/* <MyCheckBox /> */}
                 {/* <CheckBoxRef1 /> */}
-                {/* <Interest /> */}
             </div>
         </>
     )
