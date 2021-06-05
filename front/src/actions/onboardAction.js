@@ -31,8 +31,9 @@ export const addOnboard = (onboardList) => {
                 dispatch({ type: "SUCCESS_ADD_ONBOARD"});
             }
         } catch(err) {
-            console.log(err);
-            dispatch({ type: "FAILED_ADD_ONBOARD"});
+            console.log(err.response);
+            let errMessage = err.response.data.message;
+            dispatch({ type: "FAILED_ADD_ONBOARD", payload: {error : errMessage}});
         }
     }
 }
