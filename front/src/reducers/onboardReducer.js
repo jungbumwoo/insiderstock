@@ -1,10 +1,14 @@
-const initState = {
+const initialState = {
     onboards: [],
-loading: false,
+    pagedOnboard: {
+        pager: { pages: [1]},
+        pageOfItems: []
+    },
+    loading: false,
     error: null
 };
 
-const onboardReducer = (state = initState, action) => {
+const onboardReducer = (state = initialState, action) => {
     switch (action.type){
         case "REQUEST_GET_ONBOARD":
             state = {
@@ -16,7 +20,7 @@ const onboardReducer = (state = initState, action) => {
             state = {
                 ...state,
                 loading: false,
-                onboards : action.payload.onboards
+                pagedOnboard : action.payload.pagedOnboard
             }
             break;
         case "FAILED_GET_ONBOARD":

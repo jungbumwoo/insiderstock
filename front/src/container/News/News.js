@@ -99,8 +99,8 @@ const News = (props) => {
         returnItems.forEach((el) => {
             onboardObject[`${returnItems.indexOf(el)}_onboard_ticker`] = el.ticker;
             onboardObject[`${returnItems.indexOf(el)}_onboard_company`] = el.company;
-            onboardObject[`${returnItems.indexOf(el)}_onboard_marketCap`] = el.MarketCap;
-            onboardObject[`${returnItems.indexOf(el)}_onboard_purchasePrice`] = el.purchasePrice;
+            onboardObject[`${returnItems.indexOf(el)}_onboard_MarketCap`] = el.MarketCap;
+            onboardObject[`${returnItems.indexOf(el)}_onboard_price`] = el.purchasePrice;
         });
         setCheckedOnboard(onboardObject);
         setToggleModal(true);

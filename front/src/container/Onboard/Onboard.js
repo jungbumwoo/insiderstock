@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOnboard } from "../../actions/onboardAction.js";
 import Layout from "../../components/Layouts/Layout/Layout.js";
@@ -8,37 +8,63 @@ import "./Onboard.css";
 
 const Onboard = (props) => {
     const onboard = useSelector(state => state.onboard);
+    const { pager, pageOfItems } = onboard.pagedOnboard;
     const dispatch = useDispatch();
+    const [ checkedNum, setCheckedNum] = useState([]);
+    const [pageNum, setpageNum] = useState(1);
 
     useEffect(() => {
-        dispatch(getOnboard());
-    }, []);
+        dispatch(getOnboard(pageNum));
+    }, [pageNum]);
     console.log(onboard);
 
+    const checkBoxChange = (e) => {
+        const { id, checked } = e.target;
+        let intId = parseInt(id);
+        if(checked) {
+            // checked, true
+            setCheckedNum([
+                ...checkedNum,
+                intId
+            ]);
+        } else {
+            //unchecked, false
+            let filtered = checkedNum.filter(num => (num !== intId));
+            setCheckedNum(filtered);
+        }
+    }
+
     const returnOnboards = () => {
-        console.log("returnOnboards");
-        let onboardList = onboard.onboards.map((item) => {
-            console.log(item);
+        let onboardList = pageOfItems.map((trs) => {
             return (
-                <tr>
-                    <td></td>
-                    <td>{item.ticker}</td>
-                    <td>{item.company}</td>
-                    <td>{item.marketCap.$numberDecimal}</td>
-                    <td>{item.price.$numberDecimal}</td>
-                    <td>{item.shares}</td>
-                    <td>{item.cost.$numberDecimal}</td>
+                <tr key={pageOfItems.indexOf(trs)}>
+                    <td><input type="checkbox" onChange={checkBoxChange} id={parseInt(pageOfItems.indexOf(trs))} checked={checkedNum.includes(pageOfItems.indexOf(trs))} name="chk" /></td>
+                    <td>{trs.ticker}</td>
+                    <td>{trs.company}</td>
+                    <td>{trs.MarketCap}</td>
+                    <td>{trs.price}</td>
+                    <td>{trs.shares}</td>
+                    <td>{trs.cost}</td>
                 </tr>
             )
         })
         return onboardList;
     };
 
+    const handleDelete = () => {
+        console.log(`checkedNum`, checkedNum);
+        let checkedItems = checkedNum.map(num => {
+            return pageOfItems[num];
+        })
+        
+        setCheckedNum([]);
+    }
+
     return(
         <>
             <Layout />
             <div>
-                <div>
+                <div className="data_table">
                     <table className="styled-table">
                         <thead>
                             <tr>
@@ -55,6 +81,18 @@ const Onboard = (props) => {
                             {returnUtil(onboard, returnOnboards)}
                         </tbody>
                     </table>
+                </div>
+                <div className="page_numbers">
+                    <ul>
+                        {pager.pages.map(num => {
+                            return(
+                                <li key={num}>{num}</li>
+                            )
+                        })}
+                    </ul>
+                </div>
+                <div className="buttons">
+                    <button onClick={handleDelete}>Delete</button>
                 </div>
             </div>
         </>

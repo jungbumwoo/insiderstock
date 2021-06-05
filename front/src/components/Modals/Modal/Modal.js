@@ -25,9 +25,9 @@ const Modal = (props) => {
                     <label>Company :</label>
                     <input type="text" defaultValue={item.company} name={`${checked.indexOf(item)}_onboard_company`} onChange={onModalInputChange} />
                     <label>MarketCap:</label>
-                    <input type="text" defaultValue={item.MarketCap} name={`${checked.indexOf(item)}_onboard_marketCap`} onChange={onModalInputChange} />
+                    <input type="text" defaultValue={item.MarketCap} name={`${checked.indexOf(item)}_onboard_MarketCap`} onChange={onModalInputChange} />
                     <label>Price :</label>
-                    <input type="text" defaultValue={item.purchasePrice} name={`${checked.indexOf(item)}_onboard_purchasePrice`} onChange={onModalInputChange} />
+                    <input type="text" defaultValue={item.purchasePrice} name={`${checked.indexOf(item)}_onboard_price`} onChange={onModalInputChange} />
                     <label>Shares:</label>
                     <input type="text" defaultValue={0} name={`${checked.indexOf(item)}_onboard_shares`} onChange={onModalInputChange} />
                     <label>Cost: </label>
