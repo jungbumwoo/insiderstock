@@ -6,8 +6,8 @@ const Modal = (props) => {
     let shown = props.shown;
     let onCloseRequest = props.onCloseRequest;
     let checked = props.checked;
-    let onModalInputChange = props.onChangeInput;
-    let handleModalSubmit = props.modalSubmit;
+    let onModalInputChange = props.onModalInputChange;
+    let handleModalSubmit = props.handleModalSubmit;
     // let modalInputs = props.modalInputs;
     // console.log(modalInputs);
 
@@ -19,17 +19,17 @@ const Modal = (props) => {
     const filledModal = () => {
         let checkedList = checked.map((item) => {
             return (
-                <div className="modal_container">
+                <div key={checked.indexOf(item)} className="modal_container">
                     <label>Ticker :</label>
-                    <input type="text" defaultValue={item.ticker} name={`${checked.indexOf(item)}_ticker`} onChange={onModalInputChange} />
+                    <input type="text" defaultValue={item.ticker} name={`${checked.indexOf(item)}_onboard_ticker`} onChange={onModalInputChange} />
                     <label>Company :</label>
-                    <input type="text" defaultValue={item.company} name={`${checked.indexOf(item)}_company`} onChange={onModalInputChange} />
+                    <input type="text" defaultValue={item.company} name={`${checked.indexOf(item)}_onboard_company`} onChange={onModalInputChange} />
                     <label>MarketCap:</label>
-                    <input type="text" defaultValue={item.MarketCap} name={`${checked.indexOf(item)}_marketCap`} onChange={onModalInputChange} />
+                    <input type="text" defaultValue={item.MarketCap} name={`${checked.indexOf(item)}_onboard_marketCap`} onChange={onModalInputChange} />
                     <label>Price :</label>
-                    <input type="text" defaultValue={item.purchasePrice} name={`${checked.indexOf(item)}_price`} onChange={onModalInputChange} />
+                    <input type="text" defaultValue={item.purchasePrice} name={`${checked.indexOf(item)}_onboard_purchasePrice`} onChange={onModalInputChange} />
                     <label>Shares:</label>
-                    <input type="text" defaultValue={0} name={`${checked.indexOf(item)}_shares`} onChange={onModalInputChange} />
+                    <input type="text" defaultValue={0} name={`${checked.indexOf(item)}_onboard_shares`} onChange={onModalInputChange} />
                     <label>Cost: </label>
                     {/* <span defaultValue={0} name={`${checked.indexOf(item)}_cost`} onChange={onModalInputChange}>{costCalculate(item)}</span> */}
                     {/* <input type="text" value={costCalculate(item)}

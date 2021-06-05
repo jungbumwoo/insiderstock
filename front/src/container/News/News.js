@@ -16,6 +16,7 @@ const News = (props) => {
     const [ checkedArray, setCheckedArray ] = useState([]);
     const [ selectAllTF, setSelectAllTF ] = useState(false);
     const [ toggleModal, setToggleModal ] = useState(false);
+    const [ checkedOnboard, setCheckedOnboard ] = useState({});
    
     useEffect(()=> {
         let urlSearchParams = new URLSearchParams(props.location.search);
@@ -91,19 +92,39 @@ const News = (props) => {
     };
 
     const addOnboardBtn = () => {
+        const returnItems = checkedArray.map(item => {
+            return pageOfItems[item]
+        });
+        let onboardObject = {};
+        returnItems.forEach((el) => {
+            onboardObject[`${returnItems.indexOf(el)}_onboard_ticker`] = el.ticker;
+            onboardObject[`${returnItems.indexOf(el)}_onboard_company`] = el.company;
+            onboardObject[`${returnItems.indexOf(el)}_onboard_marketCap`] = el.MarketCap;
+            onboardObject[`${returnItems.indexOf(el)}_onboard_purchasePrice`] = el.purchasePrice;
+        });
+        setCheckedOnboard(onboardObject);
         setToggleModal(true);
     };
 
-    const onModalInputChange = () => {};
+    const onModalInputChange = (e) => {
+        const { name, value} = e.target;
+        console.log(name, value);
+        setCheckedOnboard({
+            ...checkedOnboard,
+            [name]: value
+        });
+    };
 
     const handleModalClose = () => {
         setCheckedArray([]);
+        setCheckedOnboard({});
         setToggleModal(false);
     };
 
     const handleModalSubmit = () => {
-        setCheckedArray([]);
-        setToggleModal(false);
+        console.log(checkedOnboard);
+        dispatch(addOnboard(checkedOnboard));
+        handleModalClose();
     };
 
     return(
