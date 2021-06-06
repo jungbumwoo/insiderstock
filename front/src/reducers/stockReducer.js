@@ -36,6 +36,7 @@ const stockReducer = (state = initState, action) => {
                 loading: true
             }
             break;
+
         case "GET_INTEREST_SUCCESS" :
             state = {
                 ...state,
@@ -44,6 +45,7 @@ const stockReducer = (state = initState, action) => {
 
             }
             break;
+
         case "GET_INTEREST_FAILED" :
             state = {
                 ...state,
@@ -51,12 +53,14 @@ const stockReducer = (state = initState, action) => {
                 error: action.payload.error
             }
             break;
+
         case "ADD_INTEREST_POST_REQUEST" :
             state = {
                 ...state,
                 loading: true,
             }
             break;
+
         case "ADD_INTEREST_POST_SUCCESS" :
             state = {
                 ...state,
@@ -67,12 +71,14 @@ const stockReducer = (state = initState, action) => {
                 ]
             }
             break;
+
         case "DELETE_INTEREST_REQUEST" :
             state = {
                 ...state,
                 loading: true
             }
             break;
+
         case "DELETE_INTERST_SUCCESS" :
             state = {
                 ...state,
@@ -83,6 +89,7 @@ const stockReducer = (state = initState, action) => {
                 }
             }
             break;
+            
         case "GET_INTEREST_FAILED":
             state = {
                 ...state,

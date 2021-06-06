@@ -1,15 +1,15 @@
 import axiosInstance from "../helpers/axios";
 
-export const getBanAction = () => {
+export const getBanAction = (params) => {
     return async (dispatch) => {
         dispatch({ type: "GET_BAN_REQUEST"});
         try {
-            const res = await axiosInstance.get("/ban");
+            const res = await axiosInstance.get(`/ban?page=${params}`);
             if(res.status === 200){
-                const { ban } = res.data;
-                console.log(ban);
+                const { data } = res.data;
+                console.log(data);
                 dispatch({ type: "GET_BAN_SUCCESS",
-                            payload: { data: ban }});
+                            payload: { data }});
             }
         } catch(err) { 
             console.log(err);
@@ -19,7 +19,7 @@ export const getBanAction = () => {
     } 
 };
 
-export const postBanAction = (data) => {
+export const addBanAction = (data) => {
     return async (dispatch) => {
         dispatch({ type: "ADD_BAN_REQUEST"});
         try {
@@ -30,6 +30,22 @@ export const postBanAction = (data) => {
         } catch(err) {
             console.log(err);
             dispatch({ type: "ADD_BAN_FAILED"});
+        }
+    }
+}
+
+export const deleteBanAction = (data) => {
+    return async (dispatch) => {
+        dispatch({ type: "REQUEST_DELETE_BAN"});
+        try {
+            const res = axiosInstance.post('/ban/delete', { deleteData : data});
+            if(res.status === 201) {
+                dispatch({ type: "SUCCESS_DELETE_BAN"});
+            }
+        } catch(err) {
+            console.log(err);
+            dispatch({ type: "FAILED_DELETE_BAN", 
+                        payload: { error : err }});
         }
     }
 }

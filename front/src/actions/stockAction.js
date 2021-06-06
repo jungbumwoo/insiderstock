@@ -53,7 +53,7 @@ export const getInterestAction = (params) => {
                             payload: {pagedGetInt} });
             }
         } catch(err) {
-            console.log(err);
+            console.log(err.response);
             dispatch({ type: "GET_INTEREST_FAILED",
                         payload: { error: err.response.data.message }});
         }

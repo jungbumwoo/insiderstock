@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllStock } from "../../actions/stockAction";
-import { postAddInterestAction, remainAction, postNotInterestAction, addOnboard, postBanAction } from "../../actions";
+import { postAddInterestAction, addBanAction, postNotInterestAction, addOnboard, postBanAction } from "../../actions";
 import { Link } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "../../components/Modals/Modal/Modal";
@@ -72,6 +72,13 @@ const News = (props) => {
     }
 
     const returnLoadingSpinner = () => {
+        if(stock.error) {
+            return (
+                <tr>
+                    {stock.error}
+                </tr>
+            )
+        }
         return (
             <tr>
                 <Spinner animation="border" variant="primary" />
@@ -104,6 +111,12 @@ const News = (props) => {
         });
         setCheckedOnboard(onboardObject);
         setToggleModal(true);
+    };
+
+    const handleBanBtn = () => {
+        let checkedStock = pageOfItems.filter(item => checkedArray.includes(pageOfItems.indexOf(item)));
+        dispatch(addBanAction(checkedStock));
+        setCheckedArray([]);
     };
 
     const onModalInputChange = (e) => {
@@ -202,7 +215,7 @@ const News = (props) => {
                 <button onClick={addInterestBtn}>Interest</button>
                 <button onClick={handleNotIntBtn}>NotInterest</button>
                 <button onClick={addOnboardBtn}>Onboard</button>
-                <button>7일간 제외</button>
+                <button onClick={handleBanBtn}>7일간 제외</button>
             </div>
             <Modal 
                 shown={toggleModal}

@@ -1,6 +1,6 @@
 const initState = {
     loading: false,
-    bans: [],
+    bans: { pager : { pages : [1]}, pageOfItems : []},
     error: null
 };
 
@@ -39,6 +39,25 @@ const banReducer = (state = initState, action) => {
         case "ADD_BAN_FAILED" :
             state = {
                 ...state,
+                error: action.payload.error
+            }
+            break;
+        case "REQUEST_DELETE_BAN" :
+            state = {
+                ...state,
+                loading: true
+            }
+            break;
+        case "SUCCESS_DELETE_BAN" :
+            state = {
+                ...state,
+                loading: false
+            }
+            break;
+        case "FAILED_DELETE_BAN" :
+            state = {
+                ...state,
+                loading: false,
                 error: action.payload.error
             }
             break;

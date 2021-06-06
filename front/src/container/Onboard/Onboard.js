@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOnboard } from "../../actions/onboardAction.js";
+import { deleteOnboardAction, getOnboard } from "../../actions/onboardAction.js";
 import Layout from "../../components/Layouts/Layout/Layout.js";
 import { returnUtil } from "../containerUtils.js";
 
@@ -52,11 +52,11 @@ const Onboard = (props) => {
     };
 
     const handleDelete = () => {
-        console.log(`checkedNum`, checkedNum);
         let checkedItems = checkedNum.map(num => {
             return pageOfItems[num];
         })
-        
+        dispatch(deleteOnboardAction(checkedItems));
+        window.location.reload(true);
         setCheckedNum([]);
     }
 
