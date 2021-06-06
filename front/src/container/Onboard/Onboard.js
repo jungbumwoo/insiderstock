@@ -60,6 +60,11 @@ const Onboard = (props) => {
         setCheckedNum([]);
     }
 
+    const handlePageChange = (e) => {
+        const clickedNum = e.target.innerHTML;
+        setpageNum(parseInt(clickedNum));
+    }; 
+
     return(
         <>
             <Layout />
@@ -86,7 +91,7 @@ const Onboard = (props) => {
                     <ul>
                         {pager.pages.map(num => {
                             return(
-                                <li key={num}>{num}</li>
+                                <li key={num} onClick={handlePageChange}>{num}</li>
                             )
                         })}
                     </ul>
