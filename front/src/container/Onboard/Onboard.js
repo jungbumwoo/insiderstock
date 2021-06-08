@@ -58,7 +58,7 @@ const Onboard = (props) => {
         dispatch(deleteOnboardAction(checkedItems));
         window.location.reload(true);
         setCheckedNum([]);
-    }
+    };
 
     const handlePageChange = (e) => {
         const clickedNum = e.target.innerHTML;
@@ -98,6 +98,7 @@ const Onboard = (props) => {
                 </div>
                 <div className="buttons">
                     <button onClick={handleDelete}>Delete</button>
+                    <button onClick={handleAddBtn}>Add</button>
                 </div>
             </div>
         </>

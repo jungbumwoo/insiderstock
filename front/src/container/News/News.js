@@ -72,7 +72,18 @@ const News = (props) => {
     }
 
     const returnLoadingSpinner = () => {
-        if(stock.error) {
+        if(stock.error == "Login Error at middlewares") {
+            let getToken = localStorage.getItem('token');
+            if(getToken){
+                localStorage.removeItem('token');
+                window.location.reload(true);
+            }
+            return (
+                <tr>
+                    {stock.error}
+                </tr>
+            )
+        } else if (stock.error) {
             return (
                 <tr>
                     {stock.error}
@@ -173,7 +184,7 @@ const News = (props) => {
                                     <th>{trs.insiderName}</th>
                                     <th>{trs.insiderPosition}</th>
                                     <th>{trs.date}</th>
-                                    <th>{trs.transcation}</th>
+                                    <th>{trs.transaction}</th>
                                     <th>{trs.insiderTradingShares}</th>
                                     <th>{trs.sharesChange}</th>
                                     <th>{trs.purchasePrice}</th>

@@ -85,7 +85,7 @@ const Interest = (props) => {
                         <th>{trs.insiderName}</th>
                         <th>{trs.insiderPosition}</th>
                         <th>{trs.date}</th>
-                        <th>{trs.transcation}</th>
+                        <th>{trs.transaction}</th>
                         <th>{trs.insiderTradingShares}</th>
                         <th>{trs.sharesChange}</th>
                         <th>{trs.purchasePrice}</th>
