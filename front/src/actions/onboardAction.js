@@ -36,6 +36,21 @@ export const addOnboard = (onboardList) => {
     }
 }
 
+export const addFillInOnboardAction = (filledInData) => {
+    return async (dispatch) => {
+        dispatch({ type: "REQUEST_ADD_FILLEDINONBOARD"});
+        try {
+            let res = axiosInstance.post('/add/onboard', { filledInOneData : filledInData});
+            if(res.status === 201) {
+                dispatch({ type: "SUCCESS_ADD_FILLEDINONBOARD"});
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch({ type: "FAILED_ADD_FILLEDINONBOARD"});
+        }
+    }
+}
+
 export const deleteOnboardAction = (onboards) => {
     console.log(onboards);
     return async (dispatch) => {

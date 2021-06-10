@@ -74,10 +74,10 @@ const Ban = (props) => {
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Ticker</th>
-                                <th>Company</th>
-                                <th>MarketCap</th>
-                                <th>PERatio</th>
+                                <th>종목코드</th>
+                                <th>종목명</th>
+                                <th>시가총액</th>
+                                <th>주가수익률</th>
                                 {/* <th>DividendYield</th> */}
                             </tr>
                         </thead>

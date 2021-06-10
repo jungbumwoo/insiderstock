@@ -19,32 +19,6 @@ const Interest = (props) => {
         dispatch(getInterestAction(curntUrl));
     }, [curntUrl]);
 
-    // const loadData = async() => {
-    //     if(curntUrl !== pager.currentPage){
-    //         console.log("fetch!!");
-    //         let res = await axiosInstance.get(`/addinterest?page=${curntUrl}`);
-    //         // fetch(`http://localhost:2000/api/addinterest`, { method: 'GET', })
-    //         // // fetch(`http://localhost:2000/api/addinterest?page=${page}`, { method: 'GET'})
-    //         // .then(response => response.json())
-    //         // .then((data) => {
-    //         //     console.log(data);
-    //         //     let { pager, pageOfItem } = data.paginatedResult;
-    //         //     setPager(pager);
-    //         //     setPageOfItems(pageOfItem);
-    //         // })
-    //         if(res.status === 200){
-    //             let newPager = res.data.pagedResult.pager;
-    //             let newPageOfItems = res.data.pagedResult.pager;
-    //             if (newPager != pager || newPageOfItems != pageOfItems ) {
-    //                 console.log("update pager, pageOfItems");
-    //                 console.log(pager);
-    //                 console.log(newPager);
-    //                 setPageOfItems(newPageOfItems);
-    //                 setPager(newPager);
-    //             }   
-    //         }
-    //     }
-    // }
     const handlePageClick = (e) => {
         let targetNum = e.target.innerHTML;
         setCurntUrl(parseInt(targetNum));
@@ -126,19 +100,19 @@ const Interest = (props) => {
                     <table>
                         <thead>
                             <tr>
-                                <th>Ticker</th>
-                                <th>Company</th>
-                                <th>Insider Name</th>
-                                <th>Insider Position</th>
-                                <th>Date</th>
-                                <th>Buy/sell</th>
+                                <th>종목코드</th>
+                                <th>종목명</th>
+                                <th>거래자</th>
+                                <th>직함</th>
+                                <th>일자</th>
+                                <th>거래유형</th>
                                 <th>Insider Trading Shares</th>
-                                <th>Shares Change</th>
-                                <th>purchasePrice</th>
+                                <th>지분변화</th>
+                                <th>매수가</th>
                                 <th>Final Share</th>
-                                <th>Price Change Since Insider Trade (%)</th>
-                                <th>PE Ratio</th>
-                                <th>Market Cap ($M)</th>
+                                <th>매수 후 가격변동률(%)</th>
+                                <th>주가수익률</th>
+                                <th>시가총액($M)</th>
                             </tr>  
                         </thead>
                         <tbody>
@@ -155,21 +129,6 @@ const Interest = (props) => {
                 <div className="buttons">
                     <button onClick={hadnleDeleteBtn}>Delete</button>
                 </div>
-
-
-                {/* {pager.pages && pager.pages.length &&
-                    <ul className="pagination">
-                        <li className={`page-item fist-item ${pager.currentPage ===1 ? 'disabled' : ''}`}>
-                            <Link to={{search: `?page=1`}}></Link>
-                        </li>
-                        {pager.pages.map(page =>
-                            <li key={page} className={`page-item number-item ${pager.currentPage === page ? 'active' : ''}`}>
-                                <Link to={{ search: `?page=${page}`}} className="page-link">{page}</Link>
-                            </li>    
-                        )}
-                    </ul>
-                    
-                } */}
             </div>
         </>
     )

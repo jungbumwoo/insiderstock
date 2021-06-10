@@ -87,11 +87,11 @@ const NotInterest = (props) => {
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Ticker</th>
-                                <th>Company</th>
-                                <th>insiderName</th>
-                                <th>Date</th>
-                                <th>MarketCap</th>
+                                <th>종목코드</th>
+                                <th>종목명</th>
+                                <th>거래자</th>
+                                <th>일자</th>
+                                <th>시가총액</th>
                             </tr>
                         </thead>
                         <tbody>
