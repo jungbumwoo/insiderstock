@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "../../components/Modals/Modal/Modal";
 
-import "./News.css";
+// import "./News.css";
 
 const News = (props) => {
     const dispatch = useDispatch();

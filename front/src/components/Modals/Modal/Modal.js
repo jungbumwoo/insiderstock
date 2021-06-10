@@ -1,5 +1,5 @@
 import React from "react";
-import "./Modal.css";
+// import "./Modal.css";
 import Icon from "../../../static/images/x-mark.svg";
 
 const Modal = (props) => {

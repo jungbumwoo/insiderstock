@@ -5,7 +5,7 @@ import MyCheckBox from "../CheckBox/MyCheckBox.js";
 import CheckBoxRef1 from "../CheckBox/CheckBoxRef1/CheckBoxRef1.js";
 import Interest from "../Interest/Interest.js";
 
-import "./Home.css";
+// import "./Home.css";
 
 const Home = (props) => {
     return (

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getInterestAction } from "../../actions/stockAction";
 import { getNotInterestAction, interestDeleteAct } from "../../actions";
-import "./Interest.css";
+// import "./Interest.css";
 import { returnUtil } from "../containerUtils";
 import axiosInstance from "../../helpers/axios";
 

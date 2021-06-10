@@ -17,23 +17,9 @@ const Header = () => {
         userInfo.token = isToken;
     }
     
-    // const signout = (e) => {
-    //     e.preventDefault();
-    //     console.log('signout Fnc at Header');
-    //     localStorage.removeItem('token');
-    //     dispatch(signout());
-    // };
-    // let getCookie = () => {
-    //     let tokenName = "userName"
-    //     let matches = document.cookie.match(new RegExp(
-    //       "(?:^|; )" + tokenName.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    //     ));
-    //     return matches ? decodeURIComponent(matches[1]) : undefined;
-    //   }
-
     const renderLoggedinbar = () => {
         return (
-            <Nav>
+            <div>
                 <li className="nav-item">
                     <span>{auth.user.username ? auth.user.username : undefined }</span>
                 </li>
@@ -43,40 +29,38 @@ const Header = () => {
                 <li>
                     <Link to="/signout">signout</Link>
                 </li>
-            </Nav>
+            </div>
         )
     }   
     const renderNonLoginbar = () => {
         return (
             <>
-                <Nav>
+                <div>
                     <li>
                         <NavLink to="signin" className="nav-link">SignIn</NavLink>
                     </li>
-                </Nav>
-                <Nav>
+                </div>
+                <div>
                     <li>
                         <NavLink to="signup" className="nav-link">SignUp</NavLink>
                     </li>
-                </Nav>
+                </div>
             </>
         )
     }
     return (
         <>
-            <Navbar bg="primary" variant="dark">
-                <Navbar.Brand href="/">Insider</Navbar.Brand>
-                <Nav className="mr-auto">
-                    <Nav.Link href="/onboard">Onboard</Nav.Link>
-                    <Nav.Link href="/interest">Interest</Nav.Link>
-                    <Nav.Link href="/ban">Banned</Nav.Link>
-                </Nav>
-                {/* <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <Button variant="outline-light">Search</Button>
-                </Form> */}
-                { isToken ? renderLoggedinbar() : renderNonLoginbar()}
-            </Navbar>
+            <a href="/">Insider</a>
+                <a href="/onboard">Onboard</a>
+                <a href="/interest">Interest</a>
+                <a href="/ban">Banned</a>
+            
+            {/* <Form inline>
+                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                <Button variant="outline-light">Search</Button>
+            </Form> */}
+            { isToken ? renderLoggedinbar() : renderNonLoginbar()}
+        
         </>
     )
 };

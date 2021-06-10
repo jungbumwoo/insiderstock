@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import Modal from "../../components/Modals/Modal/Modal";
 import Layout from "../../components/Layouts/Layout/Layout.js";
-import "./Profile.css";
+// import "./Profile.css";
 
 
 const Profile = (props) => {

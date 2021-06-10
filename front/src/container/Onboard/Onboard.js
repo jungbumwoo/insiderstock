@@ -4,7 +4,7 @@ import { addFillInOnboardAction, deleteOnboardAction, getOnboard } from "../../a
 import Layout from "../../components/Layouts/Layout/Layout.js";
 import { returnUtil } from "../containerUtils.js";
 import OnboardAddModal from "../../components/Modals/OnboardAddModal/OnboardAddModal.js";
-import "./Onboard.css";
+// import "./Onboard.css";
 
 const Onboard = (props) => {
     const onboard = useSelector(state => state.onboard);

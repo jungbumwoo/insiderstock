@@ -11,9 +11,12 @@ import Profile from "./container/Profile/Profile";
 import Ban from "./container/Ban/Ban.js";
 import Pagination from "./container/Pagination.js";
 
+import GlobalStyles from "./components/GlobalStyles.js";
+
 function App() {
   return (
     <Switch>
+      {/* <GlobalStyles /> */}
       <Route exact path="/" component={Home} />
       <Route path="/signin" component={Signin} />
       <Route path="/signup" component={Signup} />
