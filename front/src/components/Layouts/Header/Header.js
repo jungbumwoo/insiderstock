@@ -1,9 +1,7 @@
 import React from "react";
-import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Nav} from 'react-bootstrap';
-
+import "./Header.css";
 
 const Header = () => {
     const auth = useSelector(state => state.auth);
@@ -19,7 +17,7 @@ const Header = () => {
     
     const renderLoggedinbar = () => {
         return (
-            <div>
+            <ul>
                 <li className="nav-item">
                     <span>{auth.user.username ? auth.user.username : undefined }</span>
                 </li>
@@ -29,38 +27,36 @@ const Header = () => {
                 <li>
                     <Link to="/signout">signout</Link>
                 </li>
-            </div>
+            </ul>
         )
-    }   
+    };
+
     const renderNonLoginbar = () => {
         return (
-            <>
-                <div>
-                    <li>
-                        <NavLink to="signin" className="nav-link">SignIn</NavLink>
-                    </li>
-                </div>
-                <div>
-                    <li>
-                        <NavLink to="signup" className="nav-link">SignUp</NavLink>
-                    </li>
-                </div>
-            </>
+            <ul>
+                <li>
+                    <NavLink to="signin" className="nav-link">SignIn</NavLink>
+                </li>
+                <li>
+                    <NavLink to="signup" className="nav-link">SignUp</NavLink>
+                </li>
+            </ul>
         )
-    }
+    };
+
     return (
         <>
-            <a href="/">Insider</a>
-                <a href="/onboard">Onboard</a>
-                <a href="/interest">Interest</a>
-                <a href="/ban">Banned</a>
-            
-            {/* <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <Button variant="outline-light">Search</Button>
-            </Form> */}
-            { isToken ? renderLoggedinbar() : renderNonLoginbar()}
-        
+            <div className="header">
+                <a href="/" class="logo">Insider</a>
+                <input class="menu-btn" type="checkbox" id="menu-btn"/>
+                <ul>
+                    <li><a href="/onboard">Onboard</a></li>
+                    <li><a href="/interest">Interest</a></li>
+                    <li><a href="/ban">Banned</a></li>
+                </ul>
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+                { isToken ? renderLoggedinbar() : renderNonLoginbar()}
+            </div>
         </>
     )
 };

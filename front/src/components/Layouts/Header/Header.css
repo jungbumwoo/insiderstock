@@ -1,0 +1,97 @@
+/* Header */
+
+.header {
+    background-color: #FFF;
+    box-shadow: 1px 1px 0.25rem rgba(0,0,0,.1);
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+}
+
+.header ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background: #FFF;
+}
+
+.header li a {
+    display: block;
+    padding: 1em 1em;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+    background-color: #f4f4f4;
+}
+
+.header .logo {
+    display: block;
+    float: left;
+    font-size: 1.5rem;
+    padding: 0.5em 1em;
+}
+
+/* menu */
+.header .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+/* menu icon*/
+.header .menu-icon .navicon {
+    background: #333;
+    display: block;
+    height: 0.12em;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 1em;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+}
+
+.header .menu-icon .navicon:before {
+    top: 0.3rem;
+}
+
+.header .menu-icon .navicon:after {
+    top: -0.3rem;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+    display: none;
+}
+
+
+
+/* 48em = 768px */
+
+@media (min-width: 48em) {
+    .header li{
+        float: left;
+    }
+    .header li a {
+        padding: 1rem 1.5rem;
+    }
+    .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+    .header .menu-icon {
+        display: none;
+    }
+}

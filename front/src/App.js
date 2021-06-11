@@ -11,8 +11,6 @@ import Profile from "./container/Profile/Profile";
 import Ban from "./container/Ban/Ban.js";
 import Pagination from "./container/Pagination.js";
 
-import GlobalStyles from "./components/GlobalStyles.js";
-
 function App() {
   return (
     <Switch>
