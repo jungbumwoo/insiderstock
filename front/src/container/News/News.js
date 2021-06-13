@@ -12,7 +12,7 @@ const News = (props) => {
     const dispatch = useDispatch();
     const stock = useSelector(state => state.stock);
     const { pager, pageOfItems } = stock.paginatedResult;
-    const [ currentUrl, setCurrentUrl ] = useState(1);
+    const [ currentUrl, setCurrentUrl ] = useState('');
     const [ checkedArray, setCheckedArray ] = useState([]);
     const [ selectAllTF, setSelectAllTF ] = useState(false);
     const [ toggleModal, setToggleModal ] = useState(false);
