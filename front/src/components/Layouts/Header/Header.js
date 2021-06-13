@@ -17,7 +17,7 @@ const Header = () => {
     
     const renderLoggedinbar = () => {
         return (
-            <ul>
+            <ul className="login-status">
                 <li className="nav-item">
                     <span>{auth.user.username ? auth.user.username : undefined }</span>
                 </li>
@@ -33,7 +33,7 @@ const Header = () => {
 
     const renderNonLoginbar = () => {
         return (
-            <ul>
+            <ul className="login-status">
                 <li>
                     <NavLink to="signin" className="nav-link">SignIn</NavLink>
                 </li>
@@ -49,12 +49,12 @@ const Header = () => {
             <div className="header">
                 <a href="/" class="logo">Insider</a>
                 <input class="menu-btn" type="checkbox" id="menu-btn"/>
-                <ul>
+                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+                <ul className="menu">
                     <li><a href="/onboard">Onboard</a></li>
                     <li><a href="/interest">Interest</a></li>
                     <li><a href="/ban">Banned</a></li>
                 </ul>
-                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
                 { isToken ? renderLoggedinbar() : renderNonLoginbar()}
             </div>
         </>

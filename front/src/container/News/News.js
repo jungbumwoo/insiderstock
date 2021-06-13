@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "../../components/Modals/Modal/Modal";
 
-// import "./News.css";
+import "./News.css";
 
 const News = (props) => {
     const dispatch = useDispatch();
     const stock = useSelector(state => state.stock);
     const { pager, pageOfItems } = stock.paginatedResult;
-    const [ currentUrl, setCurrentUrl ] = useState('');
+    const [ currentUrl, setCurrentUrl ] = useState(1);
     const [ checkedArray, setCheckedArray ] = useState([]);
     const [ selectAllTF, setSelectAllTF ] = useState(false);
     const [ toggleModal, setToggleModal ] = useState(false);
@@ -69,6 +69,13 @@ const News = (props) => {
         let urlParams = parseInt(urlSearchParams.get('page')) || 1;
         setCurrentUrl(urlParams);
         setCheckedArray([]);
+    }
+
+    const getPageNum = () => {
+        let urlSearchParams = new URLSearchParams(props.location.search);
+        let urlParams = parseInt(urlSearchParams.get('page')) || 1;
+
+        return urlParams;
     }
 
     const returnLoadingSpinner = () => {
@@ -151,13 +158,30 @@ const News = (props) => {
         handleModalClose();
     };
 
+    const handleTRClick = (e) => {
+        console.log(e.target.parentNode.id);
+        let intId = parseInt(e.target.parentNode.id);
+        let isChecked = checkedArray.includes(intId);
+        if(isChecked) {
+            //uncheck
+            let filtered = checkedArray.filter(el => el !== intId);
+            setCheckedArray(filtered);
+        } else {
+            //check
+            setCheckedArray([
+                ...checkedArray,
+                intId
+            ])
+        }
+    }
+
     return(
         <div className="newsContainer">
             <table>
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>종목코드</th>
+                        <th className="checkbox-hide">#</th>
+                        <th>코드</th>
                         <th>종목명</th>
                         <th>거래자</th>
                         <th>직함</th>
@@ -168,7 +192,7 @@ const News = (props) => {
                         <th>매수가</th>
                         <th>비용, k</th>
                         <th>Final Share</th>
-                        <th>매수 후 가격변동률(%)</th>
+                        <th>거래 후 가격변동률(%)</th>
                         <th>주가수익률</th>
                         <th>시가총액($M)</th>
                     </tr>
@@ -176,58 +200,63 @@ const News = (props) => {
                 <tbody>
                     { stock.paginatedResult.pageOfItems ? stock.paginatedResult.pageOfItems.map(trs => {
                             return (
-                                <tr key={stock.paginatedResult.pageOfItems.indexOf(trs)}>
-                                    <th><input type="checkbox" onChange={checkBoxChange} id={parseInt(pageOfItems.indexOf(trs))} checked={checkedArray.includes(pageOfItems.indexOf(trs))} name="chk" /></th>
-                                    <th><a href={`https://www.gurufocus.com/stock/${trs.ticker}/insider`} target='_blank' rel="noreferrer">{trs.ticker}</a></th>
-                                    <th><a href={`https://www.google.com/search?q=${trs.company}`} target='_blank' rel="noreferrer">{trs.company}</a></th>
+                                <tr onClick={handleTRClick} className={checkedArray.includes(parseInt(pageOfItems.indexOf(trs))) ? 'checked-tr' : 'unchecked-tr'} id={parseInt(pageOfItems.indexOf(trs))} key={pageOfItems.indexOf(trs)}>
+                                    <td className="checkbox-hide"><input type="checkbox" onChange={checkBoxChange} id={parseInt(pageOfItems.indexOf(trs))} checked={checkedArray.includes(pageOfItems.indexOf(trs))} name="chk" /></td>
+                                    <td><a href={`https://www.gurufocus.com/stock/${trs.ticker}/insider`} target='_blank' rel="noreferrer">{trs.ticker}</a></td>
+                                    <td><a href={`https://www.google.com/search?q=${trs.company}`} target='_blank' rel="noreferrer">{trs.company}</a></td>
                                     {/* <th>{trs.currentprice}</th> */}
-                                    <th>{trs.insiderName}</th>
-                                    <th>{trs.insiderPosition}</th>
-                                    <th>{trs.date}</th>
-                                    <th>{trs.transaction}</th>
-                                    <th>{trs.insiderTradingShares}</th>
-                                    <th>{trs.sharesChange}</th>
-                                    <th>{trs.purchasePrice}</th>
-                                    <th>{trs.cost}</th>
-                                    <th>{trs.finalShare}</th>
-                                    <th>{trs.priceChangeSIT}</th>
+                                    <td>{trs.insiderName}</td>
+                                    <td>{trs.insiderPosition ? trs.insiderPosition : '-'}</td>
+                                    <td>{trs.date.slice(0,10)}</td>
+                                    <td>{trs.transaction}</td>
+                                    <td>{trs.insiderTradingShares}</td>
+                                    <td>{trs.sharesChange}</td>
+                                    <td>{trs.purchasePrice}</td>
+                                    <td>{trs.cost}</td>
+                                    <td>{trs.finalShare}</td>
+                                    <td>{trs.priceChangeSIT}</td>
                                     {/* <th>{trs.DividendYield}</th> */}
-                                    <th>{trs.PERatio}</th>
-                                    <th>{trs.MarketCap}</th>                                        
+                                    <td>{trs.PERatio}</td>
+                                    <td>{trs.MarketCap}</td>
                                 </tr>
                             )
                         }) : returnLoadingSpinner()
                     }
                 </tbody>
             </table>
-            <div className="pageNum">
-                <li className={ `${pager.currentPage === 1 ? 'disabled' : ''}`}>
-                    <Link to={{search: `?page=1`}} onClick={pageChange}>First</Link>
-                </li>
-                <li className={ `${pager.currentPage === 1 ? 'disabled' : ''}`}>
-                    <Link to={{search: `?page=${pager.currentPage - 1}`}} onClick={pageChange}>Previous</Link>
-                </li>
-                {stock.paginatedResult.pageOfItems ? stock.paginatedResult.pager.pages.map(num => {
-                    return (
-                        <span key={num}>
-                            <Link to={{search: `?page=${num}`}} onClick={pageChange}>{num}</Link>
-                        </span>
-                    )
-                }) : <span>Pager undefined at News</span>}
-                <li className={ `${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
-                    <Link to={{search: `?page=${pager.currentPage + 1}`}} onClick={pageChange}>Next</Link>
-                </li>
-                <li className={ `${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
-                    <Link to={{search: `?page=${pager.totalPages}`}} onClick={pageChange}>End</Link>
-                </li>
-            </div>
+
             <div className="buttons">
-                <button onClick={handleAllClick}>Select All</button>
+                <button onClick={handleAllClick} className="checkbox-hide">Select All</button>
                 <button onClick={addInterestBtn}>Interest</button>
                 <button onClick={handleNotIntBtn}>NotInterest</button>
                 <button onClick={addOnboardBtn}>Onboard</button>
                 <button onClick={handleBanBtn}>7일간 제외</button>
             </div>
+
+            <div className="pageNum">
+                <ul>
+                    <li className={ `${pager.currentPage === 1 ? 'disabled' : ''}`}>
+                        <Link to={{search: `?page=1`}} onClick={pageChange}>&laquo;</Link>
+                    </li> 
+                    <li className={ `${pager.currentPage === 1 ? 'disabled' : ''}`}>
+                        <Link to={{search: `?page=${pager.currentPage - 1}`}} onClick={pageChange}>&lt;</Link>
+                    </li>
+                    {pageOfItems ? pager.pages.map(num => {
+                        return (
+                            <li key={num}>
+                                <Link to={{search: `?page=${num}`}} onClick={pageChange} className={(num === getPageNum() ? 'active-pagenum' : 'pagenum')}>{num}</Link>
+                            </li>
+                        )
+                    }) : <span>Pager undefined at News</span>}
+                    <li className={ `${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
+                        <Link to={{search: `?page=${pager.currentPage + 1}`}} onClick={pageChange}>&gt;</Link>
+                    </li>
+                    <li className={ `${pager.currentPage === pager.totalPages ? 'disabled' : ''}`}>
+                        <Link to={{search: `?page=${pager.totalPages}`}} onClick={pageChange}>&raquo;</Link>
+                    </li>
+                </ul>
+            </div>
+            
             <Modal 
                 shown={toggleModal}
                 onCloseRequest={handleModalClose}

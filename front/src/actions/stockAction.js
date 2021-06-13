@@ -19,15 +19,13 @@ export const getAllStock = (params) => {
                     // payload: { stocks: result }
                     payload: { paginatedResult }
                 });
-            } else {
-                dispatch({
-                    type: "GET_ALL_STOCKS_FAILED",
-                    payload: { error: res.data.error }
-                })
             }
         } catch(err) {
             console.log("Err at stockAction");
             console.log(err)
+            if (err.response.data.err.message === "jwt expired") {
+                localStorage.removeItem('token');
+            }
             dispatch({
                 type: "GET_ALL_STOCKS_FAILED",
                 payload: { error: err }

@@ -1,5 +1,192 @@
-
 .newsContainer {
+    padding-top: 5em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+/* Zebra striping */
+tr:nth-of-type(odd){
+    background: #eee;
+}
+
+th {
+    background: #00d2ff;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+table td {
+    padding: 0.4em;
+    border: 1px solid #ccc;
+    text-align:left;
+}
+
+table thead tr th {
+    padding: 0.4em;
+    vertical-align: middle;
+}
+
+.disabled {
+    display: none;
+}
+
+.newsContainer table tbody .checked-tr {
+    background-color: #33dbff;
+}
+
+/* buttons */
+
+.buttons {
+    margin-top: 1.5em;
+    margin-right: 2em;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttons button {
+    border: none;
+    font-size: 1rem;
+    margin-left: 0.4em;
+    padding: 0.5em 0.5em;
+    border-radius: 0.2rem;
+    background-color: #f7f7f7;
+}
+
+.buttons button:first-child {
+    border: 0.1rem solid #00d2ff;
+}
+
+.buttons button:first-child:hover {
+    border: 0.1rem solid #00d2ff;
+    background-color: #00d2ff;
+    color: white;
+}
+
+.buttons button:nth-child(2) {
+    border: 0.1rem solid #0052ff;
+}
+
+.buttons button:nth-child(2):hover {
+    border: 0.1rem solid #0052ff;
+    background-color: #0052ff;
+    color: white;
+}
+
+.buttons button:nth-child(3) {
+    border: 0.1rem solid #ff2e00;
+}
+
+.buttons button:nth-child(3):hover {
+    border: 0.1rem solid #ff2e00;
+    background-color: #ff2e00;
+    color: white;
+}
+
+.buttons button:nth-child(4) {
+    border: 0.1rem solid #4ae600;
+}
+
+.buttons button:nth-child(4):hover {
+    border: 0.1rem solid #4ae600;
+    background-color: #4ae600;
+    color: white;
+}
+
+.buttons button:nth-child(5) {
+    border: 0.1rem solid #fbe000;
+}
+
+.buttons button:nth-child(5):hover {
+    border: 0.1rem solid #fbe000;
+    background-color: #fbe000;
+    color: white;
+}
+
+/* Pagination */
+
+.pageNum {
+    display: table;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 1.5em;
+    margin-bottom: 3em;
+}
+
+.pageNum ul li a{
+    float: left;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border: 1px solid #ccc;
+}
+
+.pageNum ul .active-pagenum {
+    background-color: #00d2ff;
+}
+
+.pageNum ul li .active-pagenum {
+    color: #eee;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) { 
+    
+    /* Force tables to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    /* Hide table headers (but not display: none;. for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    table tr {border: 1px solid #ccc;}
+    table td {
+        /* Behave like  a "row" */
+        border: none;
+        border-bottom: 1px solid #d9d9d9;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .checkbox-hide {
+        display: none;
+    }
+
+    table td:before {
+        position: absolute;
+        top: 0.3em;
+        left: 0.3em;
+        width: 45%;
+        padding-right: 0.4em;
+        white-space: nowrap;
+    }
+
+    /*Label the data*/
+
+    td:nth-of-type(1):before { content: "check"}
+    td:nth-of-type(2):before { content: "종목코드"}
+    td:nth-of-type(3):before { content: "종목명"}
+    td:nth-of-type(4):before { content: "거래자"}
+    td:nth-of-type(5):before { content: "직함"}
+    td:nth-of-type(6):before { content: "일자"}
+    td:nth-of-type(7):before { content: "거래유형"}
+    td:nth-of-type(8):before { content: "거래량"}
+    td:nth-of-type(9):before { content: "지분변화"}
+    td:nth-of-type(10):before { content: "매수가"}
+    td:nth-of-type(11):before { content: "비용($k)"}
+    td:nth-of-type(12):before { content: "보유지분변화"}
+    td:nth-of-type(13):before { content: "거래 후 가격변동률(%)"}
+    td:nth-of-type(14):before { content: "주가수익률"}
+    td:nth-of-type(15):before { content: "시가총액($M)"}
+}
+
+/* .newsContainer {
     width: 92%;
     margin: 0 auto;
     margin-top: 4em;
@@ -42,4 +229,4 @@
     margin: 0 auto;
     width: 100%;
     background-color:moccasin;
-}
+} */

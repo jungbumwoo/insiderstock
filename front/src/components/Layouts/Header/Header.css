@@ -19,6 +19,8 @@
 .header li a {
     display: block;
     padding: 1em 1em;
+    border-right: 1px solid #f4f4f4;
+    text-decoration: none;
 }
 
 .header li a:hover,
@@ -31,6 +33,8 @@
     float: left;
     font-size: 1.5rem;
     padding: 0.5em 1em;
+    text-decoration: none;
+    color: #0052ff;
 }
 
 /* menu */
@@ -38,35 +42,62 @@
     clear: both;
     max-height: 0;
     transition: max-height .2s ease-out;
+    color: #0052ff;
+}
+
+.header .login-status {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+    color: #0052ff;
 }
 
 /* menu icon*/
+
+.header .menu-icon {
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    padding: 1.5em 1.5em;
+    position: relative;
+    user-select: none;
+}
+
 .header .menu-icon .navicon {
     background: #333;
     display: block;
-    height: 0.12em;
+    height: 0.16em;
     position: relative;
     transition: background .2s ease-out;
-    width: 1em;
+    width: 1.3em;
 }
 
-.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:before {
+    background: #333;
+    content: '';
+    display: block;
+    height: 80%;
+    width: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+}
+
 .header .menu-icon .navicon:after {
     background: #333;
     content: '';
     display: block;
-    height: 100%;
+    height: 90%;
     width: 100%;
     position: absolute;
     transition: all .2s ease-out;
 }
 
 .header .menu-icon .navicon:before {
-    top: 0.3rem;
+    top: 0.4rem;
 }
 
 .header .menu-icon .navicon:after {
-    top: -0.3rem;
+    top: -0.4rem;
 }
 
 /* menu btn */
@@ -75,7 +106,26 @@
     display: none;
 }
 
+.header .menu-btn:checked ~ .menu {
+    max-height: 15em;
+}
 
+.header .menu-btn:checked ~ .login-status {
+    max-height: 10em;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+    transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+    transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+    top: 0;
+}
 
 /* 48em = 768px */
 
@@ -87,6 +137,11 @@
         padding: 1rem 1.5rem;
     }
     .header .menu {
+        clear: none;
+        float: left;
+        max-height: none;
+    }
+    .header .login-status {
         clear: none;
         float: right;
         max-height: none;
