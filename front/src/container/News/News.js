@@ -226,11 +226,11 @@ const News = (props) => {
             </table>
 
             <div className="buttons">
-                <button onClick={handleAllClick} className="checkbox-hide">Select All</button>
-                <button onClick={addInterestBtn}>Interest</button>
-                <button onClick={handleNotIntBtn}>NotInterest</button>
-                <button onClick={addOnboardBtn}>Onboard</button>
-                <button onClick={handleBanBtn}>7일간 제외</button>
+                <button onClick={handleAllClick} className="checkbox-hide">모두선택</button>
+                <button onClick={addInterestBtn}>관심</button>
+                <button onClick={handleNotIntBtn}>노관심</button>
+                <button onClick={addOnboardBtn}>담기</button>
+                <button onClick={handleBanBtn}>10일벤</button>
             </div>
 
             <div className="pageNum">

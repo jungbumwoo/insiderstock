@@ -1,5 +1,4 @@
 /* Header */
-
 .header {
     background-color: #FFF;
     box-shadow: 1px 1px 0.25rem rgba(0,0,0,.1);
@@ -20,7 +19,7 @@
     display: block;
     padding: 1em 1em;
     border-right: 1px solid #f4f4f4;
-    text-decoration: none;
+    /* text-decoration: none; */
 }
 
 .header li a:hover,
@@ -64,16 +63,16 @@
 }
 
 .header .menu-icon .navicon {
-    background: #333;
+    background: #0052ff;
     display: block;
-    height: 0.16em;
+    height: 0.14em;
     position: relative;
     transition: background .2s ease-out;
-    width: 1.3em;
+    width: 1.5em;
 }
 
 .header .menu-icon .navicon:before {
-    background: #333;
+    background: #0052ff;
     content: '';
     display: block;
     height: 80%;
@@ -82,8 +81,9 @@
     transition: all .2s ease-out;
 }
 
+ /* hamburger */
 .header .menu-icon .navicon:after {
-    background: #333;
+    background: #0052ff;
     content: '';
     display: block;
     height: 90%;
@@ -112,6 +112,10 @@
 
 .header .menu-btn:checked ~ .login-status {
     max-height: 10em;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+    background: #FFF;
 }
 
 .header .menu-btn:checked ~ .menu-icon .navicon:before {

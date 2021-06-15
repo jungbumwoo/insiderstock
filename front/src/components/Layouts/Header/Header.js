@@ -50,12 +50,15 @@ const Header = () => {
                 <a href="/" class="logo">Insider</a>
                 <input class="menu-btn" type="checkbox" id="menu-btn"/>
                 <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-                <ul className="menu">
-                    <li><a href="/onboard">Onboard</a></li>
-                    <li><a href="/interest">Interest</a></li>
-                    <li><a href="/ban">Banned</a></li>
-                </ul>
-                { isToken ? renderLoggedinbar() : renderNonLoginbar()}
+                <div>
+                    <ul className="menu">
+                        <li><a href="/onboard">담은목록</a></li>
+                        <li><a href="/interest">관심종목</a></li>
+                        <li><a href="/notinterest">노관심종목</a></li>
+                        <li><a href="/ban">10일벤목록</a></li>
+                    </ul>
+                    { isToken ? renderLoggedinbar() : renderNonLoginbar()}
+                </div>
             </div>
         </>
     )
