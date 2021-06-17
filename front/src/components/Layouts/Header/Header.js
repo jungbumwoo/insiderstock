@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "./Header.css";
+import "./Header3.css";
 
 const Header = () => {
     const auth = useSelector(state => state.auth);
@@ -44,20 +44,46 @@ const Header = () => {
         )
     };
 
+    // return (
+    //     <>
+    //         <div className="header">
+    //             <a href="/" class="logo">Insider</a>
+    //             <input class="menu-btn" type="checkbox" id="menu-btn"/>
+    //             <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+    //             <ul className="menu-ul">
+    //                 <li><a href="/onboard">담은목록</a></li>
+    //                 <li><a href="/interest">관심종목</a></li>
+    //                 <li><a href="/notinterest">노관심종목</a></li>
+    //                 <li><a href="/ban">10일벤목록</a></li>
+    //             </ul>
+    //             { isToken ? renderLoggedinbar() : renderNonLoginbar()}
+    //         </div>
+    //     </>
+    // )
+
     return (
         <>
             <div className="header">
-                <a href="/" class="logo">Insider</a>
-                <input class="menu-btn" type="checkbox" id="menu-btn"/>
-                <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
-                <div>
-                    <ul className="menu">
-                        <li><a href="/onboard">담은목록</a></li>
-                        <li><a href="/interest">관심종목</a></li>
-                        <li><a href="/notinterest">노관심종목</a></li>
-                        <li><a href="/ban">10일벤목록</a></li>
+                <div className="header-container">
+                    <a id="htitle" href="/">insider</a>
+                    <div className="hamburger">
+                        <input className="menu-btn" type="checkbox"/>
+                        <label className="menu-icon" for="menu-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+                <div className="menuToggle">
+                    <ul className="menu-ul">
+                        <a href="/onboard">담은목록</a>
+                        <a href="/interest">관심종목</a>
+                        <a href="/notinterest">노관심종목</a>
+                        <a href="/ban">10일벤목록</a>
+                        <a href="#">SignIn</a>
+                        <a href="#">SignUp</a>
                     </ul>
-                    { isToken ? renderLoggedinbar() : renderNonLoginbar()}
                 </div>
             </div>
         </>

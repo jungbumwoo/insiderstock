@@ -19,7 +19,7 @@
     display: block;
     padding: 1em 1em;
     border-right: 1px solid #f4f4f4;
-    /* text-decoration: none; */
+    text-decoration: none;
 }
 
 .header li a:hover,
@@ -44,7 +44,7 @@
     color: #0052ff;
 }
 
-.header .login-status {
+.header .menu .login-status {
     clear: both;
     max-height: 0;
     transition: max-height .2s ease-out;
@@ -145,7 +145,7 @@
         float: left;
         max-height: none;
     }
-    .header .login-status {
+    .header .menu .login-status {
         clear: none;
         float: right;
         max-height: none;
