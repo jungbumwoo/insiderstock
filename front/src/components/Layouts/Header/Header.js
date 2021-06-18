@@ -17,30 +17,24 @@ const Header = () => {
     
     const renderLoggedinbar = () => {
         return (
-            <ul className="login-status">
-                <li className="nav-item">
-                    <span>{auth.user.username ? auth.user.username : undefined }</span>
-                </li>
-                <li>
-                    <Link to="/profile">profile</Link>
-                </li>
-                <li>
-                    <Link to="/signout">signout</Link>
-                </li>
-            </ul>
+            <a href="/signout">signout</a>
         )
     };
 
     const renderNonLoginbar = () => {
         return (
-            <ul className="login-status">
-                <li>
-                    <NavLink to="signin" className="nav-link">SignIn</NavLink>
-                </li>
-                <li>
-                    <NavLink to="signup" className="nav-link">SignUp</NavLink>
-                </li>
-            </ul>
+            <>
+                <a href="/signin">SignIn</a>
+                <a href="/signup">SignUp</a>
+            </>
+            // <ul className="login-status">
+            //     <li>
+            //         <NavLink to="signin" className="nav-link">SignIn</NavLink>
+            //     </li>
+            //     <li>
+            //         <NavLink to="signup" className="nav-link">SignUp</NavLink>
+            //     </li>
+            // </ul>
         )
     };
 
@@ -60,31 +54,41 @@ const Header = () => {
     //         </div>
     //     </>
     // )
+    const isClicked = (e) => {
+        console.log(e.target);
+    }
 
     return (
         <>
             <div className="header">
                 <div className="header-container">
                     <a id="htitle" href="/">insider</a>
-                    <div className="hamburger">
-                        <input className="menu-btn" type="checkbox"/>
-                        <label className="menu-icon" for="menu-btn">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </label>
+                    <input onClick={isClicked} id="menu-btn" type="checkbox"/>
+                    <label className="menu-icon" for="menu-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+                    <div className="menuToggle">
+                        <ul className="menu-ul">
+                            <a href="/onboard">담은목록</a>
+                            <a href="/interest">관심종목</a>
+                            <a href="/notinterest">노관심종목</a>
+                            <a href="/ban">10일벤목록</a>
+                            { isToken ? renderLoggedinbar() : renderNonLoginbar()}
+                        </ul>
                     </div>
                 </div>
-                <div className="menuToggle">
+                {/* <div className="menuToggle">
                     <ul className="menu-ul">
                         <a href="/onboard">담은목록</a>
                         <a href="/interest">관심종목</a>
                         <a href="/notinterest">노관심종목</a>
                         <a href="/ban">10일벤목록</a>
-                        <a href="#">SignIn</a>
-                        <a href="#">SignUp</a>
+                        <a href="/signin">SignIn</a>
+                        <a href="/signup">SignUp</a>
                     </ul>
-                </div>
+                </div> */}
             </div>
         </>
     )

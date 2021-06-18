@@ -1,0 +1,12 @@
+.signin-container {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 70%;
+    padding-top: 6em;
+}
+
+#kakao-login-btn {
+    display: block;
+    margin: 0 auto;
+}

@@ -4,6 +4,8 @@ import Layout from "../../components/Layouts/Layout/Layout.js"
 import { Redirect } from "react-router-dom";
 import { postKakaoUser } from "../../actions"; 
 
+import './Signin.css';
+
 require('dotenv').config();
 
 const Signin = () => {
@@ -63,15 +65,16 @@ const Signin = () => {
     return(
         <>  
             <Layout />
-            <a href="http://localhost:2000/api/auth/facebook">
-                <button>facebook Login</button>
-            </a>
+            <div className="signin-container">
+                {/* <a href="http://localhost:2000/api/auth/facebook">
+                    facebook Login
+                </a>
 
-            <a href="http://localhost:2000/api/oauth">
-                <button>kakao Login</button>
-            </a>
-            
-            <button type="button" id="kakao-login-btn"></button>
+                <a href="http://localhost:2000/api/oauth">
+                    <button>kakao Login</button>
+                </a> */}
+                <button type="button" id="kakao-login-btn"></button>
+            </div>
         </>
     )    
 }
