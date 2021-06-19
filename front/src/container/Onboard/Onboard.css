@@ -1,4 +1,95 @@
-.styled-table {
+.onboard-container {
+    background-color: #fff;
+    padding-top: 4em;
+}
+
+/* Subtitle*/
+.onboard-container #onboard-title {
+    padding: 0.5em 0.5em;
+    display: inline-block;
+    font-size: 1.4em;
+    color: #0052ff;
+}
+
+/* table */
+.onboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.onboard-table tr:nth-of-type(odd){
+    background: #eee;
+}
+
+.onboard-table th {
+    background-color: #00d2ff;
+    color: white;
+    font-weight: bold;
+    text-align: center
+}
+
+.onboard-table td {
+    padding: 0.4em;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.onboard-table thead tr th {
+    padding: 0.4em;
+    vertical-align: middle;
+}
+
+.onboard-container table tbody .checked-tr {
+    background-color: #33dbff;
+}
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+    /* Force tables to not be like tables anymore */
+    .onboard-container table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;. for accessibility) */
+    #root > div.onboard-container > table > thead > tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .onboard-container table tr { border: 1px solid #ccc}
+
+    .onboard-container table td {
+        /* Behave like  a "row" */
+        border: none;
+        border-bottom: 1px solid #d9d9d9;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .onboard-container table td:before {
+        position: absolute;
+        top: 0.3em;
+        left: 0.3em;
+        width: 45%;
+        padding-right: 0.4em;
+        white-space: nowrap;
+    }
+
+    .onboard-container td:nth-of-type(1):before { content: "check"}
+    .onboard-container td:nth-of-type(2):before { content: "종목코드"}
+    .onboard-container td:nth-of-type(3):before { content: "종목명"}
+    .onboard-container td:nth-of-type(4):before { content: "시가총액"}
+    .onboard-container td:nth-of-type(5):before { content: "price"}
+    .onboard-container td:nth-of-type(6):before { content: "수량"}
+    .onboard-container td:nth-of-type(7):before { content: "비용"}
+
+    .onboard-container td:nth-of-type(1) {
+        display: none;
+    }
+    
+}
+
+/* .styled-table {
     background-color :bisque;
     border-collapse: collapse;
     margin: 1.5em 0;
@@ -26,4 +117,4 @@
 
 .styled-table tbody tr:last-of-type {
     border-bottom: 0.10em solid #009879;
-}
+} */

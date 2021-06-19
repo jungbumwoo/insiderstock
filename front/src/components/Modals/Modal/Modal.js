@@ -1,5 +1,5 @@
 import React from "react";
-// import "./Modal.css";
+import "./Modal.css";
 import Icon from "../../../static/images/x-mark.svg";
 
 const Modal = (props) => {
@@ -42,7 +42,6 @@ const Modal = (props) => {
     }
         //반복문으로 체크된 숫자만큼 return
         // 개별을 배열로 묶어서 전달전달~
-    
 
     const defaultInput = () => {
         return (
@@ -82,7 +81,7 @@ const Modal = (props) => {
             onCloseRequest();
         }}>
             <div className="modal-main" onClick={(e) => {
-                e.stopPropagation();
+                e.stopPropagation();    
             }}>
                 <form onSubmit={handleFormSubmit}>
                     {checked.length > 0 ? filledModal() : defaultInput()}

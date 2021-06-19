@@ -2,16 +2,16 @@
     padding-top: 5em;
 }
 
-table {
+.newsContainer table {
     width: 100%;
     border-collapse: collapse;
 }
 /* Zebra striping */
-tr:nth-of-type(odd){
+.newsContainer table tr:nth-of-type(odd){
     background: #eee;
 }
 
-th {
+.newsContainer table th {
     background: #00d2ff;
     color: white;
     font-weight: bold;
@@ -29,10 +29,6 @@ table thead tr th {
     vertical-align: middle;
 }
 
-.disabled {
-    display: none;
-}
-
 .newsContainer table tbody .checked-tr {
     background-color: #33dbff;
 }
@@ -44,8 +40,6 @@ table thead tr th {
     margin-right: 2em;
     display: flex;
     justify-content: flex-end;
-
-
 
     position: fixed;
     right: 0;
@@ -144,22 +138,27 @@ table thead tr th {
     text-decoration: none;
 }
 
+.disabled {
+    display: none;
+}
+
+
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) { 
     
     /* Force tables to not be like tables anymore */
-    table, thead, tbody, th, td, tr {
+    .newsContainer table, thead, tbody, th, td, tr {
         display: block;
     }
     
     /* Hide table headers (but not display: none;. for accessibility) */
-    thead tr {
+    .newsContainer table thead tr {
         position: absolute;
         top: -9999px;
         left: -9999px;
     }
     
-    table tr {border: 1px solid #ccc;}
-    table td {
+    .newsContainer table tr {border: 1px solid #ccc;}
+    .newsContainer table td {
         /* Behave like  a "row" */
         border: none;
         border-bottom: 1px solid #d9d9d9;
@@ -182,21 +181,21 @@ table thead tr th {
 
     /*Label the data*/
 
-    td:nth-of-type(1):before { content: "check"}
-    td:nth-of-type(2):before { content: "종목코드"}
-    td:nth-of-type(3):before { content: "종목명"}
-    td:nth-of-type(4):before { content: "거래자"}
-    td:nth-of-type(5):before { content: "직함"}
-    td:nth-of-type(6):before { content: "일자"}
-    td:nth-of-type(7):before { content: "거래유형"}
-    td:nth-of-type(8):before { content: "거래량"}
-    td:nth-of-type(9):before { content: "지분변화"}
-    td:nth-of-type(10):before { content: "매수가"}
-    td:nth-of-type(11):before { content: "비용($k)"}
-    td:nth-of-type(12):before { content: "보유지분변화"}
-    td:nth-of-type(13):before { content: "거래 후 가격변동률(%)"}
-    td:nth-of-type(14):before { content: "주가수익률"}
-    td:nth-of-type(15):before { content: "시가총액($M)"}
+    .newsContainer td:nth-of-type(1):before { content: "check"}
+    .newsContainer td:nth-of-type(2):before { content: "종목코드"}
+    .newsContainer td:nth-of-type(3):before { content: "종목명"}
+    .newsContainer td:nth-of-type(4):before { content: "거래자"}
+    .newsContainer td:nth-of-type(5):before { content: "직함"}
+    .newsContainer td:nth-of-type(6):before { content: "일자"}
+    .newsContainer td:nth-of-type(7):before { content: "거래유형"}
+    .newsContainer td:nth-of-type(8):before { content: "거래량"}
+    .newsContainer td:nth-of-type(9):before { content: "지분변화"}
+    .newsContainer td:nth-of-type(10):before { content: "매수가"}
+    .newsContainer td:nth-of-type(11):before { content: "비용($k)"}
+    .newsContainer td:nth-of-type(12):before { content: "보유지분변화"}
+    .newsContainer td:nth-of-type(13):before { content: "거래 후 가격변동률(%)"}
+    .newsContainer td:nth-of-type(14):before { content: "주가수익률"}
+    .newsContainer td:nth-of-type(15):before { content: "시가총액($M)"}
 
     .pageNum {
         margin-bottom: 3em;

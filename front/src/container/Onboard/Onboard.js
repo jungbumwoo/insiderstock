@@ -4,7 +4,10 @@ import { addFillInOnboardAction, deleteOnboardAction, getOnboard } from "../../a
 import Layout from "../../components/Layouts/Layout/Layout.js";
 import { returnUtil } from "../containerUtils.js";
 import OnboardAddModal from "../../components/Modals/OnboardAddModal/OnboardAddModal.js";
-// import "./Onboard.css";
+import { ModalMessage } from "../../components/Modals/ModalMessage/ModalMessage.js";
+import { textObject } from "../../components/text/textObject.js";
+
+import "./Onboard.css";
 
 const Onboard = (props) => {
     const onboard = useSelector(state => state.onboard);
@@ -20,6 +23,11 @@ const Onboard = (props) => {
     const [mdPrice, setmdPrice] = useState('');
     const [mdShares, setmdShares] = useState('');
     const [mdMarketPrice, setmdMarketPrice] = useState('');
+
+    // messageModal 
+    const [ modalMessageShow, setModalMessageShow ] = useState(false);
+    const [ modalTitle, setModalTitle ] = useState('');
+    const [ modalAlert, setModalAlert ] = useState('');
 
     useEffect(() => {
         dispatch(getOnboard(pageNum));
@@ -47,12 +55,12 @@ const Onboard = (props) => {
             return (
                 <tr key={pageOfItems.indexOf(trs)}>
                     <td><input type="checkbox" onChange={checkBoxChange} id={parseInt(pageOfItems.indexOf(trs))} checked={checkedNum.includes(pageOfItems.indexOf(trs))} name="chk" /></td>
-                    <td>{trs.ticker}</td>
+                    <td>{trs.ticker ? trs.ticker : '-'}</td>
                     <td>{trs.company}</td>
-                    <td>{trs.MarketCap}</td>
+                    <td>{trs.MarketCap ? trs.MarketCap : '-'}</td>
                     <td>{trs.price}</td> 
-                    <td>{trs.shares}</td>
-                    <td>{trs.cost}</td>
+                    <td>{trs.shares ? trs.shares : '-'}</td>
+                    <td>{trs.cost ? trs.cost : '-'}</td>
                 </tr>
             )
         })
@@ -74,7 +82,13 @@ const Onboard = (props) => {
     };
 
     const handleAddBtn = () => {
-        setmodalShow(!modalShow);   
+        if (checkedNum.length === 0) {
+            console.log("should select at least 1");
+            setModalAlert(textObject.alret.atleastPick);
+            setModalMessageShow(!modalMessageShow);
+        } else {
+            setmodalShow(!modalShow);   
+        }
     }
 
     const handleModalInputChange = (e) => {
@@ -123,25 +137,26 @@ const Onboard = (props) => {
     return(
         <>
             <Layout />
-            <div>
-                <div className="data_table">
-                    <table className="styled-table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>종목코드</th>
-                                <th>종목명</th>
-                                <th>시가총액</th>
-                                <th>Price</th>
-                                <th>수량</th>
-                                <th>비용</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {returnUtil(onboard, returnOnboards)}
-                        </tbody>
-                    </table>
-                </div>
+            <div className="onboard-container">
+                <span id="onboard-title">담은목록</span>
+                {/* <div className="data_table"> */}
+                <table className="onboard-table">
+                    <thead>
+                        <tr>
+                            <th className="checkbox-hide">#</th>
+                            <th>종목코드</th>
+                            <th>종목명</th>
+                            <th>시가총액</th>
+                            <th>Price</th>
+                            <th>수량</th>
+                            <th>비용</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {returnUtil(onboard, returnOnboards)}
+                    </tbody>
+                </table>
+                {/* </div> */}
                 <div className="page_numbers">
                     <ul>
                         {pager.pages.map(num => {
@@ -159,6 +174,11 @@ const Onboard = (props) => {
                     modalShow={modalShow}
                     handleModalInputChange={handleModalInputChange}
                     submit={modalSubmit}
+                />
+                <ModalMessage 
+                    shown={modalMessageShow}
+                    modalTitle={textObject.onboard.whatisOnboard}
+                    modalAlert={modalAlert}
                 />
             </div>
         </>

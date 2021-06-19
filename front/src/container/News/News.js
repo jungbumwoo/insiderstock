@@ -74,7 +74,6 @@ const News = (props) => {
     const getPageNum = () => {
         let urlSearchParams = new URLSearchParams(props.location.search);
         let urlParams = parseInt(urlSearchParams.get('page')) || 1;
-
         return urlParams;
     }
 
