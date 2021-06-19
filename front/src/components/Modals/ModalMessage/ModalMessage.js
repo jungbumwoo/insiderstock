@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import "./ModalMessage.css";
+import Icon from "../../../static/images/x-mark.svg";
 
 export const ModalMessage = (props) => {
     let shown = props.shown;
@@ -19,14 +21,18 @@ export const ModalMessage = (props) => {
         <div className="modal-message" onClick={() => {
             onCloseRequest();
         }}>
-            <div className="modal-messgae-main" onClick={(e) => {
+            <div className="modal-message-main" onClick={(e) => {
                 e.stopPropagation();
             }}>
-                <p>Muyaho</p>
-                <p>{modalAlert}</p>
-                <h3>{modalTitle}</h3>
-                <p>{modalContent1}</p>
-                <p>{modalContent2}</p>
+                <button type="button" id="modal_close_btn">
+                    <img src={Icon} onClick={onCloseRequest} alt="close icon" id="close-modal-icon"/>
+                </button>
+                <div className="modal-content">
+                    <p>{modalAlert}</p>
+                    <h3>{modalTitle}</h3>
+                    <p>{modalContent1}</p>
+                    <p>{modalContent2}</p>
+                </div>
             </div>
         </div>
     )

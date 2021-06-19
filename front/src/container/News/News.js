@@ -5,6 +5,7 @@ import { postAddInterestAction, addBanAction, postNotInterestAction, addOnboard,
 import { Link } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "../../components/Modals/Modal/Modal";
+import { ModalMessage } from "../../components/Modals/ModalMessage/ModalMessage";
 
 import "./News.css";
 
@@ -18,6 +19,12 @@ const News = (props) => {
     const [ toggleModal, setToggleModal ] = useState(false);
     const [ checkedOnboard, setCheckedOnboard ] = useState({});
    
+    /* modal */
+    const [ modalMessageShow, setModalMessageShow ] = useState(false);
+    const [ modalTitle, setModalTitle ] = useState('');
+    const [ modalAlert, setModalAlert ] = useState('');
+    const [ modalContent1, setModalContent1 ] = useState('');
+
     useEffect(()=> {
         let urlSearchParams = new URLSearchParams(props.location.search);
         let urlParams = parseInt(urlSearchParams.get('page')) || 1;
@@ -115,12 +122,13 @@ const News = (props) => {
         setCheckedArray([]);
     };
 
-    const addOnboardBtn = () => {
-        const returnItems = checkedArray.map(item => {
+    const addOnboardBtn = async() => {
+        const returnItems = await checkedArray.map(item => {
             return pageOfItems[item]
         });
         let onboardObject = {};
         returnItems.forEach((el) => {
+            console.log(`el`, el);
             onboardObject[`${returnItems.indexOf(el)}_onboard_ticker`] = el.ticker;
             onboardObject[`${returnItems.indexOf(el)}_onboard_company`] = el.company;
             onboardObject[`${returnItems.indexOf(el)}_onboard_MarketCap`] = el.MarketCap;
@@ -174,8 +182,21 @@ const News = (props) => {
         }
     }
 
+    const handleWhatis = () => {
+        setModalTitle('Insider Trading 이란?');
+        setModalContent1('해당 기업에서 직무 또는 지위를 맡은 사람이 소속 회사의 주식을 거래하는 것을 말합니다. 본인 회사의 주식을 매도하는 경우는 다양한 이유가 있지만 매매하는 경우는 주로 주식 가치 상승을 예상하기 때문입니다. 이에 Insider 들이 내부 주식을 매수하는 정보를 모았습니다.');
+        setModalMessageShow(!modalMessageShow);
+    }
+
+    const handleMessageClose = () => {
+        setModalTitle('');
+        setModalContent1('');
+        setModalMessageShow(!modalMessageShow);
+    }
+
     return(
         <div className="newsContainer">
+            <span onClick={handleWhatis} className="subtitle">insider Tranding이란?</span>
             <table>
                 <thead>
                     <tr>
@@ -263,6 +284,12 @@ const News = (props) => {
                 onModalInputChange={onModalInputChange}
                 handleModalSubmit={handleModalSubmit}
                 />
+            <ModalMessage
+                shown={modalMessageShow}
+                onCloseRequest={handleMessageClose}
+                modalTitle={modalTitle}
+                modalContent1={modalContent1}
+            />
     </div>
     )
 }
