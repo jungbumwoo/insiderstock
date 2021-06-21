@@ -12,16 +12,21 @@ const Signin = () => {
     const auth = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const isToken = localStorage.getItem('token');
+    console.log("signin");
 
     useEffect(() => {
+        console.log("Signin useEffect");
         // Kakao sdk import
         const kakaoScript = document.createElement('script');
         kakaoScript.async = true;
         kakaoScript.src = "https://developers.kakao.com/sdk/js/kakao.js";
         document.head.appendChild(kakaoScript);
+        console.log(`document.cookie`, document.cookie);
+        console.log(`document.head`, document.head);
         
         // Kakao sdk load
         kakaoScript.onload = () => {
+            console.log("kakaoScript onloaded!");
              // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
             window.Kakao.init(process.env.REACT_APP_KAKAO_JS_KEY);
 

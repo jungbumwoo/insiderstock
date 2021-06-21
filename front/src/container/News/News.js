@@ -5,6 +5,7 @@ import { postAddInterestAction, addBanAction, postNotInterestAction, addOnboard,
 import { Link } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 import Modal from "../../components/Modals/Modal/Modal";
+import { ModalMessage } from "../../components/Modals/ModalMessage/ModalMessage";
 
 import "./News.css";
 
@@ -18,6 +19,15 @@ const News = (props) => {
     const [ toggleModal, setToggleModal ] = useState(false);
     const [ checkedOnboard, setCheckedOnboard ] = useState({});
    
+    /* modal */
+    const [ modalMessageShow, setModalMessageShow ] = useState(false);
+    const [ modalTitle, setModalTitle ] = useState('');
+    const [ modalAlert, setModalAlert ] = useState('');
+    const [ modalContent1, setModalContent1 ] = useState('');
+    const [ modalContent2, setModalContent2 ] = useState('');
+    const [ modalSigninLink, setModalSigninLink ] = useState('');
+    const [ modalSignupLink, setModalSignupLink ] = useState('');
+
     useEffect(()=> {
         let urlSearchParams = new URLSearchParams(props.location.search);
         let urlParams = parseInt(urlSearchParams.get('page')) || 1;
@@ -104,23 +114,63 @@ const News = (props) => {
     };
 
     const addInterestBtn = () => {
-        let checkedStock = pageOfItems.filter(item => checkedArray.includes(pageOfItems.indexOf(item)));
-        dispatch(postAddInterestAction(checkedStock));
-        setCheckedArray([]);
+        let getToken = localStorage.getItem('token');
+        if (checkedArray.length === 0) {
+            // should click at least one
+            setModalTitle('관심목록이란?');
+            setModalContent1('-	관심 있는 종목의 주식을 모아볼 수 있는 목록입니다.');
+            setModalContent2('-	관심목록에 종목을 추가하면 해당 종목의 매수/매도 거래가 발생할 시 확인할 수 있습니다.');
+            setModalAlert('하나 이상의 항목을 클릭(선택)하여야합니다.');
+            setModalMessageShow(true);
+        } else if (!getToken) {
+            // you need to Login
+            setModalTitle('관심목록이란?');
+            setModalContent1('-	관심 있는 종목의 주식을 모아볼 수 있는 목록입니다.');
+            setModalContent2('-	관심목록에 종목을 추가하면 해당 종목의 매수/매도 거래가 발생할 시 확인할 수 있습니다.');
+            setModalAlert('로그인이 필요합니다.');
+            setModalSigninLink('SignIn');
+            setModalSignupLink('SignUp');
+            setModalMessageShow(true);
+        } else {
+            let checkedStock = pageOfItems.filter(item => checkedArray.includes(pageOfItems.indexOf(item)));
+            dispatch(postAddInterestAction(checkedStock));
+            setCheckedArray([]);
+        }
     };
 
     const handleNotIntBtn = () => {
-        let checkedStock = pageOfItems.filter(item => checkedArray.includes(pageOfItems.indexOf(item)));
-        dispatch(postNotInterestAction(checkedStock));
-        setCheckedArray([]);
+        let getToken = localStorage.getItem('token');
+        if (checkedArray.length === 0) {
+            // should click at least one
+            setModalTitle('노관심목록이란?');
+            setModalContent1('- 관심 없는 종목의 주식을 설정할 수 있습니다.');
+            setModalContent2('-	노관심목록에 종목을 추가하면 해당 종목의 매수/매도 거래가 발생하여도 메인화면에 노출되지 않습니다.');
+            setModalAlert('하나 이상의 항목을 클릭(선택)하여야합니다.');
+            setModalMessageShow(true);
+        } else if (!getToken) {
+            // you need to Login
+            setModalTitle('노관심목록이란?');
+            setModalContent1('- 관심 없는 종목의 주식을 설정할 수 있습니다.');
+            setModalContent2('-	노관심목록에 종목을 추가하면 해당 종목의 매수/매도 거래가 발생하여도 메인화면에 노출되지 않습니다.');
+            setModalAlert('로그인이 필요합니다.');
+            setModalSigninLink('SignIn');
+            setModalSignupLink('SignUp');
+            setModalMessageShow(true);
+        } else {
+            let checkedStock = pageOfItems.filter(item => checkedArray.includes(pageOfItems.indexOf(item)));
+            dispatch(postNotInterestAction(checkedStock));
+            setCheckedArray([]);
+        }
     };
 
-    const addOnboardBtn = () => {
+    const addOnboardBtn = async() => {
+        console.log(`checkedArray`, checkedArray);
         const returnItems = checkedArray.map(item => {
             return pageOfItems[item]
         });
         let onboardObject = {};
         returnItems.forEach((el) => {
+            console.log(`el`, el);
             onboardObject[`${returnItems.indexOf(el)}_onboard_ticker`] = el.ticker;
             onboardObject[`${returnItems.indexOf(el)}_onboard_company`] = el.company;
             onboardObject[`${returnItems.indexOf(el)}_onboard_MarketCap`] = el.MarketCap;
@@ -158,14 +208,13 @@ const News = (props) => {
     };
 
     const handleTRClick = (e) => {
-        console.log(e.target.parentNode.id);
         let intId = parseInt(e.target.parentNode.id);
         let isChecked = checkedArray.includes(intId);
-        if(isChecked) {
+        if(isChecked && !isNaN(intId)) {
             //uncheck
             let filtered = checkedArray.filter(el => el !== intId);
             setCheckedArray(filtered);
-        } else {
+        } else if (!isChecked && !isNaN(intId)) {
             //check
             setCheckedArray([
                 ...checkedArray,
@@ -174,8 +223,26 @@ const News = (props) => {
         }
     }
 
+    const handleWhatis = () => {
+        setModalTitle('Insider Trading 이란?');
+        setModalContent1('해당 기업에서 직무 또는 지위를 맡은 사람이 소속 회사의 주식을 거래하는 것을 말합니다.');
+        setModalContent2('본인 회사의 주식을 매도하는 경우는 다양한 이유가 있지만 매매하는 경우는 주로 주식 가치 상승을 예상하기 때문입니다. 이에 Insider 들이 내부 주식을 매수하는 정보를 모았습니다.');
+        setModalMessageShow(!modalMessageShow);
+    }
+
+    const handleMessageClose = () => {
+        setModalTitle('');
+        setModalContent1('');
+        setModalContent2('');
+        setModalMessageShow(false);
+        setModalAlert('');        
+        setModalSigninLink('');
+        setModalSignupLink('');
+    }
+
     return(
         <div className="newsContainer">
+            <span onClick={handleWhatis} className="subtitle">insider Tranding이란?</span>
             <table>
                 <thead>
                     <tr>
@@ -263,6 +330,16 @@ const News = (props) => {
                 onModalInputChange={onModalInputChange}
                 handleModalSubmit={handleModalSubmit}
                 />
+            <ModalMessage
+                shown={modalMessageShow}
+                onCloseRequest={handleMessageClose}
+                modalTitle={modalTitle}
+                modalContent1={modalContent1}
+                modalContent2={modalContent2}
+                modalAlert={modalAlert}
+                modalSigninLink={modalSigninLink}
+                modalSignupLink={modalSignupLink}
+            />
     </div>
     )
 }

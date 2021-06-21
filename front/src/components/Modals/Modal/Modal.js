@@ -30,7 +30,7 @@ const Modal = (props) => {
                     <input type="text" defaultValue={item.purchasePrice} name={`${checked.indexOf(item)}_onboard_price`} onChange={onModalInputChange} />
                     <label>Shares:</label>
                     <input type="text" defaultValue={0} name={`${checked.indexOf(item)}_onboard_shares`} onChange={onModalInputChange} />
-                    <label>Cost: </label>
+                    {/* <label>Cost: </label> */}
                     {/* <span defaultValue={0} name={`${checked.indexOf(item)}_cost`} onChange={onModalInputChange}>{costCalculate(item)}</span> */}
                     {/* <input type="text" value={costCalculate(item)}
                             name={`${checked.indexOf(item)}_cost`} 
@@ -46,8 +46,10 @@ const Modal = (props) => {
     const defaultInput = () => {
         return (
             <div className="modal_container">
-                <label>Ticker :</label>
-                <input type="text"/>
+                <div>
+                    <label>Ticker :</label>
+                    <input type="text"/>
+                </div>
                 <label>Company :</label>
                 <input type="text"/>
                 <label>Price :</label>
@@ -60,9 +62,6 @@ const Modal = (props) => {
                 <input type="text"/>
                 <h5>This is Modal</h5>
                 <p>Modal content's Here</p>
-                <button type="button" id="modal_close_btn">
-                    <img src={Icon} onClick={onCloseRequest} alt="close icon" id="close-modal-icon"/>
-                </button>
             </div>
         )
     };
@@ -87,6 +86,9 @@ const Modal = (props) => {
                     {checked.length > 0 ? filledModal() : defaultInput()}
                     <button type="button" onClick={handleModalSubmit}>Submit</button>
                 </form>
+                <button type="button" id="modal_close_btn">
+                    <img src={Icon} onClick={onCloseRequest} alt="close icon" id="close-modal-icon"/>
+                </button>
             </div>
         </div>
     )

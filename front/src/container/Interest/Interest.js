@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getInterestAction } from "../../actions/stockAction";
 import { getNotInterestAction, interestDeleteAct } from "../../actions";
 // import "./Interest.css";
 import { returnUtil } from "../containerUtils";
-import axiosInstance from "../../helpers/axios";
+
 
 const Interest = (props) => {
     const dispatch = useDispatch();
@@ -91,47 +90,64 @@ const Interest = (props) => {
         dispatch(interestDeleteAct(deleteItems, remainItems));
         setCheckedArray([]);
     };
+    
+    let isToken = localStorage.getItem('token');
 
-    return(
-        <>
-            <div>
-                <span>Interest</span>
-                <div className="data_table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>종목코드</th>
-                                <th>종목명</th>
-                                <th>거래자</th>
-                                <th>직함</th>
-                                <th>일자</th>
-                                <th>거래유형</th>
-                                <th>Insider Trading Shares</th>
-                                <th>지분변화</th>
-                                <th>매수가</th>
-                                <th>Final Share</th>
-                                <th>매수 후 가격변동률(%)</th>
-                                <th>주가수익률</th>
-                                <th>시가총액($M)</th>
-                            </tr>  
-                        </thead>
-                        <tbody>
-                            {/* {pageOfItems.length > 0 ? returnPageOfItems() : ''} */}
-                            {returnUtil(stock, returnPageOfItems)}
-                        </tbody>
-                    </table>
+    if (!isToken) {
+        console.log("token not exsist");
+        return (
+            <>
+                <div className="need-to-login">
+                    <p>로그인이 필요한 서비스 입니다.</p>
+                    <a href="/signin">SignIn</a>
+                    <a href="/signup">SignUp</a>
                 </div>
+            </>
+        )
+    } else {
+        console.log("token exsist");
+        return(
+            <>
+                <div>
+                    <span>Interest</span>
+                    <div className="data_table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>종목코드</th>
+                                    <th>종목명</th>
+                                    <th>거래자</th>
+                                    <th>직함</th>
+                                    <th>일자</th>
+                                    <th>거래유형</th>
+                                    <th>Insider Trading Shares</th>
+                                    <th>지분변화</th>
+                                    <th>매수가</th>
+                                    <th>Final Share</th>
+                                    <th>매수 후 가격변동률(%)</th>
+                                    <th>주가수익률</th>
+                                    <th>시가총액($M)</th>
+                                </tr>  
+                            </thead>
+                            <tbody>
+                                {/* {pageOfItems.length > 0 ? returnPageOfItems() : ''} */}
+                                {returnUtil(stock, returnPageOfItems)}
+                            </tbody>
+                        </table>
+                    </div>
+    
+                    <div className="page_buttons">
+                        <ul>{returnPages()}</ul>
+                    </div>
+    
+                    <div className="buttons">
+                        <button onClick={hadnleDeleteBtn}>Delete</button>
+                    </div>
+                </div>
+            </>
+        )
+    }
 
-                <div className="page_buttons">
-                    <ul>{returnPages()}</ul>
-                </div>
-
-                <div className="buttons">
-                    <button onClick={hadnleDeleteBtn}>Delete</button>
-                </div>
-            </div>
-        </>
-    )
 }
 
 export default Interest;

@@ -9,7 +9,6 @@ const AllInterest = (props) => {
         <>
             <Layout />
             <Interest location={props.location}/>
-            <NotInterest />
         </>
     )
 };

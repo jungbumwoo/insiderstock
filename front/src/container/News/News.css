@@ -2,6 +2,15 @@
     padding-top: 5em;
 }
 
+.newsContainer .subtitle {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    color: #0052ff;
+    font-size: 1rem;
+    padding: 0.4em ;
+}
+
 .newsContainer table {
     width: 100%;
     border-collapse: collapse;
@@ -18,13 +27,13 @@
     text-align: center;
 }
 
-table td {
+.newsContainer table td {
     padding: 0.4em;
     border: 1px solid #ccc;
     text-align:left;
 }
 
-table thead tr th {
+.newsContainer table thead tr th {
     padding: 0.4em;
     vertical-align: middle;
 }
@@ -170,7 +179,7 @@ table thead tr th {
         display: none;
     }
 
-    table td:before {
+    .newsContainer table td:before {
         position: absolute;
         top: 0.3em;
         left: 0.3em;
