@@ -27,6 +27,7 @@ export const ModalMessage = (props) => {
                     <img src={Icon} onClick={onCloseRequest} alt="close icon" id="close-modal-icon"/>
                 </button>
                 <div className="modal-content">
+<<<<<<< HEAD
                     <h2>{modalAlert}</h2>
                     <h3>{modalTitle}</h3>
                     <p>{modalContent1}</p>
@@ -35,6 +36,12 @@ export const ModalMessage = (props) => {
                         <a href="/signin">{modalSigninLink}</a>
                         <a href="/signup">{modalSignupLink}</a>
                     </div>
+=======
+                    <p>{modalAlert}</p>
+                    <h3>{modalTitle}</h3>
+                    <p>{modalContent1}</p>
+                    <p>{modalContent2}</p>
+>>>>>>> 8b429e9d9f316c73f76c360fb89efe9a7d683c17
                 </div>
             </div>
         </div>

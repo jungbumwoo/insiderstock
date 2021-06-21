@@ -24,9 +24,12 @@ const News = (props) => {
     const [ modalTitle, setModalTitle ] = useState('');
     const [ modalAlert, setModalAlert ] = useState('');
     const [ modalContent1, setModalContent1 ] = useState('');
+<<<<<<< HEAD
     const [ modalContent2, setModalContent2 ] = useState('');
     const [ modalSigninLink, setModalSigninLink ] = useState('');
     const [ modalSignupLink, setModalSignupLink ] = useState('');
+=======
+>>>>>>> 8b429e9d9f316c73f76c360fb89efe9a7d683c17
 
     useEffect(()=> {
         let urlSearchParams = new URLSearchParams(props.location.search);
@@ -164,8 +167,12 @@ const News = (props) => {
     };
 
     const addOnboardBtn = async() => {
+<<<<<<< HEAD
         console.log(`checkedArray`, checkedArray);
         const returnItems = checkedArray.map(item => {
+=======
+        const returnItems = await checkedArray.map(item => {
+>>>>>>> 8b429e9d9f316c73f76c360fb89efe9a7d683c17
             return pageOfItems[item]
         });
         let onboardObject = {};
@@ -225,19 +232,27 @@ const News = (props) => {
 
     const handleWhatis = () => {
         setModalTitle('Insider Trading 이란?');
+<<<<<<< HEAD
         setModalContent1('해당 기업에서 직무 또는 지위를 맡은 사람이 소속 회사의 주식을 거래하는 것을 말합니다.');
         setModalContent2('본인 회사의 주식을 매도하는 경우는 다양한 이유가 있지만 매매하는 경우는 주로 주식 가치 상승을 예상하기 때문입니다. 이에 Insider 들이 내부 주식을 매수하는 정보를 모았습니다.');
+=======
+        setModalContent1('해당 기업에서 직무 또는 지위를 맡은 사람이 소속 회사의 주식을 거래하는 것을 말합니다. 본인 회사의 주식을 매도하는 경우는 다양한 이유가 있지만 매매하는 경우는 주로 주식 가치 상승을 예상하기 때문입니다. 이에 Insider 들이 내부 주식을 매수하는 정보를 모았습니다.');
+>>>>>>> 8b429e9d9f316c73f76c360fb89efe9a7d683c17
         setModalMessageShow(!modalMessageShow);
     }
 
     const handleMessageClose = () => {
         setModalTitle('');
         setModalContent1('');
+<<<<<<< HEAD
         setModalContent2('');
         setModalMessageShow(false);
         setModalAlert('');        
         setModalSigninLink('');
         setModalSignupLink('');
+=======
+        setModalMessageShow(!modalMessageShow);
+>>>>>>> 8b429e9d9f316c73f76c360fb89efe9a7d683c17
     }
 
     return(
@@ -335,10 +350,13 @@ const News = (props) => {
                 onCloseRequest={handleMessageClose}
                 modalTitle={modalTitle}
                 modalContent1={modalContent1}
+<<<<<<< HEAD
                 modalContent2={modalContent2}
                 modalAlert={modalAlert}
                 modalSigninLink={modalSigninLink}
                 modalSignupLink={modalSignupLink}
+=======
+>>>>>>> 8b429e9d9f316c73f76c360fb89efe9a7d683c17
             />
     </div>
     )
